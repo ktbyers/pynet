@@ -5,6 +5,7 @@
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I only use things we have covered up to this point in the class.
+Well, with some minor exceptions I use pprint below.
 
 Python for Network Engineers
 https://pynet.twb-tech.com

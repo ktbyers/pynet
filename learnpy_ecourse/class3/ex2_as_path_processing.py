@@ -4,7 +4,9 @@
 
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
-In other words, I only use things we have covered up to this point in the class.
+In other words, I only use things we have covered up to this point in the class
+(with some minor exceptions).
+
 
 Python for Network Engineers
 https://pynet.twb-tech.com
