@@ -2,7 +2,9 @@
 
 '''
 
-Disclaimer - This is a solution to the below problem given the content we have discussed in class#1 and class#2.  It is not necessarily the best solution to the problem.  In other words, I only use things we have covered up to this point in the class.
+Disclaimer - This is a solution to the below problem given the content we have
+discussed in class.  It is not necessarily the best solution to the problem.
+In other words, I only use things we have covered up to this point in the class.
 
 Python for Network Engineers
 https://pynet.twb-tech.com
@@ -13,7 +15,8 @@ Class#2
 
     A. Prompt a user for an IP address in dotted decimal format.
 
-    B. Convert this IP address to binary and display the binary result on the screen (a binary string for each octet).
+    B. Convert this IP address to binary and display the binary result on the
+screen (a binary string for each octet).
 
     Example output:
 
