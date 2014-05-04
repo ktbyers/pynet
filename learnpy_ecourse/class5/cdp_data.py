@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 
+'''
+
+Programming problem solving techniques (13 minutes):
+http://youtu.be/TtIBP6IqJls 
+
+Here are the videos working through solving exercise1 of class5:
+http://youtu.be/zzTehwns-fk     Solving Exercise1 - Part1 (10 minutes)
+http://youtu.be/7DABBlTfu_Q     Solving Exercise1 - Part2 (11 minutes)
+http://youtu.be/zg68ROGfqo0     Solving Exercise1 - Part3 (7 minutes)
+
+'''
+
 sw1_show_cdp_neighbors = '''
 
 SW1>show cdp neighbors
