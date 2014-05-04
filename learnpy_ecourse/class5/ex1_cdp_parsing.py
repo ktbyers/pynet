@@ -14,7 +14,7 @@ https://pynet.twb-tech.com
 Learning Python
 
 
-Parse the CDP data (see link above) to obtain the following information: 
+Parse the CDP data to obtain the following information: 
 hostname, ip, model, vendor, and device_type (device_type will be either 
 'router', 'switch', or 'unknown').
 
@@ -34,9 +34,7 @@ network_devices = {
      ...
  }
 
-For output to this exercise, print network_devices to standard output.  Your 
-output should look similar to the following (six network devices with their 
-associated attributes).  
+For output to this exercise, print network_devices to standard output.  
 
 '''
 
@@ -367,6 +365,10 @@ for cdp_data in cdp_neighbors:
     # Iterate over each line of the cdp data
     for line in cdp_data_line:
 
+        # As a precaution set hostname to '' on every device divider
+        if '----------------' in line:
+            hostname = ''
+
         # Processing hostname
         if 'Device ID: ' in line:
             (junk, hostname) = line.split('Device ID: ')
@@ -376,7 +378,6 @@ for cdp_data in cdp_neighbors:
                 network_devices[hostname] = {}
 
         # Processing IP
-        # IP address: 10.1.1.1
         if 'IP address: ' in line: 
             (junk, ip) = line.split('IP address: ')
             ip = ip.strip()
@@ -385,7 +386,6 @@ for cdp_data in cdp_neighbors:
                 network_devices[hostname]['ip'] = ip
 
         # Process vendor, model, and device_type
-        # Platform: Cisco 881, Capabilities: Router Switch IGMP
         if 'Platform: ' in line: 
 
             (platform, capabilities) = line.split(',')
