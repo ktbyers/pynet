@@ -71,6 +71,7 @@ def convert_ip_to_binary(ip_address):
 
 
 
+# Technique to allow importable and executable code to coexist (will explain in class#8)
 if __name__ == '__main__':
 
     # Create a bunch of test cases
