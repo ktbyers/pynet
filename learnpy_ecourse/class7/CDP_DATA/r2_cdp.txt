@@ -1,0 +1,22 @@
+
+R2>show cdp neighbors detail 
+-------------------------
+Device ID: SW1
+Entry address(es): 
+  IP address: 10.1.1.22
+Platform: cisco WS-C2950-24,  Capabilities: Switch IGMP 
+Interface: FastEthernet1,  Port ID (outgoing port): FastEthernet0/12
+Holdtime : 145 sec
+
+Version :
+Cisco Internetwork Operating System Software 
+IOS (tm) C2950 Software (C2950-I6Q4L2-M), Version 12.1(22)EA8a, RELEASE SOFTWARE (fc1)
+Copyright (c) 1986-2006 by cisco Systems, Inc.
+Compiled Fri 28-Jul-06 15:16 by weiliu
+
+advertisement version: 2
+Protocol Hello:  OUI=0x00000C, Protocol ID=0x0112; payload len=27, value=00000000FFFFFFFF010221FF0000000000000019E845CE80FF0000
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+

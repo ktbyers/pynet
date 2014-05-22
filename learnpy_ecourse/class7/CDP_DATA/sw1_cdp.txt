@@ -1,0 +1,102 @@
+
+SW1> show cdp neighbors detail
+--------------------------
+Device ID: R1
+Entry address(es):
+   IP address: 10.1.1.1
+Platform: Cisco 881, Capabilities: Router Switch IGMP
+Interface: FastEthernet0/11, Port ID (outgoing port): FastEthernet1
+Holdtime: 153 sec
+
+Version :
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 29-Oct-10 00:02 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+
+--------------------------
+Device ID: R2
+Entry address(es):
+   IP address: 10.1.1.2
+Platform: Cisco 881, Capabilities: Router Switch IGMP
+Interface: FastEthernet0/12, Port ID (outgoing port): FastEthernet1
+Holdtime: 123 sec
+
+Version :
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 29-Oct-10 00:02 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+
+--------------------------
+Device ID: R3
+Entry address(es):
+   IP address: 10.1.1.3
+Platform: Cisco 881, Capabilities: Router Switch IGMP
+Interface: FastEthernet0/13, Port ID (outgoing port): FastEthernet1
+Holdtime: 129 sec
+
+Version :
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 29-Oct-10 00:02 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+
+--------------------------
+Device ID: R4
+Entry address(es):
+   IP address: 10.1.1.4
+Platform: Cisco 881, Capabilities: Router Switch IGMP
+Interface: FastEthernet0/14, Port ID (outgoing port): FastEthernet1
+Holdtime: 173 sec
+
+Version :
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 29-Oct-10 00:02 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+
+--------------------------
+Device ID: R5
+Entry address(es):
+   IP address: 10.1.1.5
+Platform: Cisco 881, Capabilities: Router Switch IGMP
+Interface: FastEthernet0/15, Port ID (outgoing port): FastEthernet1
+Holdtime: 144 sec
+
+Version :
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Fri 29-Oct-10 00:02 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+
