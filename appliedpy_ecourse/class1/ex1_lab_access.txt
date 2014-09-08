@@ -1,0 +1,29 @@
+
+# exercise 1b
+$ python
+Python 2.7.5 (default, Feb 11 2014, 07:46:25) 
+[GCC 4.8.2 20140120 (Red Hat 4.8.2-13)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> 
+>>> import pysnmp
+
+>>> import paramiko
+>>> 
+
+
+# exercise 1c
+>>> 
+>>> dir(pysnmp)
+['__builtins__', '__doc__', '__file__', '__name__', '__package__', '__path__', '__version__', 'majorVersionId', 'version', 'x']
+>>> pysnmp.version
+(4, 2, 5)
+
+>>> 
+>>> dir(paramiko)
+['AUTH_FAILED', 'AUTH_PARTIALLY_SUCCESSFUL', 'AUTH_SUCCESSFUL', 'Agent', 'AgentKey', 'AuthHandler', 'AuthenticationException', 'AutoAddPolicy', 'BadAuthenticationType', 'BadHostKeyException', 'BaseSFTP', 'BufferedFile', 'Channel', 'ChannelException', 'ChannelFile', 'DSSKey', 'ECDSAKey', 'HostKeys', 'InteractiveQuery', 'Message', 'MissingHostKeyPolicy', 'OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED', 'OPEN_FAILED_CONNECT_FAILED', 'OPEN_FAILED_RESOURCE_SHORTAGE', 'OPEN_FAILED_UNKNOWN_CHANNEL_TYPE', 'OPEN_SUCCEEDED', 'PKey', 'Packetizer', 'PasswordRequiredException', 'ProxyCommand', 'ProxyCommandFailure', 'RSAKey', 'RejectPolicy', 'SFTP', 'SFTPAttributes', 'SFTPClient', 'SFTPError', 'SFTPFile', 'SFTPHandle', 'SFTPServer', 'SFTPServerInterface', 'SFTP_BAD_MESSAGE', 'SFTP_CONNECTION_LOST', 'SFTP_EOF', 'SFTP_FAILURE', 'SFTP_NO_CONNECTION', 'SFTP_NO_SUCH_FILE', 'SFTP_OK', 'SFTP_OP_UNSUPPORTED', 'SFTP_PERMISSION_DENIED', 'SSHClient', 'SSHConfig', 'SSHException', 'SecurityOptions', 'ServerInterface', 'SubsystemHandler', 'Transport', 'WarningPolicy', '__all__', '__author__', '__builtins__', '__doc__', '__file__', '__license__', '__name__', '__package__', '__path__', '__version__', '__version_info__', 'agent', 'auth_handler', 'ber', 'buffered_pipe', 'channel', 'client', 'common', 'compress', 'config', 'd', 'dsskey', 'ecdsakey', 'file', 'hostkeys', 'io_sleep', 'kex_gex', 'kex_group1', 'message', 'packet', 'pipe', 'pkey', 'primes', 'proxy', 'py3compat', 'resource', 'rsakey', 'server', 'sftp', 'sftp_attr', 'sftp_client', 'sftp_file', 'sftp_handle', 'sftp_server', 'sftp_si', 'ssh_exception', 'sys', 'transport', 'util']
+
+# In this dir(paramiko) I see the __version__ attribute
+>>> paramiko.__version__
+'1.14.0'
+
