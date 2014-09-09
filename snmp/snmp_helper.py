@@ -59,7 +59,8 @@ Compiled Thu 26-Jun-14 14:15 by prod_rel_team
 from pysnmp.entity.rfc3413.oneliner import cmdgen
 
 
-def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha', encrypt_proto='aes128', display_errors=True):
+def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha', 
+                        encrypt_proto='aes128', display_errors=True):
     '''
     Retrieve the given OID
 
@@ -76,12 +77,14 @@ def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto
 
     From PySNMP manuals:  http://pysnmp.sourceforge.net/docs/current/security-configuration.html
 
-    Optional authProtocol parameter may be used to specify non-default hash function algorithm. Possible values include:
+    Optional authProtocol parameter may be used to specify non-default hash function algorithm. 
+    Possible values include:
     usmHMACMD5AuthProtocol -- MD5-based authentication protocol
     usmHMACSHAAuthProtocol -- SHA-based authentication protocol
     usmNoAuthProtocol -- no authentication to use (default)
 
-    Optional privProtocol parameter may be used to specify non-default ciphering algorithm. Possible values include:
+    Optional privProtocol parameter may be used to specify non-default ciphering algorithm. 
+    Possible values include:
     usmDESPrivProtocol -- DES-based encryption protocol
     usmAesCfb128Protocol -- AES128-based encryption protocol (RFC3826)
     usm3DESEDEPrivProtocol -- triple DES-based encryption protocol (Extended Security Options)
