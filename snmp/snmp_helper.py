@@ -66,8 +66,8 @@ def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto
 
     Default OID is MIB2, sysDescr
 
-    a_device is a tuple = (a_host, snmp_port)
-    a_user is a tuple = (user_name, auth_key, encrypt_key)
+    snmp_device is a tuple = (hostname_or_IP, snmp_port)
+    snmp_user is a tuple = (user_name, auth_key, encrypt_key)
 
     Defaults to SHA1-AES128 for authentication + encryption
    
