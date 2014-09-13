@@ -1,7 +1,7 @@
 '''
 Applied Python Course, Class1, Exercise 2c
 
-Note, you will need to update the IP and COMMUNITY_STRING and IP to use this script.
+Note, you will need to update the IP and COMMUNITY_STRING to use this script.
 
 '''
 

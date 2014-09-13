@@ -2,7 +2,7 @@
 
 Applied Python Course, Class1, Exercise 3b
 
-Note, you will need to update the IP and COMMUNITY_STRING and IP to use this script.
+Note, you will need to update the IP and COMMUNITY_STRING to use this script.
 
 Note, making assumption that ccmHistoryStartupLastChanged gets reset to 0 on 
 reload.  This was observed on Cisco881, but do not know how general this 
