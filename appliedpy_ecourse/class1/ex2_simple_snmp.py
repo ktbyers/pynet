@@ -1,11 +1,7 @@
 '''
 Applied Python Course, Class1, Exercise 2c
 
-Recreate the simple SNMP script that I showed you in the 'SNMP Example' video
-except connect to both routers (pynet-rtr1 and pynet-rtr2) and print out both 
-the MIB2 sysName and sysDescr.
-
-Note, you will need to update the COMMUNITY_STRING and IP to use this script.
+Note, you will need to update the IP and COMMUNITY_STRING and IP to use this script.
 
 '''
 

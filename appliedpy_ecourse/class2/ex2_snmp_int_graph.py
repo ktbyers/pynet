@@ -1,3 +1,9 @@
+'''
+Applied Python, Class2, Exercise2
+
+Note, you will need to update the IP, SNMP username and keys to use this script.
+
+'''
 
 from snmp_helper import snmp_get_oid_v3,snmp_extract
 import line_graph

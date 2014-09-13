@@ -2,21 +2,7 @@
 
 Applied Python Course, Class1, Exercise 3b
 
-Using SNMP write a program that detects if the running configuration has been 
-changed but not saved to startup-config.
-
-Cisco routers have the following three OIDs:
-
-    # Uptime when running config last changed
-    ccmHistoryRunningLastChanged = '1.3.6.1.4.1.9.9.43.1.1.1.0'
-
-    # Uptime when running config last saved (note any 'write' constitutes a save)
-    ccmHistoryRunningLastSaved = '1.3.6.1.4.1.9.9.43.1.1.2.0'
-
-    # Uptime when startup config last saved
-    ccmHistoryStartupLastChanged = '1.3.6.1.4.1.9.9.43.1.1.3.0'
-
-Has running-config been saved to startup-config
+Note, you will need to update the IP and COMMUNITY_STRING and IP to use this script.
 
 Note, making assumption that ccmHistoryStartupLastChanged gets reset to 0 on 
 reload.  This was observed on Cisco881, but do not know how general this 
