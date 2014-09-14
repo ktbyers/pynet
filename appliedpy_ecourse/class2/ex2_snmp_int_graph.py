@@ -1,4 +1,5 @@
 '''
+https://pynet.twb-tech.com
 Applied Python, Class2, Exercise2
 
 Note, you will need to update the IP, SNMP username and keys to use this script.
