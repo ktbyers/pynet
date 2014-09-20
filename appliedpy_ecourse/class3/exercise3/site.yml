@@ -1,0 +1,52 @@
+---
+#
+# Using a Jinja2 for-loop in access_switch.j2 create all of 
+# the interfaces from FastEthernet 0/1 to FastEthernet 0/24.  Each of the 
+# interfaces should have the following configuration:
+#
+# >>>>
+# interface FastEthernet 0/X          # where X is the interface number
+#  switchport access vlan Y           # where Y comes from {{access_vlan}}
+#  switchport mode access
+#  spanning-tree portfast  
+# >>>>
+#
+# $ ansible-playbook site.yml 
+#
+# PLAY [Generate configuration file] ******************************************** 
+#
+# GATHERING FACTS *************************************************************** 
+# ok: [localhost]
+#
+# TASK: [access_switch | Generate configuration file] *************************** 
+# changed: [localhost] => (item={'access_vlan': 10, 'secret': '<secret>', 'snmp_community': 
+#       '<community>', 'default_gateway': '10.10.10.1', 'ip_addr': '10.10.10.20', 
+#       'hostname': 'pynet-sw1', 'SNMPv3': True})
+# changed: [localhost] => (item={'access_vlan': 20, 'secret': '<secret>', 'snmp_community': 
+#       '<community>', 'default_gateway': '10.10.20.1', 'ip_addr': '10.10.20.20', 
+#       'hostname': 'pynet-sw2', 'SNMPv3': True})
+# changed: [localhost] => (item={'access_vlan': 30, 'secret': '<secret>', 'snmp_community': 
+#       '<community>', 'default_gateway': '10.10.30.1', 'ip_addr': '10.10.30.20', 
+#       'hostname': 'pynet-sw3', 'SNMPv3': False})
+# changed: [localhost] => (item={'access_vlan': 40, 'secret': '<secret>', 'snmp_community': 
+#       '<community>', 'default_gateway': '10.10.40.1', 'ip_addr': '10.10.40.20', 
+#       'hostname': 'pynet-sw4', 'SNMPv3': False})
+# changed: [localhost] => (item={'access_vlan': 50, 'secret': '<secret>', 'snmp_community': 
+#       '<community>', 'default_gateway': '10.10.50.1', 'ip_addr': '10.10.50.20', 
+#       'hostname': 'pynet-sw5', 'SNMPv3': False})
+#
+# PLAY RECAP ******************************************************************** 
+# localhost                  : ok=2    changed=1    unreachable=0    failed=0   
+#
+# $ ls -al ~/ANSIBLE/CFGS/pynet-sw*.txt
+# -rw-rw-r--. 1 kbyers kbyers 3152 Sep 20 13:06 /home/kbyers/ANSIBLE/CFGS/pynet-sw1.txt
+# -rw-rw-r--. 1 kbyers kbyers 3152 Sep 20 13:06 /home/kbyers/ANSIBLE/CFGS/pynet-sw2.txt
+# -rw-rw-r--. 1 kbyers kbyers 2914 Sep 20 13:06 /home/kbyers/ANSIBLE/CFGS/pynet-sw3.txt
+# -rw-rw-r--. 1 kbyers kbyers 2914 Sep 20 13:06 /home/kbyers/ANSIBLE/CFGS/pynet-sw4.txt
+# -rw-rw-r--. 1 kbyers kbyers 2914 Sep 20 13:06 /home/kbyers/ANSIBLE/CFGS/pynet-sw5.txt
+#
+- name: Generate configuration file
+  hosts: local
+
+  roles:
+    - access_switch

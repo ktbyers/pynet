@@ -1,0 +1,42 @@
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+!
+hostname {{item.hostname}}
+!
+logging buffered 32000
+no logging console
+enable secret 0 {{item.secret}}
+!
+!
+!
+!
+{% for port_number in range(1,25) %}
+interface FastEthernet0/{{ port_number }}
+ switchport access vlan {{item.access_vlan}}
+ switchport mode access
+ spanning-tree portfast
+!
+{% endfor %}
+interface Vlan1
+ ip address {{item.ip_addr}} 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway {{item.default_gateway}}
+{% if item.SNMPv3 %}
+access-list 98 remark *** SNMP ***
+access-list 98 permit any
+!
+snmp-server view VIEWSTD iso included
+snmp-server group READONLY v3 priv read VIEWSTD access 98
+snmp-server user pysnmp READONLY v3 auth sha auth_key priv aes 128 encrypt_key
+{% endif %}
+snmp-server community {{item.snmp_community}} RO 
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+end
