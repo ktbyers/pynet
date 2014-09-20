@@ -1,0 +1,52 @@
+---
+# Expand upon the Jina2 template by adding an if conditional.  The if conditional 
+# should add the below SNMPv3 commands and associated ACL 
+#
+# >>>>
+# access-list 98 remark *** SNMP ***
+# access-list 98 permit any
+# !
+# snmp-server view VIEWSTD iso included
+# snmp-server group READONLY v3 priv read VIEWSTD access 98
+# snmp-server user pysnmp READONLY v3 auth sha auth_key priv aes 128 encrypt_key
+# >>>>
+#
+# $ ansible-playbook site.yml
+#
+# PLAY [Generate configuration file] ******************************************** 
+#
+# GATHERING FACTS *************************************************************** 
+# ok: [localhost]
+#
+# TASK: [access_switch | Generate configuration file] *************************** 
+# changed: [localhost] => (item={'access_vlan': 10, 'secret': '<secret>', 'snmp_community': 
+#     '<community>', 'default_gateway': '10.10.10.1', 'ip_addr': '10.10.10.20', 
+#     'hostname': 'pynet-sw1', 'SNMPv3': True})
+# changed: [localhost] => (item={'access_vlan': 20, 'secret': '<secret>', 'snmp_community': 
+#     '<community>', 'default_gateway': '10.10.20.1', 'ip_addr': '10.10.20.20', 
+#     'hostname': 'pynet-sw2', 'SNMPv3': True})
+# ok: [localhost] => (item={'access_vlan': 30, 'secret': '<secret>', 'snmp_community': 
+#     '<community>', 'default_gateway': '10.10.30.1', 'ip_addr': '10.10.30.20', 
+#     'hostname': 'pynet-sw3', 'SNMPv3': False})
+# ok: [localhost] => (item={'access_vlan': 40, 'secret': '<secret>', 'snmp_community': 
+#     '<community>', 'default_gateway': '10.10.40.1', 'ip_addr': '10.10.40.20', 
+#     'hostname': 'pynet-sw4', 'SNMPv3': False})
+# ok: [localhost] => (item={'access_vlan': 50, 'secret': '<secret>', 'snmp_community': 
+#     '<community>', 'default_gateway': '10.10.50.1', 'ip_addr': '10.10.50.20', 
+#     'hostname': 'pynet-sw5', 'SNMPv3': False})
+#
+# PLAY RECAP ******************************************************************** 
+# localhost                  : ok=2    changed=1    unreachable=0    failed=0  
+#
+# $ ls -al ~/ANSIBLE/CFGS/*sw*.txt
+# -rw-rw-r--. 1 kbyers kbyers 871 Sep 19 18:09 /home/kbyers/ANSIBLE/CFGS/pynet-sw1.txt
+# -rw-rw-r--. 1 kbyers kbyers 871 Sep 19 18:09 /home/kbyers/ANSIBLE/CFGS/pynet-sw2.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw3.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw4.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw5.txt
+#
+- name: Generate configuration file
+  hosts: local
+
+  roles:
+    - access_switch
