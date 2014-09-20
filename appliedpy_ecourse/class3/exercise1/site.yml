@@ -1,0 +1,41 @@
+---
+#
+# Create an Ansible playbook that generates five switch configurations based upon 
+# the partial switch configuration in access_switch.j2.
+# The hostname, ip_addr, and default_gateway should be unique for each switch.
+#
+#
+# $ ansible-playbook site.yml
+#
+# PLAY [Generate configuration file] ******************************************** 
+#
+# GATHERING FACTS *************************************************************** 
+# ok: [localhost]
+#
+# TASK: [access_switch | Generate configuration file] *************************** 
+# changed: [localhost] => (item={'access_vlan': 10, 'secret': '<secret>', 'snmp_community': 
+#    '<community>', 'default_gateway': '10.10.10.1', 'ip_addr': '10.10.10.20', 'hostname': 'pynet-sw1'})
+# changed: [localhost] => (item={'access_vlan': 20, 'secret': '<secret>', 'snmp_community': 
+#    '<community>', 'default_gateway': '10.10.20.1', 'ip_addr': '10.10.20.20', 'hostname': 'pynet-sw2'})
+# changed: [localhost] => (item={'access_vlan': 30, 'secret': '<secret>', 'snmp_community': 
+#    '<community>', 'default_gateway': '10.10.30.1', 'ip_addr': '10.10.30.20', 'hostname': 'pynet-sw3'})
+# changed: [localhost] => (item={'access_vlan': 40, 'secret': '<secret>', 'snmp_community': 
+#    '<community>', 'default_gateway': '10.10.40.1', 'ip_addr': '10.10.40.20', 'hostname': 'pynet-sw4'})
+# changed: [localhost] => (item={'access_vlan': 50, 'secret': '<secret>', 'snmp_community':    
+#    '<community>', 'default_gateway': '10.10.50.1', 'ip_addr': '10.10.50.20', 'hostname': 'pynet-sw5'})
+#
+# PLAY RECAP ******************************************************************** 
+# localhost                  : ok=2    changed=1    unreachable=0    failed=0   
+#
+# $ ls -al ~/ANSIBLE/CFGS/*sw*.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw1.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw2.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw3.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw4.txt
+# -rw-rw-r--. 1 kbyers kbyers 633 Sep 19 17:55 /home/kbyers/ANSIBLE/CFGS/pynet-sw5.txt
+#
+- name: Generate configuration file
+  hosts: local
+
+  roles:
+    - access_switch

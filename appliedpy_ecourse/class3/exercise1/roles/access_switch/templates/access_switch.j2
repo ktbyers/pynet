@@ -1,0 +1,37 @@
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+!
+hostname {{item.hostname}}
+!
+logging buffered 32000
+no logging console
+enable secret 0 {{item.secret}}
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan {{item.access_vlan}}
+ switchport mode access
+ spanning-tree portfast
+
+interface FastEthernet0/24
+ switchport access vlan {{item.access_vlan}}
+ switchport mode access
+ spanning-tree portfast
+!
+interface Vlan1
+ ip address {{item.ip_addr}} 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway {{item.default_gateway}}
+snmp-server community {{item.snmp_community}} RO 
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+end
