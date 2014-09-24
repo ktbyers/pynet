@@ -60,7 +60,7 @@ def main():
     pynet_rtr2 = (IP, 8061)
     snmp_device = pynet_rtr1 
     
-    # Fa4 is in row number4 in the MIB-2 interfaces table
+    # Fa4 is in row number5 in the MIB-2 interfaces table
     row_number = 5
 
     graph_stats = {
