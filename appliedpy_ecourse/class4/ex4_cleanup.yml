@@ -1,0 +1,40 @@
+---
+
+# Use Ansible to restore your 'primary Ethernet interface' back to the 
+# following state:
+#
+# description:            <none>
+# switchport mode:        access
+# access VLAN:            1
+# trunk allowed VLANs:    all
+#
+# Also use Ansible to remove the three VLANs that you configured.
+
+- name: Arista-Ansible Exercise4
+  hosts: arista
+
+  tasks:
+    - name: Configure Ethernet3 for access mode, VLAN1
+      eos_switchport: name=Ethernet3 mode=access access_vlan=1 trunk_allowed_vlans=all
+            eapi_username={{ eapi_username }} 
+            eapi_password={{ eapi_password }} 
+            eapi_hostname={{ eapi_hostname }} 
+            eapi_port={{ eapi_port }}
+
+    - name: Reset Ethernet3 description to default
+      eos_interface: name=Ethernet3 null_as_default=true
+            eapi_username={{ eapi_username }}
+            eapi_password={{ eapi_password }}
+            eapi_hostname={{ eapi_hostname }}
+            eapi_port={{ eapi_port }}
+
+    - name: Remove VLANs
+      eos_vlan: name={{item.name}} vlanid={{item.vlanid}} state=unconfigured
+            eapi_username={{ eapi_username}} 
+            eapi_password={{ eapi_password }} 
+            eapi_hostname={{ eapi_hostname }} 
+            eapi_port={{ eapi_port }}
+      with_items:
+        - {name: kb1, vlanid: 221}
+        - {name: kb2, vlanid: 222}
+        - {name: kb3, vlanid: 223}
