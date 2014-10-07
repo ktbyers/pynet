@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+'''
+Challenge exercise (optional) -- Using Arista's eAPI, write an Ansible module 
+that adds a VLAN (both a VLAN id and a VLAN name).  Do this in an idempotent 
+manner i.e. only add the VLAN, if it doesn't exist; only change the VLAN name, 
+if it is not correct. 
+
+You should be able to pass four arguments from the Ansible task to your module 
+(eapi_username, eapi_password, eapi_hostname, and eapi_port).
+
+'''
+
+import eapilib
+
+# Reuse functions from class5, exercise2
+from eapi_vlan import check_vlan_exists, configure_vlan
+from ansible.module_utils.basic import *
+
+
+def main():
+    '''
+    Simple Ansible module to create an Arista VLAN 
+    '''
+
+    module = AnsibleModule(
+        argument_spec = dict(
+            vlan_id   = dict(required=True),
+            vlan_name = dict(required=False),
+            eapi_username = dict(required=True),
+            eapi_password = dict(required=True),
+            eapi_hostname = dict(required=True),
+            eapi_port = dict(required=False, type='int'),
+        ) 
+    )
+
+    arista_params = {
+        'eapi_username': 'username',
+        'eapi_password': 'password',
+        'eapi_hostname': 'hostname',
+        'eapi_port': 'port',
+    }
+
+    arista_dict = {}
+
+    # Map the eapi_* names to the names required by eapilib
+    for ansible_name,arista_name in arista_params.items():
+        if ansible_name in module.params:
+            arista_dict[arista_name] = module.params[ansible_name]
+
+    eapi_conn = eapilib.create_connection(**arista_dict)
+
+    vlan_id = module.params['vlan_id']
+    vlan_name = module.params.get('vlan_name')
+
+    # Check if VLAN already exists
+    check_vlan = check_vlan_exists(eapi_conn, vlan_id)
+
+    if check_vlan:
+        if vlan_name is not None and check_vlan != vlan_name:
+            configure_vlan(eapi_conn, vlan_id, vlan_name)
+            module.exit_json(msg="VLAN already exists, setting VLAN name", changed=True)
+        else:
+            module.exit_json(msg="VLAN already exists, no action required", changed=False)
+
+    else:
+        configure_vlan(eapi_conn, vlan_id, vlan_name)
+        module.exit_json(msg="Adding VLAN including vlan_name (if present)", changed=True)
+
+
+
+# Execute the main function
+main()
