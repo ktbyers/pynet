@@ -1,0 +1,115 @@
+###
+### properties
+###
+>>> rtr1_obj.net_element.properties
+<onep.element.ElementProperty.ElementProperty object at 0x7f5316c2fa90>
+
+>>> rtr1_obj.net_element.properties.processor
+'MPC8300'
+
+>>> rtr1_obj.net_element.properties.product_id
+'CISCO881-SEC-K9'
+
+>>> rtr1_obj.net_element.properties.SerialNo
+'FTX1000008X'
+
+>>> rtr1_obj.net_element.properties.sys_descr
+'Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2014 by Cisco Systems, Inc.\nCompiled Thu 26-Jun-14 14:15 by prod_rel_team'
+
+>>> rtr1_obj.net_element.properties.sys_name
+'pynet-rtr1'
+
+>>> rtr1_obj.net_element.properties.sys_uptime
+5106508
+
+
+###
+### .net_element methods
+###
+>>> rtr1_obj.net_element.get_system_cpu_utilization()
+1
+
+>>> rtr1_obj.net_element.get_total_system_memory()
+153601184
+
+>>> rtr1_obj.net_element.is_connected()
+True
+
+
+###
+### interfaces
+###
+>>> from onep.interfaces import NetworkInterface
+>>> from onep.interfaces import InterfaceFilter
+>>> InterfaceTypes = NetworkInterface.InterfaceTypes
+>>> filter = InterfaceFilter(None,InterfaceTypes.ONEP_IF_TYPE_ETHERNET)
+
+>>> rtr1_obj.net_element.get_interface_list(filter)
+[<onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599390>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599190>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599210>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599290>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599310>]
+
+>>> test_int = intf[0]
+>>> test_int
+<onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599610>
+>>> print test_int
+NetworkInterface [ FastEthernet4 ]
+
+NetworkElement [ 10.10.10.10 ]
+    Product ID   : CISCO881-SEC-K9
+    Processor    : MPC8300
+    Serial No    : FTX1000008X
+    sysName      : pynet-rtr1
+    sysUpTime    : 5107714
+    sysDescr     : Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Thu 26-Jun-14 14:15 by prod_rel_team
+
+    Type             : ONEP_IF_TYPE_ETHERNET
+
+
+>>> print test_int.get_status()
+
+InterfaceStatus [ FastEthernet4 ]
+    LinkState        : ONEP_IF_STATE_OPER_UP
+    LineProtoState   : ONEP_IF_STATE_OPER_UP
+
+
+>>> int_stats = test_int.get_statistics()
+>>> int_stats
+<onep.interfaces.InterfaceStatistics.InterfaceStatistics object at 0x3595f10>
+
+>>> print int_stats
+InterfaceStatistics:
+    ONEP_IF_STAT_RELIABILITY:   255
+    ONEP_IF_STAT_RESETS:    2
+    ONEP_IF_STAT_RX_LOAD:   1
+    ONEP_IF_STAT_RX_BYTES_PER_SEC:  0
+    ONEP_IF_STAT_RX_PKTS_PER_SEC:   0
+    ONEP_IF_STAT_RX_BYTES:  41983300
+    ONEP_IF_STAT_RX_PKTS_UCAST: 0
+    ONEP_IF_STAT_RX_PKTS_MCAST: 0
+    ONEP_IF_STAT_RX_PKTS_BCAST: 174450
+    ONEP_IF_STAT_IN_PKTS_DROP:  0
+    ONEP_IF_STAT_RX_PKTS_ERRORS:    0
+    ONEP_IF_STAT_IN_PKTS_UNKNOWN:   158093
+    ONEP_IF_STAT_RX_PKTS_RUNTS: 0
+    ONEP_IF_STAT_RX_PKTS_GIANTS:    0
+    ONEP_IF_STAT_RX_PKTS_THROTTLE:  0
+    ONEP_IF_STAT_RX_PKTS_CRC:   0
+    ONEP_IF_STAT_RX_PKTS_FRAME: 0
+    ONEP_IF_STAT_RX_PKTS_OVERRUN:   0
+    ONEP_IF_STAT_TX_LOAD:   1
+    ONEP_IF_STAT_TX_BYTES_PER_SEC:  0
+    ONEP_IF_STAT_TX_PKTS_PER_SEC:   0
+    ONEP_IF_STAT_TX_BYTES:  57848695
+    ONEP_IF_STAT_TX_PKTS_UCAST: 0
+    ONEP_IF_STAT_TX_PKTS_MCAST: 0
+    ONEP_IF_STAT_TX_PKTS_BCAST: 0
+    ONEP_IF_STAT_OUT_PKTS_DROP: 0
+    ONEP_IF_STAT_TX_PKTS_ERRORS:    0
+    ONEP_IF_STAT_TX_PKTS_UNDERRUN:  0
+    ONEP_IF_STAT_TX_PKTS_BUFFER_FAILURES:   0
+    ONEP_IF_STAT_TX_PKTS_BUFFER_SWAPPEDOUT: 0
+    ONEP_IF_STAT_RX_PKTS:   306708
+    ONEP_IF_STAT_TX_PKTS:   252870
+
