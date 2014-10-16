@@ -125,3 +125,34 @@ InterfaceStatistics:
     ONEP_IF_STAT_RX_PKTS:   306708
     ONEP_IF_STAT_TX_PKTS:   252870
 
+
+###
+### Using VTY Service (cli commands wrapped in onePK
+### VTY Service must be enabled on the router
+###
+>>> from onep.vty import VtyService
+>>> vty_service = VtyService(rtr1_obj.net_element)
+>>> vty_service.open()
+>>> 
+>>> CMD = "show ip int brief"
+>>> cli = vty_service.write(CMD)
+>>> print cli
+
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0              unassigned      YES unset  down                  down    
+FastEthernet1              unassigned      YES unset  down                  down    
+FastEthernet2              unassigned      YES unset  down                  down    
+FastEthernet3              unassigned      YES unset  down                  down    
+FastEthernet4              10.220.88.20    YES manual up                    up      
+Vlan1                      unassigned      YES unset  down                  down    
+
+# Make a config change
+>>> CMD = 'conf t'
+>>> cli = vty_service.write(CMD)
+>>> cli
+'\r\nEnter configuration commands, one per line.  End with CNTL/Z.'
+>>> CMD = 'logging buffered 30000'
+>>> cli = vty_service.write(CMD)
+>>> cli
+''
+>>> cli = vty_service.write('end')
