@@ -13,8 +13,11 @@
 >>> rtr1_obj.net_element.properties.SerialNo
 'FTX1000008X'
 
->>> rtr1_obj.net_element.properties.sys_descr
-'Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2014 by Cisco Systems, Inc.\nCompiled Thu 26-Jun-14 14:15 by prod_rel_team'
+>>> print rtr1_obj.net_element.properties.sys_descr
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Thu 26-Jun-14 14:15 by prod_rel_team
 
 >>> rtr1_obj.net_element.properties.sys_name
 'pynet-rtr1'
@@ -39,17 +42,25 @@ True
 ###
 ### interfaces
 ###
+>>> from pprint import pprint
 >>> from onep.interfaces import NetworkInterface
 >>> from onep.interfaces import InterfaceFilter
 >>> InterfaceTypes = NetworkInterface.InterfaceTypes
 >>> filter = InterfaceFilter(None,InterfaceTypes.ONEP_IF_TYPE_ETHERNET)
-
->>> rtr1_obj.net_element.get_interface_list(filter)
-[<onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599390>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599190>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599210>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599290>, <onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599310>]
+>>> 
+>>> intf = rtr1_obj.net_element.get_interface_list(filter)
+>>> 
+>>> pprint(intf)
+[<onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d650>,
+ <onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d450>,
+ <onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d4d0>,
+ <onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d550>,
+ <onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d5d0>]
 
 >>> test_int = intf[0]
 >>> test_int
-<onep.interfaces.NetworkInterface.NetworkInterface object at 0x3599610>
+<onep.interfaces.NetworkInterface.NetworkInterface object at 0x287d650>
+
 >>> print test_int
 NetworkInterface [ FastEthernet4 ]
 
