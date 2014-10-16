@@ -70,7 +70,8 @@ NetworkElement [ 10.10.10.10 ]
     Serial No    : FTX1000008X
     sysName      : pynet-rtr1
     sysUpTime    : 5107714
-    sysDescr     : Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
+    sysDescr     : 
+Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2014 by Cisco Systems, Inc.
 Compiled Thu 26-Jun-14 14:15 by prod_rel_team
