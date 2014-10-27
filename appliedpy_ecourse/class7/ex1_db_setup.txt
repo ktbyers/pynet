@@ -1,0 +1,56 @@
+'''
+Initialize your Django database. Add the six NetworkDevice objects and two 
+Credentials objects into your database. 
+'''
+
+# from ~/DJANGOX/djproject
+
+# Initialize Django tables
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, contenttypes, auth, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+
+# Create migration script for NetworkDevice and Credentials models
+$ python manage.py makemigrations net_system
+Migrations for 'net_system':
+  0001_initial.py:
+    - Create model Credentials
+    - Create model NetworkDevice
+
+
+# Add NetworkDevice and Credentials models to the database
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, contenttypes, net_system, auth, sessions
+Running migrations:
+  Applying net_system.0001_initial... OK
+
+
+# Load devices and credentials
+$ cd net_system/
+$ python load_devices.py 
+$ python load_credentials.py 
+(<Credentials: pyclass>, True)
+(<Credentials: admin1>, True)
+
+
+# Verify devices and credentials are present
+# from ~/DJANGOX/djproject
+$ python manage.py shell
+
+>>> from net_system.models import NetworkDevice,Credentials
+>>> net_devices = NetworkDevice.objects.all()
+>>> net_devices
+[<NetworkDevice: pynet-rtr1>, <NetworkDevice: pynet-rtr2>, <NetworkDevice: pynet-sw1>, 
+ <NetworkDevice: pynet-sw2>, <NetworkDevice: pynet-sw3>, <NetworkDevice: pynet-sw4>]
+
+>>> creds = Credentials.objects.all()
+>>> creds
+[<Credentials: pyclass>, <Credentials: admin1>]
+
