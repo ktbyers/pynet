@@ -11,13 +11,13 @@ Int:    Loopback0
 IP:     10.90.3.38/32
 Area:   30395
 Type:   LOOPBACK
-Cost    1
+Cost:   1
 
 Int:    GigabitEthernet0/1
 IP:     172.16.13.150/29
 Area:   30395
 Type:   BROADCAST
-Cost    1
+Cost:   1
 Hello:  10
 Dead:   40
 
@@ -25,7 +25,7 @@ Int:    GigabitEthernet0/0.2561
 IP:     10.22.0.117/30
 Area:   30395
 Type:   POINT_TO_POINT
-Cost    1
+Cost:   1
 Hello:  10
 Dead:   40
 
