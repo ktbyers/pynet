@@ -158,7 +158,8 @@ def retrieve_config():
     for a_device in net_devices:
 
         if 'ssh' in a_device.device_class:
-            if DEBUG: print "Retrieve device configuration: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG: print "Retrieve device configuration: {} {}\n".format(a_device.device_name, 
+                    a_device.device_class)
             ssh_connect = SSHConnection(a_device)
             ssh_connect.enable_mode()
             output = ssh_connect.send_command('show run\n')
