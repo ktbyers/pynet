@@ -8,7 +8,9 @@ https://pynet.twb-tech.com
 
 Class7 - 10 are part of building a larger system 
 
-This is the finished system. It does the following:
+This is the finished system. 
+
+It does the following:  
 1)Inventory collection using onePK, eAPI, and SSH.
 
 2)Uses SNMP configuration change detection to determine if the configuration
