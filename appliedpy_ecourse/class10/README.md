@@ -6,7 +6,7 @@ Python for Network Engineers
 https://pynet.twb-tech.com
 
 
-Class7 - 10 are part of building a larger system 
+Classes 7 - 10 are part of building a larger system 
 
 This is the finished system. 
 
