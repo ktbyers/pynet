@@ -41,7 +41,8 @@ def git_handling():
 
         # Perform git commit
         commit_message = "Network config changes (auto)"
-        proc = subprocess.Popen([GIT, 'commit', '-m', commit_message], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen([GIT, 'commit', '-m', commit_message], stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE)
         (std_out, std_err) = proc.communicate()
 
     # Change dir back to original directory
