@@ -35,7 +35,8 @@ def git_handling():
     if current_dir == global_params.CFGS_DIR:
 
         # Perform git add
-        proc = subprocess.Popen([GIT, 'add', '*.txt'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen([GIT, 'add', '*.txt'], stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE)
         (std_out, std_err) = proc.communicate()
 
         # Perform git commit
