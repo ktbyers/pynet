@@ -23,7 +23,7 @@ Use the MIB-2 sysDescr as a test
 7465616d'))]
 
 >>> output = snmp_extract(snmp_data)
->>> print output
+>>> print(output)
 Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2010 by Cisco Systems, Inc.
@@ -48,7 +48,7 @@ Defaults to using AES128 and SHA1
 >>> snmp_data = snmp_get_oid_v3(snmp_device, snmp_user, oid=sys_descr)
 >>> output = snmp_extract(snmp_data)
 
->>> print output
+>>> print(output)
 Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2014 by Cisco Systems, Inc.
@@ -140,10 +140,10 @@ def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto
         return snmp_data
     else:
         if display_errors:
-            print 'ERROR DETECTED: '
-            print '    %-16s %-60s' % ('error_message', error_detected)
-            print '    %-16s %-60s' % ('error_status', error_status)
-            print '    %-16s %-60s' % ('error_index', error_index)
+            print('ERROR DETECTED: ')
+            print('    %-16s %-60s' % ('error_message', error_detected))
+            print('    %-16s %-60s' % ('error_status', error_status))
+            print('    %-16s %-60s' % ('error_index', error_index))
         return None
 
 
@@ -173,10 +173,10 @@ def snmp_get_oid(a_device, oid='.1.3.6.1.2.1.1.1.0', display_errors=False):
         return snmp_data
     else:
         if display_errors:
-            print 'ERROR DETECTED: '
-            print '    %-16s %-60s' % ('error_message', error_detected)
-            print '    %-16s %-60s' % ('error_status', error_status)
-            print '    %-16s %-60s' % ('error_index', error_index)
+            print('ERROR DETECTED: ')
+            print('    %-16s %-60s' % ('error_message', error_detected))
+            print('    %-16s %-60s' % ('error_status', error_status))
+            print('    %-16s %-60s' % ('error_index', error_index))
         return None
 
 
