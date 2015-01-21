@@ -2,7 +2,7 @@
 https://pynet.twb-tech.com
 Applied Python, Class2, Exercise1
 
-Note, you will need to update the IP, SNMP username and keys to use this script.
+Note, you will need to update the ip, SNMP username and keys to use this script.
 
 You will also need to update the sender and recipient in send_notification.
 '''
@@ -10,7 +10,7 @@ You will also need to update the sender and recipient in send_notification.
 import cPickle as pickle
 import os.path
 
-from snmp_helper import snmp_get_oid,snmp_get_oid_v3,snmp_extract
+from snmp_helper import snmp_get_oid, snmp_get_oid_v3,snmp_extract
 from email_helper import send_mail
 
 from datetime import datetime
@@ -93,22 +93,22 @@ def main():
 
         Normal (non-reboot):
 
-            # Did ccmHistoryRunningLastChanged increase
-            if ccmHistoryRunningLastChanged > network_device_object.last_changed:
+            # Did RUN_LAST_CHANGED increase
+            if RUN_LAST_CHANGED > network_device_object.last_changed:
                 config_changed = True
 
         Reboot case:
 
-            ccmHistoryRunningLastChanged decreases (i.e. < network_device_object.last_changed)
+            RUN_LAST_CHANGED decreases (i.e. < network_device_object.last_changed)
 
-            Right after reboot, ccmHistoryRunningLastChanged is updated upon
+            Right after reboot, RUN_LAST_CHANGED is updated upon
             load of running-config from startup-config.
 
-            Create a grace window (RELOAD_WINDOW) for values of ccmHistoryRunningLastChanged.
-            In other words as long as ccmHistoryRunningLastChanged is <= RELOAD_WINDOW assume
+            Create a grace window (RELOAD_WINDOW) for values of RUN_LAST_CHANGED.
+            In other words as long as RUN_LAST_CHANGED is <= RELOAD_WINDOW assume
             no running-config changes.
 
-            If ccmHistoryRunningLastChanged is > RELOAD_WINDOW assume running-config was changed
+            If RUN_LAST_CHANGED is > RELOAD_WINDOW assume running-config was changed
 
     '''
 
@@ -118,27 +118,27 @@ def main():
     RELOAD_WINDOW = 300 * 100
 
     # Uptime when running config last changed
-    ccmHistoryRunningLastChanged = '1.3.6.1.4.1.9.9.43.1.1.1.0'
+    RUN_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.1.0'
     # Uptime when run-config last saved (note 'write term/show run' constitutes a save)
-    ccmHistoryRunningLastSaved = '1.3.6.1.4.1.9.9.43.1.1.2.0'
+    RUN_LAST_SAVED = '1.3.6.1.4.1.9.9.43.1.1.2.0'
     # Uptime when start config last saved
-    ccmHistoryStartupLastChanged = '1.3.6.1.4.1.9.9.43.1.1.3.0'
+    START_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.3.0'
 
     # Pickle file for storing previous RunningLastChanged timestamp
     net_dev_file = 'netdev.pkl'
 
     # SNMPv3 Connection Parameters
-    IP = '1.1.1.1'
+    ip = '1.1.1.1'
     a_user = 'username'
-    auth_key = '*********'
-    encrypt_key = '**********'
+    auth_key = '********'
+    encrypt_key = '********'
     snmp_user = (a_user, auth_key, encrypt_key)
-    pynet_rtr1 = (IP, 7961)
-    pynet_rtr2 = (IP, 8061)
+    pynet_rtr1 = (ip, 7961)
+    pynet_rtr2 = (ip, 8061)
 
     # Relevant SNMP OIDs
-    sysName = '1.3.6.1.2.1.1.5.0'
-    sysUptime = '1.3.6.1.2.1.1.3.0'
+    SYS_NAME = '1.3.6.1.2.1.1.5.0'
+    SYS_UPTIME = '1.3.6.1.2.1.1.3.0'
 
 
     print '\n*** Checking for device changes ***'
@@ -153,14 +153,14 @@ def main():
     for a_device in (pynet_rtr1, pynet_rtr2):
     
         # obtain device_name
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=sysName)
+        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_NAME)
         device_name = snmp_extract(snmp_data)
 
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=sysUptime)
+        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_UPTIME)
         uptime = snmp_extract(snmp_data)
 
         # obtain last_changed time 
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=ccmHistoryRunningLastChanged)
+        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=RUN_LAST_CHANGED)
         last_changed = snmp_extract(snmp_data)
 
         if DEBUG: 
