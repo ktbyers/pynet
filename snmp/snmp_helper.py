@@ -57,6 +57,7 @@ Compiled Thu 26-Jun-14 14:15 by prod_rel_team
 '''
 
 from pysnmp.entity.rfc3413.oneliner import cmdgen
+from __future__ import print_function
 
 
 def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha', 
