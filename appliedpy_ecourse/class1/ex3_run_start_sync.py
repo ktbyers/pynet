@@ -1,26 +1,38 @@
+#!/usr/bin/env python
 '''
 
 Applied Python Course, Class1, Exercise 3b
 
-Note, you will need to update the IP and COMMUNITY_STRING to use this script.
+Note, you will need to update the ip_addr and COMMUNITY_STRING to use this
+script.
 
-Note, making assumption that ccmHistoryStartupLastChanged gets reset to 0 on 
-reload.  This was observed on Cisco881, but do not know how general this 
+Note, making assumption that OID_START_LAST_CHANGED gets reset to 0 on
+reload.  This was observed on Cisco881, but do not know how general this
 behavior is.
 
 '''
 
 from snmp_helper import snmp_get_oid, snmp_extract
 
+# Module constants
+DEBUG = False
+
+COMMUNITY_STRING = 'galileo'
+
+# Uptime when running config last changed
+OID_RUN_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.1.0'
+# Uptime when startup config last saved
+OID_START_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.3.0'
+
 
 def determine_run_start_sync_state(run_change_sysuptime, start_save_sysuptime):
     '''
     return True if run/start are in sync
-    return False if run/start are out of sync (or can't be determined after 
+    return False if run/start are out of sync (or can't be determined after
     reload)
 
     Three cases:
-    1. Normal (no reboot): in sync if start_save_sysuptime >= run_change_sysuptime 
+    1. Normal (no reboot): in sync if start_save_sysuptime >= run_change_sysuptime
 
     2. Reboot, but subsequent 'wr mem'
        start_save_sysuptime will be non-zero in this case.  In this case
@@ -54,43 +66,35 @@ def convert_uptime_hours(sys_uptime):
 
 def main():
     '''
+    Using SNMP Write a program that detects if the running configuration has
+    been changed but not saved to startup-config.
     '''
 
-    DEBUG = False
+    ip_addr = '50.242.94.227'
 
-    COMMUNITY_STRING = '********'
-    IP = '10.10.10.10'
-    
     my_devices = {
-        "pynet_rtr1": (IP, COMMUNITY_STRING, 7961),
-        "pynet_rtr2": (IP, COMMUNITY_STRING, 8061),
+        "pynet_rtr1": (ip_addr, COMMUNITY_STRING, 7961),
+        "pynet_rtr2": (ip_addr, COMMUNITY_STRING, 8061),
     }
 
-    # Uptime when running config last changed
-    ccmHistoryRunningLastChanged = '1.3.6.1.4.1.9.9.43.1.1.1.0'
-    # Uptime when running config last saved (note any 'write' constitutes a save)
-    ccmHistoryRunningLastSaved = '1.3.6.1.4.1.9.9.43.1.1.2.0'
-    # Uptime when startup config last saved
-    ccmHistoryStartupLastChanged = '1.3.6.1.4.1.9.9.43.1.1.3.0'
-    
     sys_uptime_oid = '1.3.6.1.2.1.1.3.0'
-    
-    
+
+
     for device_name, snmp_device in my_devices.items():
-   
-        # Gather data from device 
+
+        # Gather data from device
         snmp_data = snmp_get_oid(snmp_device, oid=sys_uptime_oid)
         sys_uptime = snmp_extract(snmp_data)
-    
+
         uptime_hours = convert_uptime_hours(sys_uptime)
-    
-        snmp_data = snmp_get_oid(snmp_device, oid=ccmHistoryRunningLastChanged)
+
+        snmp_data = snmp_get_oid(snmp_device, oid=OID_RUN_LAST_CHANGED)
         last_run_change = int(snmp_extract(snmp_data))
-    
-        snmp_data = snmp_get_oid(snmp_device, oid=ccmHistoryStartupLastChanged)
+
+        snmp_data = snmp_get_oid(snmp_device, oid=OID_START_LAST_CHANGED)
         last_start_save = int(snmp_extract(snmp_data))
 
-        # Determine whether run-start are in sync    
+        # Determine whether run-start are in sync
         run_save_status = determine_run_start_sync_state(last_run_change, last_start_save)
 
         # Display output
@@ -101,14 +105,14 @@ def main():
             print "Last save time = %s" % last_start_save
 
         # Check for a reboot and no save
-        if not(last_start_save):
+        if not last_start_save:
             print 'This device has never been saved since the last reboot'
         else:
             if run_save_status:
                 print 'Running config has been saved'
             else:
                 print 'Running config not saved'
-    
+
         print
 
 
