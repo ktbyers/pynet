@@ -17,7 +17,7 @@ from snmp_helper import snmp_get_oid, snmp_extract
 # Module constants
 DEBUG = False
 
-COMMUNITY_STRING = 'galileo'
+COMMUNITY_STRING = '*******'
 
 # Uptime when running config last changed
 OID_RUN_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.1.0'
@@ -70,7 +70,7 @@ def main():
     been changed but not saved to startup-config.
     '''
 
-    ip_addr = '50.242.94.227'
+    ip_addr = '10.10.10.10'
 
     my_devices = {
         "pynet_rtr1": (ip_addr, COMMUNITY_STRING, 7961),
