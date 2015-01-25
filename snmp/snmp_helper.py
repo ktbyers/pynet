@@ -23,7 +23,7 @@ Use the MIB-2 sysDescr as a test
 7465616d'))]
 
 >>> output = snmp_extract(snmp_data)
->>> print(output)
+>>> print output
 Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.0(1)M4, RELEASE SOFTWARE (fc1)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2010 by Cisco Systems, Inc.
@@ -48,7 +48,7 @@ Defaults to using AES128 and SHA1
 >>> snmp_data = snmp_get_oid_v3(snmp_device, snmp_user, oid=sys_descr)
 >>> output = snmp_extract(snmp_data)
 
->>> print(output)
+>>> print output
 Cisco IOS Software, C880 Software (C880DATA-UNIVERSALK9-M), Version 15.4(2)T1, RELEASE SOFTWARE (fc3)
 Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2014 by Cisco Systems, Inc.
