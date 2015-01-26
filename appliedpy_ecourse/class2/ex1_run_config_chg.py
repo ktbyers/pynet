@@ -142,6 +142,7 @@ def main():
     pynet_rtr1 = (ip_addr, 7961)
     pynet_rtr2 = (ip_addr, 8061)
 
+
     print '\n*** Checking for device changes ***'
 
     saved_devices = obtain_saved_objects(net_dev_file)
@@ -153,16 +154,11 @@ def main():
     # Connect to each device / retrieve last_changed time
     for a_device in (pynet_rtr1, pynet_rtr2):
 
-        # obtain device_name
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_NAME)
-        device_name = snmp_extract(snmp_data)
+        snmp_results = []
+        for oid  in (SYS_NAME, SYS_UPTIME, RUN_LAST_CHANGED):
+            snmp_results.append(snmp_extract(snmp_get_oid_v3(a_device, snmp_user, oid=oid)))
 
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_UPTIME)
-        uptime = snmp_extract(snmp_data)
-
-        # obtain last_changed time
-        snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=RUN_LAST_CHANGED)
-        last_changed = snmp_extract(snmp_data)
+        device_name, uptime, last_changed = snmp_results
 
         if DEBUG:
             print "\nConnected to device = {0}".format(device_name)
