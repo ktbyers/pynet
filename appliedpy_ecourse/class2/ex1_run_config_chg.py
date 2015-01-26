@@ -2,7 +2,7 @@
 https://pynet.twb-tech.com
 Applied Python, Class2, Exercise1
 
-Note, you will need to update the ip, SNMP username and keys to use this script.
+Note, you will need to update the ip_addr, SNMP username and keys to use this script.
 
 You will also need to update the sender and recipient in send_notification.
 '''
@@ -10,18 +10,33 @@ You will also need to update the sender and recipient in send_notification.
 import cPickle as pickle
 import os.path
 
-from snmp_helper import snmp_get_oid, snmp_get_oid_v3,snmp_extract
+from snmp_helper import snmp_get_oid_v3, snmp_extract
 from email_helper import send_mail
 
 from datetime import datetime
-    
+
+
+# Constants
+DEBUG = True
+
+# 300 seconds (converted to hundredths of seconds)
+RELOAD_WINDOW = 300 * 100
+
+# Uptime when running config last changed
+RUN_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.1.0'
+
+# Relevant SNMP OIDs
+SYS_NAME = '1.3.6.1.2.1.1.5.0'
+SYS_UPTIME = '1.3.6.1.2.1.1.3.0'
+
+
 
 def obtain_saved_objects(file_name):
     '''
     Read in previously saved objects from a pickle file
 
     Returns a dict:
-    { 
+    {
       'device_name': device_object,
       'device_name': device_object,
     }
@@ -46,6 +61,9 @@ def obtain_saved_objects(file_name):
 
 
 def send_notification(net_device):
+    '''
+    Send email notification regarding modified device
+    '''
 
     current_time = datetime.now()
 
@@ -69,7 +87,7 @@ class NetworkDevice(object):
     '''
     Simple object to store network device information
 
-    For an alternate solution, you could replace the class/objects with 
+    For an alternate solution, you could replace the class/objects with
     a data structure that uses dictionaries.
     '''
 
@@ -112,34 +130,17 @@ def main():
 
     '''
 
-    DEBUG = True
-
-    # 300 seconds (converted to hundredths of seconds)
-    RELOAD_WINDOW = 300 * 100
-
-    # Uptime when running config last changed
-    RUN_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.1.0'
-    # Uptime when run-config last saved (note 'write term/show run' constitutes a save)
-    RUN_LAST_SAVED = '1.3.6.1.4.1.9.9.43.1.1.2.0'
-    # Uptime when start config last saved
-    START_LAST_CHANGED = '1.3.6.1.4.1.9.9.43.1.1.3.0'
-
     # Pickle file for storing previous RunningLastChanged timestamp
     net_dev_file = 'netdev.pkl'
 
     # SNMPv3 Connection Parameters
-    ip = '1.1.1.1'
+    ip_addr = '10.10.10.10'
     a_user = 'username'
     auth_key = '********'
     encrypt_key = '********'
     snmp_user = (a_user, auth_key, encrypt_key)
-    pynet_rtr1 = (ip, 7961)
-    pynet_rtr2 = (ip, 8061)
-
-    # Relevant SNMP OIDs
-    SYS_NAME = '1.3.6.1.2.1.1.5.0'
-    SYS_UPTIME = '1.3.6.1.2.1.1.3.0'
-
+    pynet_rtr1 = (ip_addr, 7961)
+    pynet_rtr2 = (ip_addr, 8061)
 
     print '\n*** Checking for device changes ***'
 
@@ -151,7 +152,7 @@ def main():
 
     # Connect to each device / retrieve last_changed time
     for a_device in (pynet_rtr1, pynet_rtr2):
-    
+
         # obtain device_name
         snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_NAME)
         device_name = snmp_extract(snmp_data)
@@ -159,11 +160,11 @@ def main():
         snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=SYS_UPTIME)
         uptime = snmp_extract(snmp_data)
 
-        # obtain last_changed time 
+        # obtain last_changed time
         snmp_data = snmp_get_oid_v3(a_device, snmp_user, oid=RUN_LAST_CHANGED)
         last_changed = snmp_extract(snmp_data)
 
-        if DEBUG: 
+        if DEBUG:
             print "\nConnected to device = {0}".format(device_name)
             print "Last changed timestamp = {0}".format(last_changed)
             print "Uptime = {0}".format(uptime)
@@ -180,21 +181,25 @@ def main():
 
                 if last_changed <= RELOAD_WINDOW:
                     print "DEVICE RELOADED...not changed"
-                    current_devices[device_name] = NetworkDevice(device_name, uptime, last_changed, False)
+                    current_devices[device_name] = NetworkDevice(device_name, uptime,
+                                                                 last_changed, False)
                 else:
                     print "DEVICE RELOADED...and changed"
-                    current_devices[device_name] = NetworkDevice(device_name, uptime, last_changed, True)
+                    current_devices[device_name] = NetworkDevice(device_name, uptime,
+                                                                 last_changed, True)
                     send_notification(current_devices[device_name])
 
             # running-config last_changed is the same
             elif last_changed == saved_device.last_changed:
                 print "not changed"
-                current_devices[device_name] = NetworkDevice(device_name, uptime, last_changed, False)
+                current_devices[device_name] = NetworkDevice(device_name, uptime,
+                                                             last_changed, False)
 
             # running-config was modified
             elif last_changed > saved_device.last_changed:
                 print "CHANGED"
-                current_devices[device_name] = NetworkDevice(device_name, uptime, last_changed, True)
+                current_devices[device_name] = NetworkDevice(device_name, uptime,
+                                                             last_changed, True)
                 send_notification(current_devices[device_name])
 
             else:
