@@ -22,7 +22,7 @@
             eapi_port={{ eapi_port }}
 
     - name: Reset Ethernet3 description to default
-      eos_interface: name=Ethernet3 null_as_default=true
+      eos_interface: name=Ethernet3 admin=enable null_as_default=true
             eapi_username={{ eapi_username }}
             eapi_password={{ eapi_password }}
             eapi_hostname={{ eapi_hostname }}
