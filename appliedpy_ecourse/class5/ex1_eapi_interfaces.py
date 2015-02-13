@@ -13,10 +13,10 @@ def main():
     '''
 
     arista_dict = dict(
-        ip='50.242.94.227',
+        ip='10.10.10.10',
         port=8243,
-        username='eapi',
-        password='99saturday'
+        username='username',
+        password='********'
     )
 
     eapi_url = 'https://{username}:{password}@{ip}:{port}/command-api'.format(**arista_dict)
