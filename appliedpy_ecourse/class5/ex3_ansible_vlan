@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 '''
-Challenge exercise (optional) -- Using Arista's eAPI, write an Ansible module 
-that adds a VLAN (both a VLAN id and a VLAN name).  Do this in an idempotent 
-manner i.e. only add the VLAN, if it doesn't exist; only change the VLAN name, 
-if it is not correct. 
+Challenge exercise (optional) -- Using Arista's eAPI, write an Ansible module
+that adds a VLAN (both a VLAN id and a VLAN name).  Do this in an idempotent
+manner i.e. only add the VLAN, if it doesn't exist; only change the VLAN name,
+if it is not correct.
 
-You should be able to pass four arguments from the Ansible task to your module 
+You should be able to pass four arguments from the Ansible task to your module
 (eapi_username, eapi_password, eapi_hostname, and eapi_port).
 
 '''
@@ -19,18 +19,18 @@ from ansible.module_utils.basic import *
 
 def main():
     '''
-    Simple Ansible module to create an Arista VLAN 
+    Simple Ansible module to create an Arista VLAN
     '''
 
     module = AnsibleModule(
-        argument_spec = dict(
-            vlan_id   = dict(required=True),
-            vlan_name = dict(required=False),
-            eapi_username = dict(required=True),
-            eapi_password = dict(required=True),
-            eapi_hostname = dict(required=True),
-            eapi_port = dict(required=False, type='int'),
-        ) 
+        argument_spec=dict(
+            vlan_id=dict(required=True),
+            vlan_name=dict(required=False),
+            eapi_username=dict(required=True),
+            eapi_password=dict(required=True),
+            eapi_hostname=dict(required=True),
+            eapi_port=dict(required=False, type='int'),
+        )
     )
 
     arista_params = {
@@ -43,7 +43,7 @@ def main():
     arista_dict = {}
 
     # Map the eapi_* names to the names required by eapilib
-    for ansible_name,arista_name in arista_params.items():
+    for ansible_name, arista_name in arista_params.items():
         if ansible_name in module.params:
             arista_dict[arista_name] = module.params[ansible_name]
 
