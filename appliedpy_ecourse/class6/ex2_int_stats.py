@@ -1,29 +1,28 @@
 '''
-Print out the interface statistics for FastEthernet4 on the two lab routers 
+Print out the interface statistics for FastEthernet4 on the two lab routers
 (rtr1 = port 15002, rtr2 = port 8002).
-
 '''
 
 from onepk_helper import NetworkDevice
-from onep.interfaces import NetworkInterface,InterfaceFilter
+from onep.interfaces import NetworkInterface, InterfaceFilter
 
 
 def main():
 
     pynet_rtr1 = dict(
-        ip = '10.10.10.10',
-        username = 'pyclass',
-        password = '********',
-        pin_file = 'pynet-rtr1-pin.txt',
-        port = 15002
+        ip='10.10.10.10',
+        username='user1',
+        password='**********',
+        pin_file='pynet-rtr1-pin.txt',
+        port=15002
     )
 
     pynet_rtr2 = dict(
-        ip = '10.10.10.10',
-        username = 'pyclass',
-        password = '********',
-        pin_file = 'pynet-rtr2-pin.txt',
-        port = 8002
+        ip='10.10.10.10',
+        username='user1',
+        password='**********',
+        pin_file='pynet-rtr2-pin.txt',
+        port=8002
     )
 
     for a_rtr in (pynet_rtr1, pynet_rtr2):
@@ -32,12 +31,12 @@ def main():
         rtr_obj.establish_session()
 
         # Create a filter for only Enet interfaces
-        filter = InterfaceFilter(None,NetworkInterface.InterfaceTypes.ONEP_IF_TYPE_ETHERNET)
+        a_filter = InterfaceFilter(None, NetworkInterface.InterfaceTypes.ONEP_IF_TYPE_ETHERNET)
 
         # Get the interfaces
-        int_list = rtr_obj.net_element.get_interface_list(filter)
+        int_list = rtr_obj.net_element.get_interface_list(a_filter)
 
-        print 
+        print
         for intf in int_list:
             if 'FastEthernet4' in intf.name:
                 rtr_name = rtr_obj.net_element.properties.sys_name
