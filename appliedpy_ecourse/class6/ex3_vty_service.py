@@ -1,8 +1,7 @@
 '''
-Using onePK and the VTY Service obtain the output from the 'show version' 
-command.  Use 'terminal length 0' to disable output paging (i.e. disable 
+Using onePK and the VTY Service obtain the output from the 'show version'
+command.  Use 'terminal length 0' to disable output paging (i.e. disable
 '--More--' prompting).
-
 '''
 
 from onepk_helper import NetworkDevice
@@ -10,21 +9,26 @@ from onep.vty import VtyService
 
 
 def main():
+    '''
+    Using onePK and the VTY Service obtain the output from the 'show version'
+    command.  Use 'terminal length 0' to disable output paging (i.e. disable
+    '--More--' prompting).
+    '''
 
     pynet_rtr1 = dict(
-        ip = '10.10.10.10',
-        username = 'pyclass',
-        password = '********',
-        pin_file = 'pynet-rtr1-pin.txt',
-        port = 15002
+        ip='10.10.10.10',
+        username='user1',
+        password='**********',
+        pin_file='pynet-rtr1-pin.txt',
+        port=15002
     )
 
     pynet_rtr2 = dict(
-        ip = '10.10.10.10',
-        username = 'pyclass',
-        password = '********',
-        pin_file = 'pynet-rtr2-pin.txt',
-        port = 8002
+        ip='10.10.10.10',
+        username='user1',
+        password='**********',
+        pin_file='pynet-rtr2-pin.txt',
+        port=8002
     )
 
     for a_rtr in (pynet_rtr1, pynet_rtr2):
@@ -37,10 +41,10 @@ def main():
         vty_service = VtyService(rtr_obj.net_element)
         vty_service.open()
 
-        CMD = "terminal length 0"
-        cli = vty_service.write(CMD)
-        CMD = "show version"
-        cli = vty_service.write(CMD)
+        cmd = "terminal length 0"
+        cli = vty_service.write(cmd)
+        cmd = "show version"
+        cli = vty_service.write(cmd)
 
         print "\n" + "*" * 80
         print "** CONNECTED TO: {}".format(rtr_name)
