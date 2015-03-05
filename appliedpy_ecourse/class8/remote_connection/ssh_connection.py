@@ -14,7 +14,7 @@ class SSHConnection(object):
     def __init__(self, net_device):
         self.net_device = net_device
         self.ip = net_device.ip_address
-        
+
         if net_device.ssh_port:
             self.port = net_device.ssh_port
         else:
@@ -42,11 +42,12 @@ class SSHConnection(object):
 
         # Automatically add untrusted hosts (make sure okay for security policy in your environment)
         self.remote_conn_pre.set_missing_host_key_policy(
-             paramiko.AutoAddPolicy())
+            paramiko.AutoAddPolicy())
 
         # initiate SSH connection
         print "SSH connection established to {}:{}".format(self.ip, self.port)
-        self.remote_conn_pre.connect(hostname=self.ip, port=self.port, username=self.username, password=self.password)
+        self.remote_conn_pre.connect(hostname=self.ip, port=self.port,
+                                     username=self.username, password=self.password)
 
         # Use invoke_shell to establish an 'interactive session'
         self.remote_conn = self.remote_conn_pre.invoke_shell()
@@ -81,19 +82,20 @@ class SSHConnection(object):
         """
         Finds the network device name and prompt ('>', '#')
         """
-    
+
         DEBUG = False
-        if DEBUG: print "In find_prompt"
+        if DEBUG:
+            print "In find_prompt"
 
         self.remote_conn.send("\n")
         time.sleep(1)
 
         router_name = self.remote_conn.recv(MAX_BUFFER)
 
-        if (router_name.count('>') == 1):
+        if router_name.count('>') == 1:
             z_prompt = '>'
             router_name = router_name.split('>')[0]
-        elif (router_name.count('#') == 1):
+        elif router_name.count('#') == 1:
             z_prompt = '#'
             router_name = router_name.split('#')[0]
         else:
@@ -102,12 +104,13 @@ class SSHConnection(object):
         router_name = self.normalize_linefeeds(router_name)
         self.router_name = router_name.strip()
         self.router_prompt = self.router_name + z_prompt
-        if DEBUG: print "router_name: {}; prompt: {}".format(self.router_name, self.router_prompt)
+        if DEBUG:
+            print "router_name: {}; prompt: {}".format(self.router_name, self.router_prompt)
 
 
     def clear_buffer(self):
         '''
-        Read any data available in the channel 
+        Read any data available in the channel
         '''
 
         if self.remote_conn.recv_ready():
@@ -115,7 +118,7 @@ class SSHConnection(object):
         else:
             return None
 
-    
+
     def send_command(self, command_string, delay_factor=1, max_loops=30):
         """
         Execute command_string on the SSH channel.
@@ -125,14 +128,15 @@ class SSHConnection(object):
         delay_factor can be used to increase the delays.
 
         max_loops can be used to increase the number of times it reads the data buffer
-        
+
         Returns the output of the command.
         """
 
         DEBUG = False
         output = ''
 
-        if DEBUG: print 'In send_command'
+        if DEBUG:
+            print 'In send_command'
 
         self.clear_buffer()
 
@@ -140,8 +144,9 @@ class SSHConnection(object):
         command_string = command_string.rstrip("\n")
         command_string += '\n'
 
-        if DEBUG: print "Command is: {}".format(command_string)
- 
+        if DEBUG:
+            print "Command is: {}".format(command_string)
+
         self.remote_conn.send(command_string)
 
         time.sleep(1*delay_factor)
@@ -150,33 +155,41 @@ class SSHConnection(object):
 
         while (not_done) and (i <= max_loops):
 
-            if DEBUG: print "In while loop"
+            if DEBUG:
+                print "In while loop"
             time.sleep(2*delay_factor)
             i += 1
 
             # Keep reading data as long as available (up to max_loops)
             if self.remote_conn.recv_ready():
-                if DEBUG: print "recv_ready = True"
+                if DEBUG:
+                    print "recv_ready = True"
                 output += self.remote_conn.recv(MAX_BUFFER)
             else:
-                if DEBUG: print "recv_ready = False"
+                if DEBUG:
+                    print "recv_ready = False"
                 not_done = False
 
         output = self.normalize_linefeeds(output)
         output = self.strip_command(command_string, output)
         output = self.strip_prompt(output)
-   
-        if DEBUG: print output 
+
+        if DEBUG:
+            print output
         return output
 
 
     def strip_prompt(self, a_string):
+        '''
+        Strip trailing prompt from a_string
+        '''
 
         DEBUG = False
 
         response_list = a_string.split('\n')
         if response_list[-1] == self.router_prompt:
-            if DEBUG: print "Stripping router prompt {}".format(response_list[-1])
+            if DEBUG:
+                print "Stripping router prompt {}".format(response_list[-1])
             return '\n'.join(response_list[:-1])
         else:
             return a_string
@@ -200,8 +213,14 @@ class SSHConnection(object):
 
 
     def enable_mode(self):
+        '''
+        Enter enable mode
+        '''
         pass
 
 
     def config_mode(self):
+        '''
+        Enter config mode
+        '''
         pass

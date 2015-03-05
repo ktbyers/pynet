@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+'''
+Applied Python Class8
+Network Management System
+'''
 
 import django
 import time
@@ -6,10 +10,13 @@ import time
 from net_system.models import NetworkDevice, Credentials, SnmpCredentials
 
 from remote_connection import SSHConnection
-from inventory import CiscoGatherInventory,AristaGatherInventory
+from inventory import CiscoGatherInventory, AristaGatherInventory
 
 
 def print_inventory(a_device):
+    '''
+    Print network device inventory information
+    '''
 
     fields = [
         'device_name',
@@ -38,14 +45,14 @@ def print_inventory(a_device):
 
 def inventory_dispatcher():
     '''
-    Dispatcher for calling SSH, onePK, or eAPI based on the 
+    Dispatcher for calling SSH, onePK, or eAPI based on the
     NetworkDevice.device_class
     '''
 
     DEBUG = True
 
     # Single location to specify the relevant GatherInventory class to use
-    CLASS_MAPPER = {
+    class_mapper = {
         'cisco_ios_ssh'     : CiscoGatherInventory,
         'arista_eos_ssh'    : AristaGatherInventory,
     }
@@ -55,11 +62,14 @@ def inventory_dispatcher():
     for a_device in net_devices:
 
         if 'ssh' in a_device.device_class:
-            if DEBUG: print "SSH inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "SSH inventory call: {} {}\n".format(a_device.device_name,
+                                                           a_device.device_class)
+
             ssh_connect = SSHConnection(a_device)
             output = ssh_connect.send_command('show version\n')
-            inventory_obj = CLASS_MAPPER[a_device.device_class](a_device, output)
-            
+            inventory_obj = class_mapper[a_device.device_class](a_device, output)
+
             inventory_obj.find_vendor()
             inventory_obj.find_model()
             inventory_obj.find_device_type()
@@ -72,11 +82,15 @@ def inventory_dispatcher():
             print_inventory(a_device)
 
         elif 'onepk' in a_device.device_class:
-            if DEBUG: print "onePK inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "onePK inventory call: {} {}\n".format(a_device.device_name,
+                                                             a_device.device_class)
             pass
 
         elif 'eapi' in a_device.device_class:
-            if DEBUG: print "eAPI inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "eAPI inventory call: {} {}\n".format(a_device.device_name,
+                                                            a_device.device_class)
             pass
 
         else:
@@ -95,10 +109,12 @@ if __name__ == "__main__":
     print
 
     while True:
-        
-        if VERBOSE: print "### Gather inventory from devices ###"
+
+        if VERBOSE:
+            print "### Gather inventory from devices ###"
         inventory_dispatcher()
 
-        if VERBOSE: print "Sleeping for {} seconds".format(LOOP_DELAY)
+        if VERBOSE:
+            print "Sleeping for {} seconds".format(LOOP_DELAY)
         time.sleep(LOOP_DELAY)
-        
+

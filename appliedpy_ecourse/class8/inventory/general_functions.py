@@ -23,33 +23,38 @@ def parse_uptime(time_str):
     time_str = time_str.replace(' and', ',')
 
     time_list = time_str.split(',')
-    if DEBUG: print time_list
+    if DEBUG:
+        print time_list
 
     for element in time_list:
         try:
-            if ( re.search("year", element)):
+            if re.search("year", element):
                 years = int(element.split()[0])
                 valid_string = True
-            elif ( re.search("week", element)):
+            elif re.search("week", element):
                 weeks = int(element.split()[0])
                 valid_string = True
-            elif ( re.search("day", element)):
+            elif re.search("day", element):
                 days = int(element.split()[0])
                 valid_string = True
-            elif ( re.search("hour", element)):
+            elif re.search("hour", element):
                 hours = int(element.split()[0])
                 valid_string = True
-            elif ( re.search("minute", element)):
+            elif re.search("minute", element):
                 minutes = int(element.split()[0])
                 valid_string = True
-        except (IndexError, ValueError) as e:
-            log.exception("Invalid uptime string returned from remote device (%s)" % time_str)
+        except (IndexError, ValueError):
+            if DEBUG:
+                print "Invalid uptime string returned from remote device (%s)" % time_str
             return ""
 
     if valid_string:
         uptime_sec = uptime_seconds([years, weeks, days, hours, minutes])
-        if DEBUG: print "%s years, %s weeks, %s days, %s hours, %s minutes" % (years, weeks, days, hours, minutes)
-        if DEBUG: print "Uptime in minutes = %s" % (uptime_sec)
+        if DEBUG:
+            print "%s years, %s weeks, %s days, %s hours, %s minutes" % (years, weeks, days,
+                                                                         hours, minutes)
+        if DEBUG:
+            print "Uptime in minutes = %s" % (uptime_sec)
     else:
         return ""
 
