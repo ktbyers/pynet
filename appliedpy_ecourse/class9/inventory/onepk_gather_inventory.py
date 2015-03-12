@@ -2,8 +2,10 @@ import re
 
 
 def onepk_find_model(part_number):
-    
+   
     if 'CISCO881' in part_number:
+        return '881'
+    elif '881' == part_number:
         return '881'
     else:
         raise ValueError("Unable to find model from part number({})".format(part_number))

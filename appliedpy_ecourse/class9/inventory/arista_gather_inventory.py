@@ -1,9 +1,11 @@
 import re
-from gather_inventory import GatherInventory
-from general_functions import parse_uptime
+from inventory.gather_inventory import GatherInventory
+from inventory.general_functions import parse_uptime
 
 class AristaGatherInventory(GatherInventory):
-
+    '''
+    SSH Inventory Processing for Arista Devices
+    '''
 
     def find_vendor(self):
         if 'Arista' in self.output:
@@ -27,14 +29,15 @@ class AristaGatherInventory(GatherInventory):
         if 'Arista ' in model:
             self.net_device.model = model.split('Arista ')[1]
             self.net_device.save()
-            
+
 
     def find_device_type(self):
         if self.net_device.model == 'vEOS':
             self.net_device.device_type = 'switch'
             self.net_device.save()
         else:
-            raise ValueError("Unable to find device_type from model({})".format(self.net_device.model))
+            raise ValueError("Unable to find device_type from model({})".format(
+                self.net_device.model))
 
 
     def find_os_version(self):

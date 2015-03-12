@@ -6,14 +6,30 @@ import time
 from net_system.models import NetworkDevice, Credentials, SnmpCredentials
 
 from remote_connection import SSHConnection
-from inventory import CiscoGatherInventory,AristaGatherInventory
-from inventory import onepk_find_model,onepk_find_device_type,onepk_find_os_version
+from inventory import CiscoGatherInventory, AristaGatherInventory
+from inventory import onepk_find_model, onepk_find_device_type, onepk_find_os_version
 
 import onepk_helper
 import eapilib
 
 
+# Delay between running inventory gathering and config backup
+LOOP_DELAY = 300
+
+# Single location to specify the relevant GatherInventory class to use
+CLASS_MAPPER = {
+    'cisco_ios_ssh'     : CiscoGatherInventory,
+    'arista_eos_ssh'    : AristaGatherInventory,
+}
+
+# Directory where configurations are stored
+CFGS_DIR = '/home/kbyers/CFGS/'
+
+
 def print_inventory(a_device):
+    '''
+    Print out the network device inventory information
+    '''
 
     fields = [
         'device_name',
@@ -42,28 +58,24 @@ def print_inventory(a_device):
 
 def inventory_dispatcher():
     '''
-    Dispatcher for calling SSH, onePK, or eAPI based on the 
+    Dispatcher for calling SSH, onePK, or eAPI based on the
     NetworkDevice.device_class
     '''
 
     DEBUG = True
-
-    # Single location to specify the relevant GatherInventory class to use
-    CLASS_MAPPER = {
-        'cisco_ios_ssh'     : CiscoGatherInventory,
-        'arista_eos_ssh'    : AristaGatherInventory,
-    }
 
     net_devices = NetworkDevice.objects.all()
 
     for a_device in net_devices:
 
         if 'ssh' in a_device.device_class:
-            if DEBUG: print "SSH inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "SSH inventory call: {} {}\n".format(a_device.device_name,
+                                                           a_device.device_class)
             ssh_connect = SSHConnection(a_device)
             output = ssh_connect.send_command('show version\n')
             inventory_obj = CLASS_MAPPER[a_device.device_class](a_device, output)
-            
+
             inventory_obj.find_vendor()
             inventory_obj.find_model()
             inventory_obj.find_device_type()
@@ -75,7 +87,9 @@ def inventory_dispatcher():
             print_inventory(a_device)
 
         elif 'onepk' in a_device.device_class:
-            if DEBUG: print "onePK inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "onePK inventory call: {} {}\n".format(a_device.device_name,
+                                                             a_device.device_class)
 
             # FIX - pin_file is hard-coded
             onepk_connect = onepk_helper.NetworkDevice(
@@ -105,10 +119,12 @@ def inventory_dispatcher():
 
         elif 'eapi' in a_device.device_class:
 
-            if DEBUG: print "eAPI inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "eAPI inventory call: {} {}\n".format(a_device.device_name,
+                                                            a_device.device_class)
 
             eapi_conn = eapilib.create_connection(
-                hostname = a_device.ip_address,
+                hostname=a_device.ip_address,
                 username=a_device.credentials.username,
                 password=a_device.credentials.password,
                 port=a_device.api_port
@@ -148,47 +164,58 @@ def inventory_dispatcher():
 
 
 def retrieve_config():
-
-    CFGS_DIR = '/home/kbyers/CFGS/'
+    '''
+    Use SSH to retrieve the network device running configuration.
+    '''
 
     DEBUG = True
 
     net_devices = NetworkDevice.objects.all()
-    
+
     for a_device in net_devices:
 
         if 'ssh' in a_device.device_class:
-            if DEBUG: print "Retrieve device configuration: {} {}\n".format(a_device.device_name, 
-                    a_device.device_class)
+            if DEBUG:
+                print "Retrieve device configuration: {} {}\n".format(a_device.device_name,
+                                                                      a_device.device_class)
             ssh_connect = SSHConnection(a_device)
             ssh_connect.enable_mode()
             output = ssh_connect.send_command('show run\n')
 
             file_name = a_device.device_name + '.txt'
             full_path = CFGS_DIR + file_name
-            if DEBUG: print "Writing configuration file to file system\n"
+            if DEBUG:
+                print "Writing configuration file to file system\n"
             with open(full_path, 'w') as f:
                 f.write(output)
 
-
-if __name__ == "__main__":
+def main():
+    '''
+    Network management system class #9
+    '''
 
     django.setup()
 
-    LOOP_DELAY = 300
-    VERBOSE = True
+    verbose = True
 
     time.sleep(3)
     print
 
     while True:
-        
-        if VERBOSE: print "### Gather inventory from devices ###"
+
+        if verbose:
+            print "### Gather inventory from devices ###"
         inventory_dispatcher()
 
-        if VERBOSE: print "\n### Retrieve config from devices ###"
+        if verbose:
+            print "\n### Retrieve config from devices ###"
         retrieve_config()
 
-        if VERBOSE: print "Sleeping for {} seconds".format(LOOP_DELAY)
+        if verbose:
+            print "Sleeping for {} seconds".format(LOOP_DELAY)
+
         time.sleep(LOOP_DELAY)
-        
+
+
+if __name__ == "__main__":
+    main()
