@@ -5,7 +5,7 @@
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
@@ -29,14 +29,14 @@ Here is some brief testing of this function in the Python shell:
 True
 >>> ex3_valid_ip.valid_ip('0.1.1.1')
 False
->>> 
->>> 
+>>>
+>>>
 >>> from ex3_valid_ip import valid_ip
 >>> valid_ip('223.17.19.1')
 True
 >>> valid_ip('223.17.19.256')
 False
->>> 
+>>>
 
 '''
 
@@ -47,26 +47,24 @@ def valid_ip(ip_address):
     Return either True or False
     '''
 
-    valid_ip = True
-
     # Make sure IP has four octets
     octets = ip_address.split('.')
     if len(octets) != 4:
         return False
-    
+
     # convert octet from string to int
-    for i,octet in enumerate(octets):
-    
+    for i, octet in enumerate(octets):
+
         try:
             octets[i] = int(octet)
         except ValueError:
             # couldn't convert octet to an integer
             return False
-    
-    
+
+
     # map variables to elements of octets list
     first_octet, second_octet, third_octet, fourth_octet = octets
-    
+
     # Check first_octet meets conditions
     if first_octet < 1:
         return False
@@ -74,20 +72,20 @@ def valid_ip(ip_address):
         return False
     elif first_octet == 127:
         return False
-    
+
     # Check 169.254.X.X condition
     if first_octet == 169 and second_octet == 254:
         return False
-    
+
     # Check 2nd - 4th octets
     for octet in (second_octet, third_octet, fourth_octet):
         if (octet < 0) or (octet > 255):
             return False
-  
- 
+
+
     # Passed all of the checks
-    return True 
-   
+    return True
+
 
 
 # Technique to allow importable and executable code to coexist (will explain in class#8)
@@ -116,16 +114,14 @@ if __name__ == '__main__':
     print
 
     # Run the test cases
-    for ip,expected_return in test_ip_addresses.items():
-
-        func_test = valid_ip(ip)
+    for ip, expected_return in test_ip_addresses.items():
 
         # Make the output format nicer
         dots_to_print = (25 - len(ip)) * '.'
 
-        if func_test == expected_return:
+        if valid_ip(ip) == expected_return:
             print "Testing %s %s %s" % (ip, dots_to_print, 'ok')
         else:
-            print "Testing %s %s %s" % (ip, dots,to_print, 'failed')
+            print "Testing %s %s %s" % (ip, dots_to_print, 'failed')
 
-    print 
+    print
