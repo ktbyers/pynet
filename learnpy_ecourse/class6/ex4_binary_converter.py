@@ -75,7 +75,7 @@ def convert_ip_to_binary(ip_address):
 if __name__ == '__main__':
 
     # Create a bunch of test cases
-    test_ip_addresses = [ 
+    test_ip_addresses = [
         '1.1.1.1',
         '223.255.255.255',
         '223.255.254.252',
@@ -83,7 +83,7 @@ if __name__ == '__main__':
         '192.128.3.7',
         '223.0.0.0',
         '10.200.255.1',
-        '192.168.17.1',  
+        '192.168.17.1',
     ]
 
     print
@@ -94,5 +94,5 @@ if __name__ == '__main__':
         binary_ip = convert_ip_to_binary(ip)
         print "%18s    %-40s" % (ip, binary_ip)
 
-    print 
+    print
 

@@ -13,20 +13,38 @@ class GatherInventory(object):
         self.output = output
 
     def find_vendor(self):
+        '''
+        Generic find_vendor method
+        '''
         pass
 
     def find_model(self):
+        '''
+        Generic find_model method
+        '''
         pass
 
     def find_device_type(self):
+        '''
+        Generic find_device_type method
+        '''
         pass
 
     def find_os_version(self):
+        '''
+        Generic find_os_version method
+        '''
         pass
 
     def find_serial_number(self):
+        '''
+        Generic find_serial_number method
+        '''
         pass
 
     def find_uptime(self):
+        '''
+        Generic find_uptime method
+        '''
         pass
 

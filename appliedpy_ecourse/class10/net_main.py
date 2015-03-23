@@ -2,18 +2,17 @@
 
 import time
 from datetime import datetime
-from pprint import pprint
 import os
 import subprocess
 
 import django
 from django.utils import timezone
 
-from net_system.models import NetworkDevice, Credentials, SnmpCredentials
+from net_system.models import NetworkDevice
 
 from remote_connection import SSHConnection
-from inventory import CiscoGatherInventory,AristaGatherInventory
-from inventory import onepk_find_model,onepk_find_device_type,onepk_find_os_version
+from inventory import CiscoGatherInventory, AristaGatherInventory
+from inventory import onepk_find_model, onepk_find_device_type, onepk_find_os_version
 from snmp_config_detect import snmp_wrapper
 from email_helper import send_mail
 
@@ -23,9 +22,22 @@ import eapilib
 import global_params
 
 
-def git_handling():
+# Module variables
+GIT = '/bin/git'
+DIFF = '/bin/diff'
 
-    GIT = '/bin/git'
+# Single location to specify the relevant GatherInventory class to use
+CLASS_MAPPER = {
+    'cisco_ios_ssh'     : CiscoGatherInventory,
+    'arista_eos_ssh'    : AristaGatherInventory,
+}
+
+
+def git_handling():
+    '''
+    Commit the change into git following config file change
+    '''
+
     orig_dir = os.getcwd()
 
     # Change dir to CFGS_DIR
@@ -35,14 +47,14 @@ def git_handling():
     if current_dir == global_params.CFGS_DIR:
 
         # Perform git add
-        proc = subprocess.Popen([GIT, 'add', '*.txt'], stdout=subprocess.PIPE, 
-                stderr=subprocess.PIPE)
+        proc = subprocess.Popen([GIT, 'add', '*.txt'], stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         (std_out, std_err) = proc.communicate()
 
         # Perform git commit
         commit_message = "Network config changes (auto)"
-        proc = subprocess.Popen([GIT, 'commit', '-m', commit_message], stdout=subprocess.PIPE, 
-                stderr=subprocess.PIPE)
+        proc = subprocess.Popen([GIT, 'commit', '-m', commit_message], stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         (std_out, std_err) = proc.communicate()
 
     # Change dir back to original directory
@@ -56,13 +68,11 @@ def find_diff(file1, file2):
 
     DEBUG = True
 
-    DIFF = '/bin/diff'
-
     # Format of the first entry is an array of [COMMAND, OPTION, OPTION]
     proc = subprocess.Popen([DIFF, file1, file2], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # proc.communicate returns a tuple of (stdout, stderr)
-    (diff_output, STDERR) = proc.communicate()
+    (diff_output, std_err) = proc.communicate()
     if DEBUG:
         print ">>>Config differences:"
         print diff_output
@@ -71,6 +81,9 @@ def find_diff(file1, file2):
 
 
 def print_inventory(a_device):
+    '''
+    Print the inventory from the network device.
+    '''
 
     fields = [
         'device_name',
@@ -99,28 +112,24 @@ def print_inventory(a_device):
 
 def inventory_dispatcher():
     '''
-    Dispatcher for calling SSH, onePK, or eAPI based on the 
+    Dispatcher for calling SSH, onePK, or eAPI based on the
     NetworkDevice.device_class
     '''
 
     DEBUG = True
-
-    # Single location to specify the relevant GatherInventory class to use
-    CLASS_MAPPER = {
-        'cisco_ios_ssh'     : CiscoGatherInventory,
-        'arista_eos_ssh'    : AristaGatherInventory,
-    }
 
     net_devices = NetworkDevice.objects.all()
 
     for a_device in net_devices:
 
         if 'ssh' in a_device.device_class:
-            if DEBUG: print "SSH inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "SSH inventory call: {} {}\n".format(a_device.device_name,
+                                                           a_device.device_class)
             ssh_connect = SSHConnection(a_device)
             output = ssh_connect.send_command('show version\n')
             inventory_obj = CLASS_MAPPER[a_device.device_class](a_device, output)
-            
+
             inventory_obj.find_vendor()
             inventory_obj.find_model()
             inventory_obj.find_device_type()
@@ -132,7 +141,9 @@ def inventory_dispatcher():
             print_inventory(a_device)
 
         elif 'onepk' in a_device.device_class:
-            if DEBUG: print "onePK inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "onePK inventory call: {} {}\n".format(a_device.device_name,
+                                                             a_device.device_class)
 
             # FIX - pin_file is hard-coded
             onepk_connect = onepk_helper.NetworkDevice(
@@ -162,10 +173,12 @@ def inventory_dispatcher():
 
         elif 'eapi' in a_device.device_class:
 
-            if DEBUG: print "eAPI inventory call: {} {}\n".format(a_device.device_name, a_device.device_class)
+            if DEBUG:
+                print "eAPI inventory call: {} {}\n".format(a_device.device_name,
+                                                            a_device.device_class)
 
             eapi_conn = eapilib.create_connection(
-                hostname = a_device.ip_address,
+                hostname=a_device.ip_address,
                 username=a_device.credentials.username,
                 password=a_device.credentials.password,
                 port=a_device.api_port
@@ -205,11 +218,15 @@ def inventory_dispatcher():
 
 
 def backup_config(a_device):
+    '''
+    Retrieve configuration from network device, save to filesystem.
+    '''
 
     DEBUG = True
     perform_diff = False
 
-    if DEBUG: print "Retrieve device configuration via SSH: {}\n".format(a_device.device_name)
+    if DEBUG:
+        print "Retrieve device configuration via SSH: {}\n".format(a_device.device_name)
     ssh_connect = SSHConnection(a_device)
     ssh_connect.enable_mode()
     output = ssh_connect.send_command('show run\n')
@@ -224,7 +241,8 @@ def backup_config(a_device):
         cmd_status = subprocess.call(['/bin/mv', full_path, bup_file])
         perform_diff = True
 
-    if DEBUG: print "Writing configuration file to file system\n"
+    if DEBUG:
+        print "Writing configuration file to file system\n"
     with open(full_path, 'w') as f:
         f.write(output)
 
@@ -232,7 +250,8 @@ def backup_config(a_device):
     a_device.cfg_archive_time = timezone.make_aware(datetime.now(), timezone.get_current_timezone())
 
     # obtain last_changed time (Cisco specific)
-    a_device.cfg_last_changed = int(snmp_wrapper(a_device, oid=global_params.OID_RUNNING_LAST_CHANGED))
+    a_device.cfg_last_changed = int(snmp_wrapper(a_device,
+                                                 oid=global_params.OID_RUNNING_LAST_CHANGED))
     a_device.save()
 
     if perform_diff:
@@ -242,6 +261,14 @@ def backup_config(a_device):
 
 
 def detect_config_change():
+    '''
+    Use SNMP to detect configuration changes.
+
+    If configuration has changed, then:
+    1. Perform backup
+    2. Email diff
+    3. Check change into Git
+    '''
 
     net_devices = NetworkDevice.objects.all()
 
@@ -266,7 +293,8 @@ def detect_config_change():
                 if config_diffs:
                     print "Sending email notification regarding changes\n"
                     subject = "Network Device Changed: {}".format(a_device.device_name)
-                    send_mail(global_params.EMAIL_RECIPIENT, subject, config_diffs, global_params.EMAIL_SENDER)
+                    send_mail(global_params.EMAIL_RECIPIENT, subject,
+                              config_diffs, global_params.EMAIL_SENDER)
             else:
                 # Update last_changed field to handle reboot case
                 a_device.cfg_last_changed = last_changed
@@ -287,13 +315,16 @@ if __name__ == "__main__":
     print
 
     while True:
-        
-        if VERBOSE: print "### Gather inventory from devices ###"
+
+        if VERBOSE:
+            print "### Gather inventory from devices ###"
         inventory_dispatcher()
 
-        if VERBOSE: print "\n### Detect device configuration changes ###\n"
+        if VERBOSE:
+            print "\n### Detect device configuration changes ###\n"
         detect_config_change()
 
-        if VERBOSE: print "\nSleeping for {} seconds".format(global_params.LOOP_DELAY)
+        if VERBOSE:
+            print "\nSleeping for {} seconds".format(global_params.LOOP_DELAY)
         time.sleep(global_params.LOOP_DELAY)
-        
+
