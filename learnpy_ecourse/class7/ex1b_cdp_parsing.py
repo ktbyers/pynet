@@ -2,7 +2,7 @@
 
 '''
 Create a program that opens the 'sw1_cdp.txt' file and finds all of the remote
-hostnames, remote IP addresses, and remote platforms.  Your output should look 
+hostnames, remote IP addresses, and remote platforms.  Your output should look
 similar to the following:
 
  remote_hosts: ['R1', 'R2', 'R3', 'R4', 'R5']
@@ -25,10 +25,10 @@ tmp_dict['platform'] = re.findall(r"Platform: (.+?),", cdp_data)
 
 
 # Print output
-print 
+print
 field_order = ('remote_hosts', 'IPs', 'platform')
 for k in field_order:
     print "%15s: %-20s" % (k, tmp_dict[k])
 
-print 
+print
 
