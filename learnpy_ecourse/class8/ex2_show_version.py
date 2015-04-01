@@ -40,7 +40,7 @@ Python interpreter shell demonstrating this (with blank __init__.py)
 >>> import show_version.os_version
 >>> import show_version.model
 >>> import show_version.uptime
->>> 
+>>>
 >>> dir()
 ['__builtins__', '__doc__', '__name__', '__package__', 'show_version']
 >>> f = open("show_version.txt")
@@ -62,8 +62,8 @@ should be able to type:
 Python interpreter shell demonstrating this (with __init__.py as shown in GitHub)
 >>> import show_version
 >>> dir(show_version)
-['__builtins__', '__doc__', '__file__', '__name__', '__package__', '__path__', 
-'model', 'obtain_model', 'obtain_os_version', 'obtain_uptime', 'os_version', 
+['__builtins__', '__doc__', '__file__', '__name__', '__package__', '__path__',
+'model', 'obtain_model', 'obtain_os_version', 'obtain_uptime', 'os_version',
 'uptime']
 >>> f = open("show_version.txt")
 >>> show_ver = f.read()
@@ -86,19 +86,30 @@ this package.  It should return something similar to the following:
 
 import show_version
 
-if __name__ == "__main__":
+def main():
+    '''
+    Write a script that processes the show_version output using the 'show_version' package
 
-    f = open("show_version.txt")
+    It should return something similar to the following:
+    model:        881
+    os_version:   Version 15.0(1)M4
+    uptime:       uptime is 12 weeks, 5 days, 1 hour, 4 minutes
+    '''
 
-    show_ver = f.read()
+    with open("show_version.txt", "r") as version_file:
+        show_ver = version_file.read()
 
     model = show_version.obtain_model(show_ver)
-    os_version =  show_version.obtain_os_version(show_ver)
+    os_version = show_version.obtain_os_version(show_ver)
     uptime = show_version.obtain_uptime(show_ver)
 
-    print 
+    print
     print "%15s: %-50s" % ("model", model)
     print "%15s: %-50s" % ("os_version", os_version)
     print "%15s: %-50s" % ("uptime", uptime)
-    print 
+    print
 
+
+if __name__ == "__main__":
+
+    main()

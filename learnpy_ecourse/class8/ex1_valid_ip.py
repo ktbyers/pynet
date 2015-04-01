@@ -5,7 +5,7 @@
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
@@ -44,7 +44,7 @@ address validation).
 
     B. Execute this module--make sure all of the tests pass.
 
-$ ./ex1_valid_ip.py 
+$ ./ex1_valid_ip.py
 
 Testing 223.0.0.0 ................ ok
 Testing 10.200.255.1 ............. ok
@@ -87,26 +87,24 @@ def valid_ip(ip_address):
     Return either True or False
     '''
 
-    valid_ip = True
-
     # Make sure IP has four octets
     octets = ip_address.split('.')
     if len(octets) != 4:
         return False
-    
+
     # convert octet from string to int
-    for i,octet in enumerate(octets):
-    
+    for i, octet in enumerate(octets):
+
         try:
             octets[i] = int(octet)
         except ValueError:
             # couldn't convert octet to an integer
             return False
-    
-    
+
+
     # map variables to elements of octets list
     first_octet, second_octet, third_octet, fourth_octet = octets
-    
+
     # Check first_octet meets conditions
     if first_octet < 1:
         return False
@@ -114,23 +112,23 @@ def valid_ip(ip_address):
         return False
     elif first_octet == 127:
         return False
-    
+
     # Check 169.254.X.X condition
     if first_octet == 169 and second_octet == 254:
         return False
-    
+
     # Check 2nd - 4th octets
     for octet in (second_octet, third_octet, fourth_octet):
         if (octet < 0) or (octet > 255):
             return False
-  
- 
+
+
     # Passed all of the checks
-    return True 
-   
+    return True
 
 
-# Technique to allow importable and executable code to coexist 
+
+# Technique to allow importable and executable code to coexist
 if __name__ == '__main__':
 
     # Create a bunch of test cases
@@ -156,7 +154,7 @@ if __name__ == '__main__':
     print
 
     # Run the test cases
-    for ip,expected_return in test_ip_addresses.items():
+    for ip, expected_return in test_ip_addresses.items():
 
         func_test = valid_ip(ip)
 
@@ -166,6 +164,6 @@ if __name__ == '__main__':
         if func_test == expected_return:
             print "Testing %s %s %s" % (ip, dots_to_print, 'ok')
         else:
-            print "Testing %s %s %s" % (ip, dots,to_print, 'failed')
+            print "Testing %s %s %s" % (ip, dots_to_print, 'failed')
 
-    print 
+    print
