@@ -5,7 +5,7 @@
 This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
@@ -96,26 +96,31 @@ class IPAddressWithNetmask(IPAddress):
         netmask_tmp = [octet1, octet2, octet3, octet4]
 
         # Convert from binary to decimal
-        for i,octet in enumerate(netmask_tmp):
+        for i, octet in enumerate(netmask_tmp):
             # Must be a string to use the join method
-            netmask_tmp[i] = str(int(octet,2))
+            netmask_tmp[i] = str(int(octet, 2))
 
         return '.'.join(netmask_tmp)
 
 
-if __name__ == "__main__":
-
-    # Some test code
+def main():
+    '''
+    Basic test on code
+    '''
     test_ip2 = IPAddressWithNetmask('172.31.255.1/24')
 
-    print 
+    print
     print "%15s: %-40s" % ("IP", test_ip2.ip_addr)
     print "%15s: %-40s" % ("Netmask", test_ip2.netmask)
-    print "%15s: %-40s" % ("Binary IP", test_ip2.display_in_binary()) 
+    print "%15s: %-40s" % ("Binary IP", test_ip2.display_in_binary())
     print "%15s: %-40s" % ("Hex IP", test_ip2.display_in_hex())
     print "%15s: %-40s" % ("IP Valid", test_ip2.is_valid())
-    print "%15s: %-40s" % ("Netmask dot dec", test_ip2.netmask_in_dotdecimal() )
+    print "%15s: %-40s" % ("Netmask dot dec", test_ip2.netmask_in_dotdecimal())
     print
 
-    
+
+if __name__ == "__main__":
+    main()
+
+
 
