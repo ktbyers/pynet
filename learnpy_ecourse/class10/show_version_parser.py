@@ -29,16 +29,20 @@ def process_show_version(net_device):
 
 
 def obtain_vendor_model(show_ver):
-
+    '''
+    Obtain vendor and model from show version data
+    '''
     # '(.+?) ' means any sequence of one or more characters followed by space (shortest match)
     match = re.search(r"Cisco (.+?) .+bytes of memory", show_ver)
     if match:
         return ("Cisco", match.group(1))
     else:
-        return None
+        return (None, None)
 
 def obtain_os_version(show_ver):
-
+    '''
+    Obtain os version from show version data
+    '''
     # (.+?), means any sequence of one or more characters followed by comma (shortest match)
     match = re.search(r"Cisco IOS Software.*Version (.+?),", show_ver)
     if match:
@@ -47,7 +51,9 @@ def obtain_os_version(show_ver):
         return None
 
 def obtain_uptime(show_ver):
-
+    '''
+    Obtain uptime from show version data
+    '''
     match = re.search(r".* uptime is .*", show_ver)
 
     if match:
@@ -61,7 +67,7 @@ def obtain_hostname(show_ver):
     '''
     Example string from Cisco IOS:
     twb-sf-881 uptime is 14 weeks, 4 days, 22 hours, 59 minutes
-    
+
     return the hostname, else None
     '''
 

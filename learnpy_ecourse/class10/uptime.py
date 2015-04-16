@@ -22,7 +22,7 @@ class Uptime(object):
     def __init__(self, uptime_str):
 
         # process the uptime string
-        (junk, uptime_str) = uptime_str.split("uptime is")
+        _, uptime_str = uptime_str.split("uptime is")
 
         # [years, weeks, days, hours, minutes]
         uptime_list = [0, 0, 0, 0, 0]
@@ -35,7 +35,7 @@ class Uptime(object):
             r" ([0-9]+) minute",
         ]
 
-        for i,a_pattern in enumerate(pattern_list):
+        for i, a_pattern in enumerate(pattern_list):
             uptime_list[i] = find_uptime_field(a_pattern, uptime_str)
 
         (self.years, self.weeks, self.days, self.hours, self.minutes) = uptime_list
@@ -52,14 +52,14 @@ class Uptime(object):
         WEEK_S = DAY_S * 7
         YEAR_S = DAY_S * 365
 
-        return ( (self.years * YEAR_S) + (self.weeks * WEEK_S) + (self.days * DAY_S) + 
-                    (self.hours * HOUR_S) + (self.minutes * MINUTE_S) ) 
+        return ((self.years * YEAR_S) + (self.weeks * WEEK_S) + (self.days * DAY_S) +
+                (self.hours * HOUR_S) + (self.minutes * MINUTE_S))
 
 
-if __name__ == "__main__":
-
-    # Some test code
-
+def main():
+    '''
+    Some test code
+    '''
     uptime_strings = [
         'twb-sf-881 uptime is 6 weeks, 4 days, 2 hours, 25 minutes',
         '3750RJ uptime is 1 hour, 29 minutes',
@@ -83,3 +83,8 @@ if __name__ == "__main__":
         print "%-20s: %s" % ('Uptime in seconds: ', test_obj.uptime_seconds())
 
     print
+
+
+if __name__ == "__main__":
+    main()
+

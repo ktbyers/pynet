@@ -3,24 +3,24 @@
 This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
 Learning Python
 
 
-Create a script that can login to a network device (using either telnet or SSH) 
-and retrieve 'show version' from the device.  
+Create a script that can login to a network device (using either telnet or SSH)
+and retrieve 'show version' from the device.
 
-Process the 'show version' output and store the below attributes in a 
+Process the 'show version' output and store the below attributes in a
 NetworkDevice object:
 
 NetworkObject
     hostname
     ip
-    username    
-    password 
+    username
+    password
     device_type          # router, switch, firewall, etc.
     vendor
     model
@@ -29,62 +29,62 @@ NetworkObject
     serial_number
 
 
-This object should be stored to a file using pickle. 
+This object should be stored to a file using pickle.
 
 
-Here is the output of running essentially this code against a test device 
+Here is the output of running essentially this code against a test device
 (password stripped):
 
-$ python main_program.py 
+$ python main_program.py
 
 Using SSH:
-       hostname: twb-sf-881                              
-             ip: 10.220.88.1                             
-       username: pynet                                   
+       hostname: twb-sf-881
+             ip: 10.220.88.1
+       username: pynet
        password: *
-    device_type: router                                  
-         vendor: Cisco                                   
-          model: 881                                     
-     os_version: 15.0(1)M4                               
-         uptime: 8978280                                 
-  serial_number: FTX1512038X                             
+    device_type: router
+         vendor: Cisco
+          model: 881
+     os_version: 15.0(1)M4
+         uptime: 8978280
+  serial_number: FTX1512038X
 
 Using telnet:
-       hostname: twb-sf-881                              
-             ip: 10.220.88.1                             
-       username: pynet                                   
+       hostname: twb-sf-881
+             ip: 10.220.88.1
+       username: pynet
        password: *
-    device_type: router                                  
-         vendor: Cisco                                   
-          model: 881                                     
-     os_version: 15.0(1)M4                               
-         uptime: 8978280                                 
-  serial_number: FTX1512038X                             
+    device_type: router
+         vendor: Cisco
+          model: 881
+     os_version: 15.0(1)M4
+         uptime: 8978280
+  serial_number: FTX1512038X
 
 
 
 Reading objects from pickle files:
-       hostname: twb-sf-881                              
-             ip: 10.220.88.1                             
-       username: pynet                                   
+       hostname: twb-sf-881
+             ip: 10.220.88.1
+       username: pynet
        password: *
-    device_type: router                                  
-         vendor: Cisco                                   
-          model: 881                                     
-     os_version: 15.0(1)M4                               
-         uptime: 8978280                                 
-  serial_number: FTX1512038X                             
+    device_type: router
+         vendor: Cisco
+          model: 881
+     os_version: 15.0(1)M4
+         uptime: 8978280
+  serial_number: FTX1512038X
 
-       hostname: twb-sf-881                              
-             ip: 10.220.88.1                             
-       username: pynet                                   
+       hostname: twb-sf-881
+             ip: 10.220.88.1
+       username: pynet
        password: *
-    device_type: router                                  
-         vendor: Cisco                                   
-          model: 881                                     
-     os_version: 15.0(1)M4                               
-         uptime: 8978280                                 
-  serial_number: FTX1512038X                             
+    device_type: router
+         vendor: Cisco
+          model: 881
+     os_version: 15.0(1)M4
+         uptime: 8978280
+  serial_number: FTX1512038X
 
 '''
 
@@ -98,10 +98,14 @@ from show_version_parser import process_show_version
 
 
 class NetworkDevice(object):
+    '''
+    Container for network device attributes
+    '''
     def __init__(self, ip, username, password):
         self.ip = ip
         self.username = username
         self.password = password
+        self.show_version = ''
 
 
 def ssh_main():
@@ -156,7 +160,7 @@ def telnet_main():
     time.sleep(1)
     test_device2.show_version = remote_conn.read_very_eager()
 
-    remote_conn.close() 
+    remote_conn.close()
     process_show_version(test_device2)
 
     # Print to stdout for verification
@@ -172,7 +176,7 @@ def net_device_verification(net_device):
     Prints out a set of attributes for a NetworkDevice object
     '''
 
-    print_attr = [    
+    print_attr = [
         'hostname',
         'ip',
         'username',
@@ -192,8 +196,12 @@ def net_device_verification(net_device):
 
     print
 
-if __name__ == "__main__":
 
+def main():
+    '''
+    Login to a network device (using either telnet or SSH) and retrieve 'show version'
+    from the device.
+    '''
     print
     print "Using SSH:"
     ssh_main()
@@ -209,3 +217,6 @@ if __name__ == "__main__":
             netdev_obj = pickle.load(f)
             net_device_verification(netdev_obj)
 
+
+if __name__ == "__main__":
+    main()
