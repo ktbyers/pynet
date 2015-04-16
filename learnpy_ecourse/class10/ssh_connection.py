@@ -29,7 +29,8 @@ def establish_connection(ip, username='', password=''):
     remote_conn_pre.set_missing_host_key_policy(
         paramiko.AutoAddPolicy())
 
-    remote_conn_pre.connect(ip, username=username, password=password)
+    remote_conn_pre.connect(ip, username=username, password=password,
+                            look_for_keys=False, allow_agent=False)
 
     remote_conn = remote_conn_pre.invoke_shell()
 
