@@ -1,18 +1,17 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
 Learning Python
 
 
-Create a program that converts the following uptime strings to a time in 
+Create a program that converts the following uptime strings to a time in
 seconds.
 
 uptime1 = 'twb-sf-881 uptime is 6 weeks, 4 days, 2 hours, 25 minutes'
@@ -92,7 +91,7 @@ for uptime in (uptime1, uptime2, uptime3, uptime4):
                 uptime_seconds += int(days) * DAY_SECONDS
             except ValueError:
                 print "Error, during string conversion to integer"
-        
+
         elif 'hour' in time_field:
             (hours, junk) = time_field.split(' hour')
             try:
@@ -114,11 +113,9 @@ for uptime in (uptime1, uptime2, uptime3, uptime4):
     # times (use a for loop instead)
     uptime_seconds2 = 0
     for time_field in uptime_fields:
-        for string_pattern, time_factor in ( (' year', YEAR_SECONDS),  
-                                             (' week', WEEK_SECONDS), 
-                                             (' day', DAY_SECONDS), 
-                                             (' hour', HOUR_SECONDS), 
-                                             (' minute', MINUTE_SECONDS) ):
+        for string_pattern, time_factor in ((' year', YEAR_SECONDS), (' week', WEEK_SECONDS),
+                                            (' day', DAY_SECONDS), (' hour', HOUR_SECONDS),
+                                            (' minute', MINUTE_SECONDS)):
             if string_pattern in time_field:
                 (the_time, junk) = time_field.split(string_pattern)
                 try:

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -81,7 +80,7 @@ for line in show_ip_lines:
         if_name, ip_addr, discard1, discard2, line_status, line_proto = line_split
 
         if (line_status == 'up') and (line_proto == 'up'):
-            show_ip_list.append( (if_name, ip_addr, line_status, line_proto) )
+            show_ip_list.append((if_name, ip_addr, line_status, line_proto))
 
 
 print "\n"

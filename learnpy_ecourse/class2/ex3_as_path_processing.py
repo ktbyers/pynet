@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -26,10 +25,10 @@ a string; the AS_PATH should be a list):
 
 Your output should look like this:
 
-ip_prefix           as_path                                           
-1.0.192.0/18        ['701', '38040', '9737']                          
-1.1.1.0/24          ['701', '1299', '15169']                          
-1.1.42.0/24         ['701', '9505', '17408', '2.1465']                
+ip_prefix           as_path
+1.0.192.0/18        ['701', '38040', '9737']
+1.1.1.0/24          ['701', '1299', '15169']
+1.1.42.0/24         ['701', '9505', '17408', '2.1465']
 1.0.192.0/19        ['701', '6762', '6762', '6762', '6762', '38040', '9737']
 
 
@@ -67,7 +66,7 @@ print "%-20s %-50s" % (ip_prefix, as_path)
 
 entry_split = entry4.split()
 ip_prefix = entry_split[1]
-as_path= entry_split[4:-1]
+as_path = entry_split[4:-1]
 print "%-20s %-50s" % (ip_prefix, as_path)
 
 print "\n"

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -12,14 +11,14 @@ https://pynet.twb-tech.com
 Learning Python
 Class#3
 
-I. Create an IP address converter (dotted decimal to binary).  This will be 
+I. Create an IP address converter (dotted decimal to binary).  This will be
 similar to what we did in class2 except:
 
     A. Make the IP address a command-line argument instead of prompting the user
 for it.
             ./binary_converter.py 10.88.17.23
 
-    B. Simplify the script logic by using the flow-control statements that we 
+    B. Simplify the script logic by using the flow-control statements that we
 learned in this class.
 
     C. Zero-pad the digits such that the binary output is always 8-binary digits
@@ -33,14 +32,14 @@ long.  Strip off the leading '0b' characters.  For example,
         IP address          Binary
         10.88.17.23        00001010.01011000.00010001.00010111
 
-    Note, you will probably need to use a 'while' loop and a 'break' statement 
+    Note, you will probably need to use a 'while' loop and a 'break' statement
 for part C.
 
         while True:
             ...
             break       # on some condition (exit the while loop)
 
-    Python will execute this loop again and again until the 'break' is encountered. 
+    Python will execute this loop again and again until the 'break' is encountered.
 
 '''
 

@@ -1,14 +1,10 @@
 #!/usr/bin/env python
-
-import pprint
-import sys
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
@@ -44,6 +40,9 @@ as follows:
 For output, print network_devices to standard output.
 
 '''
+
+import pprint
+import sys
 
 sw1_show_cdp_neighbors = '''
 
@@ -360,7 +359,7 @@ cdp_neighbors = (
 network_devices = {}
 
 
-# Iterate over each cdp_neighbor_details string 
+# Iterate over each cdp_neighbor_details string
 for cdp_data in cdp_neighbors:
 
     # Break the cdp neighbor data up into lines
@@ -387,7 +386,7 @@ for cdp_data in cdp_neighbors:
             else:
                 sys.exit("Invalid prompt for local hostname - exiting")
 
-            # When you find a new device, initialize it as a blank dictionary    
+            # When you find a new device, initialize it as a blank dictionary
             if not local_hostname in network_devices:
                 network_devices[local_hostname] = {}
 
@@ -397,28 +396,28 @@ for cdp_data in cdp_neighbors:
             (junk, remote_hostname) = line.split('Device ID: ')
             remote_hostname = remote_hostname.strip()
 
-            # When you find a new device, initialize it as a blank dictionary    
+            # When you find a new device, initialize it as a blank dictionary
             if not remote_hostname in network_devices:
                 network_devices[remote_hostname] = {}
 
 
             # Map adjacencies
             if (local_hostname in network_devices) and remote_hostname:
-    
+
                 # Add adjacent_devices field if it doesn't exist
-                if not 'adjacent_devices' in network_devices[local_hostname]: 
+                if not 'adjacent_devices' in network_devices[local_hostname]:
                     network_devices[local_hostname]['adjacent_devices'] = [remote_hostname]
-    
+
                 # adjacent_devices is already present, append to it
                 else:
-    
+
                     # Add the remote device (if not already on list)
                     if not remote_hostname in network_devices[local_hostname]['adjacent_devices']:
                         network_devices[local_hostname]['adjacent_devices'].append(remote_hostname)
-  
+
 
         # Processing IP
-        if 'IP address: ' in line: 
+        if 'IP address: ' in line:
             (junk, ip) = line.split('IP address: ')
             ip = ip.strip()
 
@@ -426,7 +425,7 @@ for cdp_data in cdp_neighbors:
                 network_devices[remote_hostname]['ip'] = ip
 
         # Process vendor, model, and device_type
-        if 'Platform: ' in line: 
+        if 'Platform: ' in line:
 
             (platform, capabilities) = line.split(',')
 
@@ -453,4 +452,4 @@ for cdp_data in cdp_neighbors:
 print '\n'
 pprint.pprint(network_devices)
 print '\n'
- 
+

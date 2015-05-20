@@ -1,21 +1,18 @@
 #!/usr/bin/env python
-
-import pprint
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
 Learning Python
 
 
-Parse the CDP data to obtain the following information: 
-hostname, ip, model, vendor, and device_type (device_type will be either 
+Parse the CDP data to obtain the following information:
+hostname, ip, model, vendor, and device_type (device_type will be either
 'router', 'switch', or 'unknown').
 
 From this data create a dictionary of all the network devices in the network.
@@ -23,20 +20,22 @@ From this data create a dictionary of all the network devices in the network.
 The network_devices dictionary should have the following format:
 
 network_devices = {
-     'SW1': { 'ip': '10.1.1.22', 
-                'model': 'WS-C2950-24', 
-                'vendor': 'cisco', 
+     'SW1': { 'ip': '10.1.1.22',
+                'model': 'WS-C2950-24',
+                'vendor': 'cisco',
                 'device_type': 'switch' },
-     'R1': { 'ip': '10.1.1.1', 
-                'model': '881', 
-                'vendor': 'Cisco', 
+     'R1': { 'ip': '10.1.1.1',
+                'model': '881',
+                'vendor': 'Cisco',
                 'device_type': 'router' },
      ...
  }
 
-For output to this exercise, print network_devices to standard output.  
+For output to this exercise, print network_devices to standard output.
 
 '''
+
+import pprint
 
 sw1_show_cdp_neighbors = '''
 
@@ -353,7 +352,7 @@ cdp_neighbors = (
 network_devices = {}
 
 
-# Iterate over each cdp_neighbor_details string 
+# Iterate over each cdp_neighbor_details string
 for cdp_data in cdp_neighbors:
 
     # Break the cdp neighbor data up into lines
@@ -378,7 +377,7 @@ for cdp_data in cdp_neighbors:
                 network_devices[hostname] = {}
 
         # Processing IP
-        if 'IP address: ' in line: 
+        if 'IP address: ' in line:
             (junk, ip) = line.split('IP address: ')
             ip = ip.strip()
 
@@ -386,7 +385,7 @@ for cdp_data in cdp_neighbors:
                 network_devices[hostname]['ip'] = ip
 
         # Process vendor, model, and device_type
-        if 'Platform: ' in line: 
+        if 'Platform: ' in line:
 
             (platform, capabilities) = line.split(',')
 
@@ -407,9 +406,9 @@ for cdp_data in cdp_neighbors:
                 network_devices[hostname]['vendor'] = vendor
                 network_devices[hostname]['model'] = model
                 network_devices[hostname]['device_type'] = device_type
-  
+
 
 print '\n'
 pprint.pprint(network_devices)
 print '\n'
- 
+

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -41,7 +40,7 @@ if len(octets) != 4:
     sys.exit("\n\nInvalid IP address: %s\n" % ip_addr)
 
 # convert octet from string to int
-for i,octet in enumerate(octets):
+for i, octet in enumerate(octets):
 
     # I haven't told you about exception handling yet (soon)
     # You could do without this, the script will just crash
