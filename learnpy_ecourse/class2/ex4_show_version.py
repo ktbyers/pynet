@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -23,7 +22,7 @@ How would you process this string to retrieve only the IOS version?
 
 ios_version = "15.0(1)M4"
 
-Try to make it generic (i.e. assume that the IOS version can change).  
+Try to make it generic (i.e. assume that the IOS version can change).
 
 You can assume that the commas divide this string into four sections and that
 the string will always have 'Cisco IOS Software', 'Version', and 'RELEASE

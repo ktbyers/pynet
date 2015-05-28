@@ -1,20 +1,19 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
 discussed in class.  It is not necessarily the best solution to the problem.
 In other words, I generally only use things we have covered up to this point
-in the class (with some exceptions which I will usually note). 
+in the class (with some exceptions which I will usually note).
 
 Python for Network Engineers
 https://pynet.twb-tech.com
 Learning Python
 
 
-Parse the below 'show version' data and obtain the following items (vendor, 
+Parse the below 'show version' data and obtain the following items (vendor,
 model, os_version, uptime, and serial_number).  Try to make your string parsing
-generic i.e. it would work for other Cisco IOS devices. 
+generic i.e. it would work for other Cisco IOS devices.
 
 The following are reasonable strings to look for:
 'Cisco IOS Software' for vendor and os_version
@@ -22,7 +21,7 @@ The following are reasonable strings to look for:
 'Processor board ID' for serial_number
 ' uptime is ' for uptime
 
-Store these variables (vendor, model, os_version, uptime, and serial_number) in 
+Store these variables (vendor, model, os_version, uptime, and serial_number) in
 a dictionary.  Print the dictionary to standard output when done.
 
 Note, "Cisco IOS Software...Version 15.0(1)M4...(fc1)" is one line.
@@ -85,11 +84,11 @@ for line in show_ver_list:
         router_dict['vendor'] = 'Cisco'
         os_version = line.split(',')[2]
         router_dict['os_version'] = os_version.split('Version ')[1]
-       
+
     # Model processing (note, 'Cisco 881...bytes of memory' is on one line)
     if 'bytes of memory' in line:
         # The model will be the second word in this line
-        router_dict['model'] = line.split()[1] 
+        router_dict['model'] = line.split()[1]
 
     # Serial number processing
     if 'Processor board ID' in line:
@@ -104,6 +103,6 @@ for line in show_ver_list:
 
 
 # Print dictionary to standard output
-print 
+print
 pprint.pprint(router_dict)
-print 
+print

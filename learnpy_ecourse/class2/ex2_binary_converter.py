@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 '''
 
 Disclaimer - This is a solution to the below problem given the content we have
@@ -35,5 +34,6 @@ third_octet_bin = bin(int(octets[2]))
 fourth_octet_bin = bin(int(octets[3]))
 
 print "\n\n%15s %15s %15s %15s" % ("first_octet", "second_octet", "third_octet", "fourth_octet")
-print "%15s %15s %15s %15s\n" % (first_octet_bin, second_octet_bin, third_octet_bin, fourth_octet_bin)
+print "%15s %15s %15s %15s\n" % (first_octet_bin, second_octet_bin,
+                                 third_octet_bin, fourth_octet_bin)
 
