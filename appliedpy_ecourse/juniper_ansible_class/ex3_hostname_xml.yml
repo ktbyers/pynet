@@ -1,0 +1,13 @@
+---
+- name: Set hostname using XML
+  hosts: juniper
+  gather_facts: false
+  tasks: 
+    - name: Set system hostname
+      junos_install_config:
+        host={{ ansible_ssh_host }}
+        file=set_hostname.xml
+        overwrite=false
+        user={{ juniper_user }}   
+        passwd={{ juniper_passwd }}
+
