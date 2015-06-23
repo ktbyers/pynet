@@ -2,9 +2,9 @@
 
 '''
 
-The file 'OSPF_DATA/ospf_data.txt' contains the output from 'show ip ospf 
-interface'.  Using some functions and some regular expressions, parse this 
-output to display the following (note, I ended up using re.split() as part of 
+The file 'OSPF_DATA/ospf_data.txt' contains the output from 'show ip ospf
+interface'.  Using some functions and some regular expressions, parse this
+output to display the following (note, I ended up using re.split() as part of
 the solution to this problem):
 
 Int:    Loopback0
@@ -70,7 +70,7 @@ def separate_interface_data(ospf_data):
 
 def generic_ospf_parser(pattern, ospf_data):
     '''
-    Takes a generic regular expression pattern that has a group(1) match 
+    Takes a generic regular expression pattern that has a group(1) match
     pattern and returns this
 
     Else returns None
@@ -93,7 +93,7 @@ def print_ospf_out(a_dict):
     for a_field in field_order:
         if a_dict.get(a_field) is not None:
             print "%15s:   %-20s" % (a_field, a_dict.get(a_field))
-    
+
 
 # Technique to allow importable and executable code to coexist (will explain in class#8)
 if __name__ == '__main__':
@@ -101,8 +101,8 @@ if __name__ == '__main__':
 
     f = open('./OSPF_DATA/ospf_data.txt')
 
-    ospf_data = f.read()
-    ospf_data_sections = separate_interface_data(ospf_data)
+    ospf_output = f.read()
+    ospf_data_sections = separate_interface_data(ospf_output)
     f.close()
 
     ospf_intf_patterns = {
@@ -113,13 +113,13 @@ if __name__ == '__main__':
         'Cost'  : r", Network Type .+?, Cost: (.+)",
         'Hello' : r"Timer intervals configured, Hello (.+?),",
         'Dead'  : r"Timer intervals configured, Hello .+?, Dead (.+?),",
-    } 
+    }
 
-    for section in ospf_data_sections:
+    for int_section in ospf_data_sections:
 
         tmp_dict = {}
-        for k,ospf_pattern in ospf_intf_patterns.items():
-            return_val = generic_ospf_parser(ospf_pattern, section)
+        for k, ospf_pattern in ospf_intf_patterns.items():
+            return_val = generic_ospf_parser(ospf_pattern, int_section)
             if return_val is not None:
                 tmp_dict[k] = return_val
 

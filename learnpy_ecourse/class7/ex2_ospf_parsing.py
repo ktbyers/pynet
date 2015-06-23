@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
 '''
-Open the ./OSPF_DATA/ospf_single_interface.txt and extract the interface, IP 
-address, area, type, cost, hello timer, and dead timer.  Use regular expressions 
+Open the ./OSPF_DATA/ospf_single_interface.txt and extract the interface, IP
+address, area, type, cost, hello timer, and dead timer.  Use regular expressions
 to accomplish your extraction.
 
 Your output should look similar to the following:
 
 Int:    GigabitEthernet0/1
 IP:     172.16.13.150/29
-Area:   30395
+Area:   303953
 Type:   BROADCAST
 Cost:   1
 Hello:  10
@@ -46,9 +46,9 @@ for line in f:
 
 
 # Print output
-print 
-field_order = ('Int', 'IP', 'Area', 'Type', 'Hello', 'Dead')
+print
+field_order = ('Int', 'IP', 'Area', 'Type', 'Cost', 'Hello', 'Dead')
 for k in field_order:
     print "%10s: %-20s" % (k, ospf_dict[k])
-print 
+print
 
