@@ -120,8 +120,11 @@ if __name__ == '__main__':
         dots_to_print = (25 - len(ip)) * '.'
 
         if valid_ip(ip) == expected_return:
-            print "Testing %s %s %s" % (ip, dots_to_print, 'ok')
+            if expected_return:
+                print "Testing %s %s %s" % (ip, dots_to_print, 'valid')
+            else:
+                print "Testing %s %s %s" % (ip, dots_to_print, 'invalid')
         else:
-            print "Testing %s %s %s" % (ip, dots_to_print, 'failed')
+            print "Testing %s %s %s" % (ip, dots_to_print, 'test failed')
 
     print
