@@ -1,0 +1,17 @@
+$ git clone https://github.com/ktbyers/pynet_test
+Cloning into 'pynet_test'...
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (5/5), done.
+
+$ cd pynet_test
+$ ls -al
+total 32
+drwxrwxr-x.  3 kbyers kbyers    64 Jul  1 15:03 .
+drwx------. 50 kbyers kbyers  4096 Jul  1 15:03 ..
+drwxrwxr-x.  8 kbyers kbyers  4096 Jul  1 15:03 .git
+-rw-rw-r--.  1 kbyers kbyers   702 Jul  1 15:03 .gitignore
+-rw-rw-r--.  1 kbyers kbyers 11358 Jul  1 15:03 LICENSE
+-rw-rw-r--.  1 kbyers kbyers    13 Jul  1 15:03 README.md
+

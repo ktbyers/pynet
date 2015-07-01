@@ -1,0 +1,18 @@
+$ vi test_enumerate.py
+$ chmod 755 test_enumerate.py 
+
+$ git add test_enumerate.py 
+$ git commit -m "Adding test_enumerate.py file"
+[master 4efcbaa] Adding test_enumerate.py file
+ 1 file changed, 7 insertions(+)
+ create mode 100755 test_enumerate.py
+
+$ git push origin master
+Username for 'https://github.com': ktbyers
+Password for 'https://ktbyers@github.com': 
+Counting objects: 4, done.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 428 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/ktbyers/pynet_test
+   76a950e..4efcbaa  master -> master

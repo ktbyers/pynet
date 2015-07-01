@@ -1,0 +1,37 @@
+$ git branch
+* master
+
+$ git branch test
+$ git branch
+* master
+  test
+
+$ git checkout test
+Switched to branch 'test'
+
+$ git branch
+  master
+* test
+
+$ vi test_zip.py
+$ chmod 755 test_zip.py 
+
+$ git add test_zip.py 
+$ git commit -m "Adding test_zip.py file"
+[test c6ebab9] Adding test_zip.py file
+ 1 file changed, 7 insertions(+)
+ create mode 100755 test_zip.py
+
+$ git checkout master
+Switched to branch 'master'
+
+$ git branch
+* master
+  test
+
+$ git merge test
+Updating 4efcbaa..c6ebab9
+Fast-forward
+ test_zip.py | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100755 test_zip.py

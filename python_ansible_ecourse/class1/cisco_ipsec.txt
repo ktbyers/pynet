@@ -1,0 +1,161 @@
+!
+! Last configuration change at 16:34:34 PDT Wed Jul 1 2015 by pyclass
+! NVRAM config last updated at 16:30:19 PDT Wed Jul 1 2015 by pyclass
+!
+version 15.4
+no service pad
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+no service password-encryption
+!
+hostname pynet-rtr1
+!
+!
+!
+logging buffered 50000
+no logging console
+enable secret 5 $1$5999$djwfej9Mq99917x9SDgAC.
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local if-authenticated 
+!
+!
+!
+!
+!
+aaa session-id common
+memory-size iomem 10
+clock timezone PST -8 0
+clock summer-time PDT recurring
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name twb-tech.com
+ip cef
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+license udi pid CISCO881-SEC-K9 sn FTX1000000X
+!
+!
+username pyclass privilege 15 secret 5 $1$CQCe$poonB1jFHYQAWt/3eXub41
+!
+!
+!
+!
+lldp run
+!
+ip ssh version 2
+ip scp server enable
+! 
+!
+crypto isakmp policy 10
+ encr aes
+ authentication pre-share
+ group 5
+crypto isakmp key KEY address 1.1.1.1 no-xauth
+crypto isakmp key KEY address 2.2.2.1 no-xauth
+crypto isakmp key KEY address 3.3.3.1 no-xauth
+crypto isakmp key KEY address 4.4.4.1 no-xauth
+crypto isakmp key KEY address 5.5.5.1 no-xauth
+crypto isakmp keepalive 10 periodic
+!
+!
+crypto ipsec transform-set AES192-SHA esp-aes 192 esp-sha-hmac 
+ mode tunnel
+crypto ipsec transform-set AES-SHA esp-aes esp-sha-hmac 
+ mode tunnel
+!
+!
+!
+crypto map CRYPTO 10 ipsec-isakmp 
+ set peer 1.1.1.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST1
+crypto map CRYPTO 20 ipsec-isakmp 
+ set peer 2.2.2.1
+ set transform-set AES-SHA 
+ set pfs group2
+ match address VPN-TEST2
+crypto map CRYPTO 30 ipsec-isakmp 
+ set peer 3.3.3.1
+ set transform-set AES-SHA 
+ set pfs group2
+ match address VPN-TEST3
+crypto map CRYPTO 40 ipsec-isakmp 
+ set peer 4.4.4.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST4
+crypto map CRYPTO 50 ipsec-isakmp 
+ set peer 5.5.5.1
+ set transform-set AES-SHA 
+ set pfs group5
+ match address VPN-TEST5
+!
+!
+!
+!
+interface FastEthernet0
+ no ip address
+!
+interface FastEthernet1
+ no ip address
+!
+interface FastEthernet2
+ no ip address
+!
+interface FastEthernet3
+ no ip address
+!
+interface FastEthernet4
+ description *** LAN connection (don't change) ***
+ ip address 10.220.88.20 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip route 0.0.0.0 0.0.0.0 10.220.88.1
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ no modem enable
+line aux 0
+line vty 0 4
+ transport input ssh
+!
+scheduler max-task-time 5000
+ntp server 130.126.24.24
+ntp server 152.2.21.1
+!
+end

@@ -1,0 +1,9 @@
+- some string
+- 99
+- 18
+- ip_addr: 172.31.200.1
+  model: '1921'
+  platform: cisco_ios
+  vendor: cisco
+- another string
+- final string
