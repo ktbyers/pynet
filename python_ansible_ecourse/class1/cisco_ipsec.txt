@@ -80,6 +80,8 @@ crypto ipsec transform-set AES192-SHA esp-aes 192 esp-sha-hmac
  mode tunnel
 crypto ipsec transform-set AES-SHA esp-aes esp-sha-hmac 
  mode tunnel
+crypto ipsec transform-set 3DES-SHA esp-3des esp-sha-hmac 
+ mode tunnel
 !
 !
 !
@@ -105,7 +107,7 @@ crypto map CRYPTO 40 ipsec-isakmp
  match address VPN-TEST4
 crypto map CRYPTO 50 ipsec-isakmp 
  set peer 5.5.5.1
- set transform-set AES-SHA 
+ set transform-set 3DES-SHA 
  set pfs group5
  match address VPN-TEST5
 !
