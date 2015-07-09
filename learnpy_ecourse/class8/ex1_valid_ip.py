@@ -16,11 +16,11 @@ exercise3; create a Python module that contains only this one ip
 validation function.
 
     A. Modify this Python module such that you add a set of tests
-into the module.  Use the __name__ == '__main__' technique to
-separate the test code from the function definition.  In your test
-code, check the validity of each of the following IP addresses
-(False means it is an invalid IP address; True means it is a valid 
-IP address).
+into the module. Use the __name__ == '__main__' technique to
+separate the test code from the function definition. In your test 
+code, verify your IP address validation function against each of 
+the following IP addresses (False means it is an invalid IP 
+address; True means it is a valid IP address).
 
     test_ip_addresses = {
         '192.168.1'     :   False,
