@@ -119,7 +119,7 @@ if __name__ == '__main__':
         # Make the output format nicer
         dots_to_print = (25 - len(ip)) * '.'
 
-        if valid_ip(ip) == expected_return:
+        if valid_ip(ip) is expected_return:
             if expected_return:
                 print "Testing %s %s %s" % (ip, dots_to_print, 'valid')
             else:

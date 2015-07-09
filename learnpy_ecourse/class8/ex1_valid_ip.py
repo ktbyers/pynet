@@ -156,14 +156,16 @@ if __name__ == '__main__':
     # Run the test cases
     for ip, expected_return in test_ip_addresses.items():
 
-        func_test = valid_ip(ip)
-
         # Make the output format nicer
         dots_to_print = (25 - len(ip)) * '.'
 
-        if func_test == expected_return:
-            print "Testing %s %s %s" % (ip, dots_to_print, 'ok')
+        if valid_ip(ip) is expected_return:
+            if expected_return:
+                print "Testing %s %s %s" % (ip, dots_to_print, 'valid')
+            else:
+                print "Testing %s %s %s" % (ip, dots_to_print, 'invalid')
         else:
-            print "Testing %s %s %s" % (ip, dots_to_print, 'failed')
+            print "Testing %s %s %s" % (ip, dots_to_print, 'test failed')
 
     print
+
