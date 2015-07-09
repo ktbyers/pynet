@@ -19,8 +19,8 @@ validation function.
 into the module.  Use the __name__ == '__main__' technique to
 separate the test code from the function definition.  In your test
 code, check the validity of each of the following IP addresses
-(False means it should fail; True means it should pass the IP
-address validation).
+(False means it is an invalid IP address; True means it is a valid 
+IP address).
 
     test_ip_addresses = {
         '192.168.1'     :   False,
@@ -44,24 +44,24 @@ address validation).
 
     B. Execute this module--make sure all of the tests pass.
 
-$ ./ex1_valid_ip.py
+$ ./ex1_valid_ip.py 
 
-Testing 223.0.0.0 ................ ok
-Testing 10.200.255.1 ............. ok
-Testing 169.254.1.9 .............. ok
-Testing 192.168.1 ................ ok
-Testing 192.256.7.7 .............. ok
-Testing 10.1.1. .................. ok
-Testing 10.1.1.256 ............... ok
-Testing 0.77.22.19 ............... ok
-Testing 10.1.1.x ................. ok
-Testing 241.17.17.9 .............. ok
-Testing 1.1.1.1 .................. ok
-Testing 192.168.17.1 ............. ok
-Testing -1.88.99.17 .............. ok
-Testing 223.255.255.255 .......... ok
-Testing 192.168.-1.7 ............. ok
-Testing 127.0.0.1 ................ ok
+Testing 223.0.0.0 ................ valid
+Testing 10.200.255.1 ............. valid
+Testing 169.254.1.9 .............. invalid
+Testing 192.168.1 ................ invalid
+Testing 192.256.7.7 .............. invalid
+Testing 10.1.1. .................. invalid
+Testing 10.1.1.256 ............... invalid
+Testing 0.77.22.19 ............... invalid
+Testing 10.1.1.x ................. invalid
+Testing 241.17.17.9 .............. invalid
+Testing 1.1.1.1 .................. valid
+Testing 192.168.17.1 ............. valid
+Testing -1.88.99.17 .............. invalid
+Testing 223.255.255.255 .......... valid
+Testing 192.168.-1.7 ............. invalid
+Testing 127.0.0.1 ................ invalid
 
 
     C. Import this module into the Python interpreter shell.  Make
