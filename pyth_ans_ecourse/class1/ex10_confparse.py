@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 '''
-Using CiscoConfParse find crypto maps that are not using AES (based-on transform-set name).
-
-Print these entries and their corresponding transform-set name.
+Using ciscoconfparse find the crypto maps that are not using AES (based-on the
+transform set name). Print these entries and their corresponding transform set
+name.
 '''
 
 import re
@@ -10,9 +10,9 @@ from ciscoconfparse import CiscoConfParse
 
 def main():
     '''
-    Using CiscoConfParse find crypto maps that are not using AES (based-on transform-set name).
-
-    Print these entries and their corresponding transform-set name.
+    Using ciscoconfparse find the crypto maps that are not using AES (based-on
+    the transform set name). Print these entries and their corresponding
+    transform set name.
     '''
     cisco_file = 'cisco_ipsec.txt'
 

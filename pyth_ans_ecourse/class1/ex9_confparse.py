@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 '''
-Using CiscoConfParse find crypto maps that are using pfs group2
-
-Print these entries out to standard output
+Use the ciscoconfparse library to find the crypto maps that are using pfs group2
 '''
 
 from ciscoconfparse import CiscoConfParse
 
 def main():
     '''
-    Using CiscoConfParse find crypto maps that are using pfs group2
-
-    Print these entries out to standard output
+    Use the ciscoconfparse library to find the crypto maps that are using pfs
+    group2
     '''
     cisco_file = 'cisco_ipsec.txt'
 
