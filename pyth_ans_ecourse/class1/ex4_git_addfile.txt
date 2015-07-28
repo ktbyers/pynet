@@ -1,3 +1,6 @@
+# Add a file to the repository in the lab environment and then push it up to 
+# GitHub.
+
 $ vi test_enumerate.py
 $ chmod 755 test_enumerate.py 
 

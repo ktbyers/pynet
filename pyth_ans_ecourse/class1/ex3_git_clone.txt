@@ -1,9 +1,13 @@
+# Clone the repository that you just created on GitHub into your home 
+# directory in the lab environment.
+
 $ git clone https://github.com/ktbyers/pynet_test
 Cloning into 'pynet_test'...
 remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
 Unpacking objects: 100% (5/5), done.
+
 
 $ cd pynet_test
 $ ls -al
