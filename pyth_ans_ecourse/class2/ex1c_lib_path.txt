@@ -1,0 +1,32 @@
+
+### my_func.py in the same directory as ex1c_lib_path.py
+[ class2]$ ./ex1c_lib_path.py 
+hello
+
+
+### Test with my_func.py in subdirectory test/
+[ class2]$ mkdir test
+[ class2]$ mv my_func.py test/
+[ class2]$ rm my_func.pyc 
+[ class2]$ ./ex1c_lib_path.py 
+Traceback (most recent call last):
+  File "./ex1c_lib_path.py", line 3, in <module>
+    import my_func
+ImportError: No module named my_func
+[ class2]$ export PYTHONPATH='/home/kbyers/pynet/pyth_ans_ecourse/class2/test'
+[ class2]$ ./ex1c_lib_path.py 
+hello
+
+
+### Test with my_func.py in ~/applied_python/lib/python2.7/site-packages/
+[ class2]$ unset PYTHONPATH
+[ class2]$ cd test/
+[ test]$ ls
+my_func.py  my_func.pyc
+[ test]$ rm my_func.pyc
+[ test]$ mv my_func.py ~/applied_python/lib/python2.7/site-packages/
+[ test]$ cd ..
+[ class2]$ rm -r test
+[ class2]$ ./ex1c_lib_path.py 
+hello
+
