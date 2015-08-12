@@ -1,14 +1,28 @@
+#!/usr/bin/env python
 '''
-https://pynet.twb-tech.com
-Applied Python, Class2, Exercise2
+Using SNMPv3 create two SVG image files.
 
-Note, you will need to update the ip_addr, SNMP username and keys to use this script.
+The first image file should graph the input and output octets on interface FA4
+on pynet-rtr1 every five minutes for an hour. Use the pygal library to create
+the SVG graph file. Note, you should be doing a subtraction here (i.e. the
+input/output octets transmitted during this five minute interval).
 
+The second SVG graph file should be the same as the first except graph the
+unicast packets received and transmitted.
+
+The relevant OIDs are as follows:
+
+('ifDescr_fa4', '1.3.6.1.2.1.2.2.1.2.5')
+('ifInOctets_fa4', '1.3.6.1.2.1.2.2.1.10.5')
+('ifInUcastPkts_fa4', '1.3.6.1.2.1.2.2.1.11.5')
+('ifOutOctets_fa4', '1.3.6.1.2.1.2.2.1.16.5'),
+('ifOutUcastPkts_fa4', '1.3.6.1.2.1.2.2.1.17.5')
 '''
 
 from snmp_helper import snmp_get_oid_v3, snmp_extract
 import line_graph
 import time
+from getpass import getpass
 
 
 def get_interface_stats(snmp_device, snmp_user, stat_type, row_number):
@@ -46,13 +60,14 @@ def main():
     Create two graphs in/out octets and in/out packets
     '''
 
-    DEBUG = False
+    debug = False
 
-    ip_addr = '10.10.10.10'
-
-    a_user = 'username'
-    auth_key = '********'
-    encrypt_key = '********'
+    # SNMPv3 Connection Parameters
+    ip_addr = raw_input("Enter router IP: ")
+    a_user = 'pysnmp'
+    my_key = getpass(prompt="Auth + Encryption Key: ")
+    auth_key = my_key
+    encrypt_key = my_key
 
     snmp_user = (a_user, auth_key, encrypt_key)
 
@@ -93,18 +108,16 @@ def main():
 
         time.sleep(300)
 
-
     print
-    if DEBUG:
+    if debug:
         print graph_stats
 
     x_labels = []
     for x_label in range(5, 65, 5):
         x_labels.append(str(x_label))
 
-    if DEBUG:
+    if debug:
         print x_labels
-
 
     # Create the graphs
     if line_graph.twoline("pynet-rtr1-octets.svg", "pynet-rtr1 Fa4 Input/Output Bytes",
