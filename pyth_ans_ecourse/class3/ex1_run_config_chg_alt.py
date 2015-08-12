@@ -116,8 +116,8 @@ def send_notification(device_name):
 
     current_time = datetime.now()
 
-    sender = 'ktbyers@twb-tech.com'
-    recipient = 'ktbyersx@gmail.com'
+    sender = 'sender@twb-tech.com'
+    recipient = 'recipient@twb-tech.com'
     subject = 'Device {0} was modified'.format(device_name)
 
     message = '''
@@ -160,9 +160,9 @@ def main():
     '''
 
     # File for storing previous RunningLastChanged timestamp
-    #net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
+    net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
     #net_dev_file = 'netdev.yml'     # can be .pkl, .yml, or .json
-    net_dev_file = 'netdev.json'     # can be .pkl, .yml, or .json
+    #net_dev_file = 'netdev.json'     # can be .pkl, .yml, or .json
 
     # SNMPv3 Connection Parameters
     ip_addr = raw_input("Enter router IP: ")
