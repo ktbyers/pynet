@@ -1,18 +1,17 @@
+#!/usr/bin/env python
 '''
-https://pynet.twb-tech.com
-Applied Python, Class2, Exercise1
+Using SNMPv3 create a script that detects router configuration changes.
 
-Note, you will need to update the ip_addr, SNMP username and keys to use this script.
+If the running configuration has changed, then send an email notification to
+yourself identifying the router that changed and the time that it changed.
 
-You will also need to update the sender and recipient in send_notification.
-
-Note, this alternate version supports Pickle, YAML, and JSON file formats. Change the net_dev_file
-variable to .pkl, .yml, or .json to use a different output format.
-
+In this exercise, you will possibly need to save data to an external file. Use
+either JSON or YAML to save the data to an external file.
 '''
 
 import os.path
 from datetime import datetime
+from getpass import getpass
 
 import cPickle as pickle
 import yaml
@@ -117,8 +116,8 @@ def send_notification(device_name):
 
     current_time = datetime.now()
 
-    sender = 'sender@domain.com'
-    recipient = 'recipient@domain.com'
+    sender = 'ktbyers@twb-tech.com'
+    recipient = 'ktbyersx@gmail.com'
     subject = 'Device {0} was modified'.format(device_name)
 
     message = '''
@@ -135,7 +134,6 @@ This change was detected at: {1}
 
 def main():
     '''
-
     Check if the running-configuration has changed, send an email notification when
     this occurs.
 
@@ -159,21 +157,22 @@ def main():
             no running-config changes.
 
             If RUN_LAST_CHANGED is > RELOAD_WINDOW assume running-config was changed
-
     '''
 
     # File for storing previous RunningLastChanged timestamp
-    net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
+    #net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
+    #net_dev_file = 'netdev.yml'     # can be .pkl, .yml, or .json
+    net_dev_file = 'netdev.json'     # can be .pkl, .yml, or .json
 
     # SNMPv3 Connection Parameters
-    ip_addr = '10.10.10.10'
-    a_user = 'admin1'
-    auth_key = '*******'
-    encrypt_key = '*******'
+    ip_addr = raw_input("Enter router IP: ")
+    a_user = 'pysnmp'
+    my_key = getpass(prompt="Auth + Encryption Key: ")
+    auth_key = my_key
+    encrypt_key = my_key
     snmp_user = (a_user, auth_key, encrypt_key)
     pynet_rtr1 = (ip_addr, 7961)
     pynet_rtr2 = (ip_addr, 8061)
-
 
     print '\n*** Checking for device changes ***'
 
@@ -196,7 +195,6 @@ def main():
             print "\nConnected to device = {0}".format(device_name)
             print "Last changed timestamp = {0}".format(last_changed)
             print "Uptime = {0}".format(uptime)
-
 
         # see if this device has been previously saved
         if device_name in saved_devices:
@@ -244,5 +242,4 @@ def main():
 
 
 if __name__ == '__main__':
-
     main()
