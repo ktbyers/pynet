@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Use Paramiko to retrieve the entire 'show version' output.
+Use Paramiko to change 'logging buffer <size>' configuration.
 '''
 
 import paramiko
@@ -41,7 +41,7 @@ def send_command(remote_conn, cmd='', delay=1):
 
 def main():
     '''
-    Use Paramiko to retrieve the entire 'show version' output.
+    Use Paramiko to change 'logging buffer <size>' configuration.
     '''
     ip_addr = raw_input("Enter IP address: ")
     username = 'pyclass'
@@ -59,7 +59,11 @@ def main():
     clear_buffer(remote_conn)
     disable_paging(remote_conn)
 
-    output = send_command(remote_conn, cmd='show version')
+    send_command(remote_conn, cmd='conf t')
+    send_command(remote_conn, cmd='logging buffered 20010')
+    send_command(remote_conn, cmd='end')
+
+    output = send_command(remote_conn, cmd='show run | inc logging')
     print '\n>>>>'
     print output
     print '>>>>\n'
