@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 '''
-Use Pexpect to retrieve the output of 'show ip int brief'
+Use Pexpect to change the logging buffer size (logging buffered <size>).
+
+Verify this change by examining the output of 'show run'.
 '''
 
 import pexpect
@@ -38,7 +40,9 @@ def disable_paging(ssh_conn, pattern='#', cmd='terminal length 0'):
 
 def main():
     '''
-    Use Pexpect to retrieve the output of 'show ip int brief'
+    Use Pexpect to change the logging buffer size (logging buffered <size>).
+
+    Verify this change by examining the output of 'show run'.
     '''
     ip_addr = raw_input("Enter IP address: ")
     username = 'pyclass'
