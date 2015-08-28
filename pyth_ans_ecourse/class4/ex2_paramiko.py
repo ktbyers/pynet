@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Use Paramiko to change 'logging buffer <size>' configuration.
+Use Paramiko to change 'logging buffered <size>' configuration.
 '''
 
 import paramiko
@@ -41,7 +41,7 @@ def send_command(remote_conn, cmd='', delay=1):
 
 def main():
     '''
-    Use Paramiko to change 'logging buffer <size>' configuration.
+    Use Paramiko to change 'logging buffered <size>' configuration.
     '''
     ip_addr = raw_input("Enter IP address: ")
     username = 'pyclass'
