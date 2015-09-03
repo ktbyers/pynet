@@ -1,0 +1,4 @@
+---
+- name: Generate configuration file
+  template: src=access_switch.j2 dest=/home/kbyers/ANSIBLE/CFGS/{{item.hostname}}.txt
+  with_items: switches
