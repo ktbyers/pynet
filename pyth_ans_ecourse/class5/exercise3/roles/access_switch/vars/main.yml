@@ -16,4 +16,3 @@ switches:
         default_gateway: 10.10.50.1, access_vlan: 50, snmp_community: <community>,
         SNMPv3: False}
 
-
