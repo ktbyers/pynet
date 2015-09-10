@@ -1,0 +1,19 @@
+---
+# Use the cisco_file_transfer.py module to transfer a small file to the Cisco 
+# pynet-rtr1 router.
+
+- name: Ansible-Cisco file transfer
+  hosts: pynet-rtr1
+  gather_facts: False
+
+  tasks:
+  - name: File transfer
+    cisco_file_transfer:
+      source_file="/home/kbyers/ANSIBLE/cisco_logging.txt"
+      dest_file=cisco_logging.txt
+      overwrite=true
+      enable_scp=true
+      host={{ host }}
+      port={{ port }}
+      username={{ username }}
+      password={{ password }}
