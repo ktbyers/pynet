@@ -1,0 +1,9 @@
+---
+
+- name: Arista Ansible testing
+  hosts: arista
+
+  tasks:
+    - name: create kb4 VLAN
+      ex3_ansible_vlan: arista_sw={{ inventory_hostname }} vlan_id=225 vlan_name=kb4
+
