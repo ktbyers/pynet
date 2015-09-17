@@ -2,30 +2,28 @@
 '''
 Use Arista's eAPI to obtain 'show interfaces' from the switch.  Parse the 'show
 interfaces' output to obtain the 'inOctets' and 'outOctets' fields for each of
-the interfaces on the switch.  Accomplish this directly using jsonrpclib.
+the interfaces on the switch.  Accomplish this using Arista's pyeapi library.
 '''
 
-import jsonrpclib
+import pyeapi
+
+def pyeapi_result(output):
+    '''
+    Return the 'result' value from the pyeapi output
+    '''
+    return output[0]['result']
 
 def main():
     '''
     Use Arista's eAPI to obtain 'show interfaces' from the switch.
     '''
+    eapi_conn = pyeapi.connect_to("pynet-sw3")
 
-    arista_dict = dict(
-        ip='10.10.10.10',
-        port=8243,
-        username='username',
-        password='********'
-    )
+    interfaces = eapi_conn.enable("show interfaces")
+    interfaces = pyeapi_result(interfaces)
 
-    eapi_url = 'https://{username}:{password}@{ip}:{port}/command-api'.format(**arista_dict)
-    eapi_conn = jsonrpclib.Server(eapi_url)
-
-    interfaces = eapi_conn.runCmds(1, ["show interfaces"])
-
-    # Strip off unneeded data structures
-    interfaces = interfaces[0]['interfaces']
+    # Strip off unneeded dictionary
+    interfaces = interfaces['interfaces']
 
     # inOctets/outOctets are fields inside 'interfaceCounters' dict
     data_stats = {}
@@ -40,7 +38,5 @@ def main():
 
     print
 
-
 if __name__ == '__main__':
-
     main()
