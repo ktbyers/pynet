@@ -1,0 +1,65 @@
+# Some basic Django operations
+# Assumes Django >= 1.7
+
+
+# Initial DB configuration
+python manage.py migrate
+
+# Refreshing DB after changes to models.py (assumes app name = net_system)
+python manage.py makemigrations net_system
+python manage.py migrate 
+
+
+# Using Django as an ORM will require the following
+export DJANGO_SETTINGS_MODULE=djproject.settings
+export PYTHONPATH=~/DJANGOX/djproject/
+
+
+# Example object creation
+pynet_rtr1 = NetworkDevice(
+    device_name='pynet-rtr1',
+    device_type='cisco_ios',
+    ip_address='1.1.1.1',
+    port=22,
+    )
+pynet_rtr1.save()
+
+# Example object creation using get_or_create
+pynet_rtr2 = NetworkDevice.objects.get_or_create(
+    device_name='pynet-rtr2',
+    device_type='cisco_ios',
+    ip_address='1.1.1.1',
+    port=8022,
+)
+
+
+# Examples retrieving objects
+$ python manage.py shell
+>>> from net_system.models import NetworkDevice
+>>> net_devices = NetworkDevice.objects.all()
+>>> print net_devices
+[<NetworkDevice: pynet-rtr1>, 
+ <NetworkDevice: pynet-rtr2>, 
+ <NetworkDevice: pynet-sw1>, 
+ <NetworkDevice: pynet-sw2>, 
+ <NetworkDevice: pynet-sw3>, 
+<NetworkDevice: pynet-sw4>]
+
+>>> a_device = NetworkDevice.objects.get(device_name='pynet-rtr1')
+>>> a_device
+<NetworkDevice: pynet-rtr1>
+
+# Example modifying an object
+>>> a_device.vendor = 'cisco'
+>>> a_device.vendor
+'cisco'
+>>> a_device.save()
+
+# Example delete object
+>>> a_device.delete()
+
+
+# Example retrieving all related objects for a foreign-key relationship
+>>> cisco_creds.networkdevice_set.all()
+[<NetworkDevice: pynet-rtr1>, <NetworkDevice: pynet-rtr2>]
+
