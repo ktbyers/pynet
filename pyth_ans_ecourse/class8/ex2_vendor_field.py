@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Set the vendor field for each NetworkDevice to the appropriate vendor. Save
+Set the vendor field of each NetworkDevice to the appropriate vendor. Save
 this field to the database.
 '''
 
