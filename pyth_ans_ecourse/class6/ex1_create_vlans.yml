@@ -16,6 +16,6 @@
             port={{ eapi_port }}
             transport=https
       with_items:
-        - {vlan_name: kb1, vlan_id: 221}
-        - {vlan_name: kb2, vlan_id: 222}
-        - {vlan_name: kb3, vlan_id: 223}
+        - {vlan_name: kb1, vlan_id: 661}
+        - {vlan_name: kb2, vlan_id: 662}
+        - {vlan_name: kb3, vlan_id: 663}
