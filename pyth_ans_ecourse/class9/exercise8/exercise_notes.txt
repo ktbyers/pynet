@@ -1,0 +1,15 @@
+$ python
+
+>>> from mytest import *
+>>> dir()
+['MyClass', '__builtins__', '__doc__', '__name__', '__package__', 'func1', 'func2', 'func3']
+>>> func1()
+Hello world
+>>> func2()
+Simple
+>>> func3()
+Whatever
+>>> my_obj = MyClass('a', 'b', 'c')
+>>> my_obj.hello()
+Hello World: a b c
+
