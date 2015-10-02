@@ -1,0 +1,17 @@
+$ python
+
+>>> import mytest
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named mytest
+
+>>> import mytest.world
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named mytest.world
+
+>>> import mytest.simple
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named mytest.simple
+
