@@ -1,0 +1,29 @@
+
+$ export PYTHONPATH=$PYTHONPATH:/home/kbyers/pynet/pyth_ans_ecourse/class9/exercise7/
+$ env | grep PYT
+PYTHONPATH=/home/kbyers/DJANGOX/djproject/:/home/kbyers/pynet/pyth_ans_ecourse/class9/exercise7/
+
+$ cd /tmp
+$ python
+
+>>> import sys
+>>> from pprint import pprint
+>>> pprint(sys.path)
+['',
+ '/home/kbyers/DJANGOX/djproject',
+ '/home/kbyers/pynet/pyth_ans_ecourse/class9/exercise7',
+ '/home/kbyers/applied_python/lib64/python27.zip',
+ '/home/kbyers/applied_python/lib64/python2.7',
+ '/home/kbyers/applied_python/lib64/python2.7/plat-linux2',
+ '/home/kbyers/applied_python/lib64/python2.7/lib-tk',
+ '/home/kbyers/applied_python/lib64/python2.7/lib-old',
+ '/home/kbyers/applied_python/lib64/python2.7/lib-dynload',
+ '/usr/lib64/python2.7',
+ '/usr/lib/python2.7',
+ '/home/kbyers/applied_python/local/lib/python2.7/site-packages',
+ '/home/kbyers/applied_python/lib/python2.7/site-packages']
+>>> 
+>>> import mytest
+>>> mytest.__file__
+'/home/kbyers/pynet/pyth_ans_ecourse/class9/exercise7/mytest/__init__.py'
+
