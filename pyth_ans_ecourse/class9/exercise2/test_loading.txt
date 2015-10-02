@@ -1,0 +1,20 @@
+$ python
+>>> import mytest
+>>> mytest.func1()
+Hello world
+>>> mytest.func2()
+Simple
+>>> mytest.func3()
+Whatever
+>>> quit()
+
+$ python
+>>> from mytest import func1, func2, func3
+>>> func1()
+Hello world
+>>> func2()
+Simple
+>>> func3()
+Whatever
+>>> 
+
