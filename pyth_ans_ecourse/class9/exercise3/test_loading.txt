@@ -1,0 +1,11 @@
+
+$ python
+>>> from mytest import *
+>>> func1()
+Hello world
+>>> func2()
+Simple
+>>> func3()
+Whatever
+>>> 
+
