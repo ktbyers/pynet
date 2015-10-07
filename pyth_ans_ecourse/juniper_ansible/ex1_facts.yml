@@ -1,0 +1,11 @@
+---
+- name: Print out Juniper Facts
+  hosts: juniper
+  gather_facts: false
+  tasks: 
+    - name: Retrieve Juniper Facts
+      junos_get_facts: host={{ ansible_ssh_host }} user={{ juniper_user }} passwd={{ juniper_passwd }}
+      register: srx_info 
+
+    - name: Print SRX information
+      debug: msg="{{ srx_info.facts }}"
