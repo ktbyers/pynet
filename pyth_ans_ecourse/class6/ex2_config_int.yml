@@ -19,8 +19,8 @@
             port={{ eapi_port }}
             transport=https
 
-    - name: Set Ethernet3 to access mode, VLAN222
-      eos_switchport: name=Ethernet3 mode=access access_vlan=222
+    - name: Set Ethernet3 to access mode, VLAN662
+      eos_switchport: name=Ethernet3 mode=access access_vlan=662
             username={{ eapi_username }}
             password={{ eapi_password }}
             host={{ eapi_hostname }}

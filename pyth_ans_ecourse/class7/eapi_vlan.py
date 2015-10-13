@@ -61,7 +61,7 @@ def main():
     '''
     Add/remove vlans from Arista switch in an idempotent manner
     '''
-    eapi_conn = pyeapi.connect_to("pynet-sw3")
+    eapi_conn = pyeapi.connect_to("pynet-sw2")
 
     # Argument parsing
     parser = argparse.ArgumentParser(

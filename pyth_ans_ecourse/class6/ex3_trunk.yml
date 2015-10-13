@@ -11,7 +11,7 @@
 
   tasks:
     - name: Configure Ethernet3 to trunk
-      eos_switchport: name=Ethernet3 mode=trunk trunk_native_vlan=1 trunk_allowed_vlans=221,222,223
+      eos_switchport: name=Ethernet3 mode=trunk trunk_native_vlan=1 trunk_allowed_vlans=661,662,663
             username={{ eapi_username }}
             password={{ eapi_password }}
             host={{ eapi_hostname }}

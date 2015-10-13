@@ -17,7 +17,7 @@ def main():
     '''
     Use Arista's eAPI to obtain 'show interfaces' from the switch.
     '''
-    eapi_conn = pyeapi.connect_to("pynet-sw3")
+    eapi_conn = pyeapi.connect_to("pynet-sw2")
 
     interfaces = eapi_conn.enable("show interfaces")
     interfaces = pyeapi_result(interfaces)
