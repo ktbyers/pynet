@@ -1,14 +1,13 @@
 $ python
-Python 2.7.9 (default, Apr  1 2015, 18:18:03) 
-[GCC 4.8.2 20140120 (Red Hat 4.8.2-16)] on linux2
+Python 2.7.10 (default, Aug 11 2015, 23:39:10) 
+[GCC 4.8.3 20140911 (Red Hat 4.8.3-9)] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
->>> 
 >>> import pysnmp
->>> 
 >>> import paramiko
->>> 
+
 >>> pysnmp.__version__
 '4.2.5'
->>> 
->>> paramiko.__version_info__
-(1, 15, 2)
+
+>>> paramiko.__version__
+'1.15.3'
+
