@@ -39,9 +39,6 @@ def main():
     Ansible dynamic inventory experimentation
     Output dynamic inventory as JSON from statically defined data structures
     '''
-
-    django.setup()
-
     # Argument parsing
     parser = argparse.ArgumentParser(description="Ansible dynamic inventory")
     parser.add_argument("--list", help="Ansible inventory of all of the groups",
