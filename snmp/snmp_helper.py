@@ -4,7 +4,7 @@ Requires the pysnmp4 library
 Example usage (SNMPv1/SNMPv2c):
 
 >>> from snmp_helper import snmp_get_oid,snmp_extract
->>> 
+>>>
 >>> COMMUNITY_STRING = '<COMMUNITY>'
 >>> SNMP_PORT = 161
 >>> a_device = ('1.1.1.1', COMMUNITY_STRING, SNMP_PORT)
@@ -60,8 +60,8 @@ from __future__ import print_function
 from pysnmp.entity.rfc3413.oneliner import cmdgen
 
 
-def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha', 
-                        encrypt_proto='aes128', display_errors=True):
+def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha',
+                    encrypt_proto='aes128', display_errors=True):
     '''
     Retrieve the given OID
 
@@ -71,20 +71,20 @@ def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto
     snmp_user is a tuple = (user_name, auth_key, encrypt_key)
 
     Defaults to SHA1-AES128 for authentication + encryption
-   
+
     auth_proto can be 'sha' or 'md5' or 'none'
     encrypt_proto can be 'aes128', 'aes192', 'aes256', '3des', 'des', or 'none'
- 
+
 
     From PySNMP manuals:  http://pysnmp.sourceforge.net/docs/current/security-configuration.html
 
-    Optional authProtocol parameter may be used to specify non-default hash function algorithm. 
+    Optional authProtocol parameter may be used to specify non-default hash function algorithm.
     Possible values include:
     usmHMACMD5AuthProtocol -- MD5-based authentication protocol
     usmHMACSHAAuthProtocol -- SHA-based authentication protocol
     usmNoAuthProtocol -- no authentication to use (default)
 
-    Optional privProtocol parameter may be used to specify non-default ciphering algorithm. 
+    Optional privProtocol parameter may be used to specify non-default ciphering algorithm.
     Possible values include:
     usmDESPrivProtocol -- DES-based encryption protocol
     usmAesCfb128Protocol -- AES128-based encryption protocol (RFC3826)
@@ -130,8 +130,8 @@ def snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto
     (error_detected, error_status, error_index, snmp_data) = cmd_gen.getCmd(
 
         cmdgen.UsmUserData(a_user, auth_key, encrypt_key,
-            authProtocol=auth_protocol,
-            privProtocol=encrypt_protocol, ),
+                           authProtocol=auth_protocol,
+                           privProtocol=encrypt_protocol, ),
         cmdgen.UdpTransportTarget(snmp_device),
         oid,
         lookupNames=True, lookupValues=True
