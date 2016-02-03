@@ -158,7 +158,11 @@ def main():
 
         snmp_results = []
         for oid  in (SYS_NAME, SYS_UPTIME, RUN_LAST_CHANGED):
-            snmp_results.append(snmp_extract(snmp_get_oid_v3(a_device, snmp_user, oid=oid)))
+            try:
+                value = snmp_extract(snmp_get_oid_v3(a_device, snmp_user, oid=oid))
+                snmp_results.append(int(value))
+            except ValueError:
+                snmp_results.append(value)
 
         device_name, uptime, last_changed = snmp_results
 
