@@ -17,5 +17,11 @@ file_name = "show_ver.out"
 net_connect = ConnectHandler(**device)
 output = net_connect.send_command_expect('show version')
 
+# Write file
 with open(file_name, "w") as f:
     f.write(output)
+
+# Read file
+new_output = ''
+with open(file_name) as f:
+    new_output = f.read()
