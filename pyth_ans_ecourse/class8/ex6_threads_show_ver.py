@@ -25,7 +25,7 @@ def show_version(a_device):
                                  port=a_device.port, secret='')
     print
     print '#' * 80
-    print remote_conn.send_command("show version")
+    print remote_conn.send_command_expect("show version")
     print '#' * 80
     print
 

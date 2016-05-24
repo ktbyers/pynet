@@ -26,7 +26,7 @@ def show_version_queue(a_device, output_q):
                                  port=a_device.port, secret='', verbose=False)
 
     output = ('#' * 80) + "\n"
-    output += remote_conn.send_command("show version") + "\n"
+    output += remote_conn.send_command_expect("show version") + "\n"
     output += ('#' * 80) + "\n"
     output_dict[a_device.device_name] = output
     output_q.put(output_dict)
