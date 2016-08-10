@@ -70,7 +70,7 @@ def send_notification(net_device):
     current_time = datetime.now()
 
     sender = 'sender@twb-tech.com'
-    recipient = 'recipient@twb-tech.com'
+    recipient = 'ktbyersx@gmail.com'
     subject = 'Device {0} was modified'.format(net_device.device_name)
 
     message = '''

@@ -59,24 +59,21 @@ def main():
 
     Create two graphs in/out octets and in/out packets
     '''
-
     debug = False
 
     # SNMPv3 Connection Parameters
-    ip_addr = raw_input("Enter router IP: ")
-    a_user = 'pysnmp'
+    rtr1_ip_addr = raw_input("Enter pynet-rtr1 IP: ")
     my_key = getpass(prompt="Auth + Encryption Key: ")
+
+    a_user = 'pysnmp'
     auth_key = my_key
     encrypt_key = my_key
 
     snmp_user = (a_user, auth_key, encrypt_key)
-
-    pynet_rtr1 = (ip_addr, 7961)
-    snmp_device = pynet_rtr1
+    snmp_device = (rtr1_ip_addr, 161)
 
     # Fa4 is in row number5 in the MIB-2 interfaces table
     row_number = 5
-
     graph_stats = {
         "in_octets": [],
         "out_octets": [],
@@ -87,35 +84,28 @@ def main():
 
     # Enter a loop gathering SNMP data every 5 minutes for an hour.
     for time_track in range(0, 65, 5):
-
         print "\n%20s %-60s" % ("time", time_track)
 
         # Gather SNMP statistics for these four fields
         for entry in ("in_octets", "out_octets", "in_ucast_pkts", "out_ucast_pkts"):
-
             # Retrieve the SNMP data
             snmp_retrieved_count = get_interface_stats(snmp_device, snmp_user, entry, row_number)
-
             # Get the base counter value
             base_count = base_count_dict.get(entry)
             if base_count:
                 # Save the data to graph_stats dictionary
                 graph_stats[entry].append(snmp_retrieved_count - base_count)
                 print "%20s %-60s" % (entry, graph_stats[entry][-1])
-
             # Update the base counter value
             base_count_dict[entry] = snmp_retrieved_count
-
-        time.sleep(300)
+        time.sleep(10)
 
     print
     if debug:
         print graph_stats
-
     x_labels = []
     for x_label in range(5, 65, 5):
         x_labels.append(str(x_label))
-
     if debug:
         print x_labels
 
@@ -129,7 +119,6 @@ def main():
                           graph_stats["in_ucast_pkts"], "In Packets", graph_stats["out_ucast_pkts"],
                           "Out Packets", x_labels):
         print "In/Out Packets graph created"
-
     print
 
 
