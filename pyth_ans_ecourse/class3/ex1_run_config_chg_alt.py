@@ -12,12 +12,11 @@ either JSON or YAML to save the data to an external file.
 import os.path
 from datetime import datetime
 from getpass import getpass
+from collections import namedtuple
 
 import cPickle as pickle
-import yaml
 import json
-
-from collections import namedtuple
+import yaml
 
 from snmp_helper import snmp_get_oid_v3, snmp_extract
 from email_helper import send_mail
@@ -91,7 +90,6 @@ def save_objects_to_file(file_name, data_dict):
     '''
     Write the network devices out to a file
     '''
-
     # Determine whether .pkl, .yml, or .json file
     if file_name.count(".") == 1:
         _, out_format = file_name.split(".")
@@ -113,13 +111,11 @@ def send_notification(device_name):
     '''
     Send email notification regarding modified device
     '''
-
     current_time = datetime.now()
 
     sender = 'sender@twb-tech.com'
     recipient = 'recipient@twb-tech.com'
     subject = 'Device {0} was modified'.format(device_name)
-
     message = '''
 The running configuration of {0} was modified.  
 
@@ -160,22 +156,24 @@ def main():
     '''
 
     # File for storing previous RunningLastChanged timestamp
-    net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
-    #net_dev_file = 'netdev.yml'     # can be .pkl, .yml, or .json
+    #net_dev_file = 'netdev.pkl'     # can be .pkl, .yml, or .json
+    net_dev_file = 'netdev.yml'     # can be .pkl, .yml, or .json
     #net_dev_file = 'netdev.json'     # can be .pkl, .yml, or .json
 
     # SNMPv3 Connection Parameters
-    ip_addr = raw_input("Enter router IP: ")
-    a_user = 'pysnmp'
+    rtr1_ip_addr = raw_input("Enter pynet-rtr1 IP: ")
+    rtr2_ip_addr = raw_input("Enter pynet-rtr2 IP: ")
     my_key = getpass(prompt="Auth + Encryption Key: ")
+
+    a_user = 'pysnmp'
     auth_key = my_key
     encrypt_key = my_key
+
     snmp_user = (a_user, auth_key, encrypt_key)
-    pynet_rtr1 = (ip_addr, 7961)
-    pynet_rtr2 = (ip_addr, 8061)
+    pynet_rtr1 = (rtr1_ip_addr, 161)
+    pynet_rtr2 = (rtr2_ip_addr, 161)
 
     print '\n*** Checking for device changes ***'
-
     saved_devices = obtain_saved_objects(net_dev_file)
     print "{0} devices were previously saved\n".format(len(saved_devices))
 
@@ -192,7 +190,6 @@ def main():
             except ValueError:
                 snmp_results.append(value)
         device_name, uptime, last_changed = snmp_results
-
         if DEBUG:
             print "\nConnected to device = {0}".format(device_name)
             print "Last changed timestamp = {0}".format(last_changed)
@@ -200,46 +197,36 @@ def main():
 
         # see if this device has been previously saved
         if device_name in saved_devices:
-
             saved_device = saved_devices[device_name]
             print "{0} {1}".format(device_name, (35 - len(device_name))*'.'),
 
             # Check for a reboot (did uptime decrease or last_changed decrease?)
             if uptime < saved_device.uptime or last_changed < saved_device.last_changed:
-
                 if last_changed <= RELOAD_WINDOW:
                     print "DEVICE RELOADED...not changed"
                     current_devices[device_name] = NetworkDevice(uptime, last_changed, False)
-
                 else:
                     print "DEVICE RELOADED...and changed"
                     current_devices[device_name] = NetworkDevice(uptime, last_changed, True)
-
                     send_notification(device_name)
-
-            # running-config last_changed is the same
             elif last_changed == saved_device.last_changed:
+                # running-config last_changed is the same
                 print "not changed"
                 current_devices[device_name] = NetworkDevice(uptime, last_changed, False)
-
-            # running-config was modified
             elif last_changed > saved_device.last_changed:
+                # running-config was modified
                 print "CHANGED"
                 current_devices[device_name] = NetworkDevice(uptime, last_changed, True)
                 send_notification(device_name)
-
             else:
                 raise ValueError()
-
         else:
             # New device, just save it
             print "{0} {1}".format(device_name, (35 - len(device_name))*'.'),
             print "saving new device"
             current_devices[device_name] = NetworkDevice(uptime, last_changed, False)
 
-
     save_objects_to_file(net_dev_file, current_devices)
-
     print
 
 
