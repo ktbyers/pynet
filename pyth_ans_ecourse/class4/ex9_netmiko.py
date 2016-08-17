@@ -14,9 +14,7 @@ from test_devices import pynet1, pynet2, juniper_srx
 
 
 def print_output(results):
-    '''
-    Display output
-    '''
+    """Display output."""
     print "\nSuccessful devices:"
     for a_dict in results:
         for identifier, val in a_dict.iteritems():
@@ -44,7 +42,6 @@ def worker_cmd(a_device, mp_queue, cmd='show arp'):
     Return a dictionary where the key is the device identifier
     Value is (success|fail(boolean), return_string)
     '''
-
     identifier = '{ip}:{port}'.format(**a_device)
     return_data = {}
 
@@ -64,12 +61,10 @@ def main():
     Use Netmiko to execute 'show arp' on pynet-rtr1, pynet-rtr2, and juniper-srx.
     Use processes or threads to get this to occur concurrently.
     '''
-    ip_addr = raw_input("Enter IP address: ")
     password = getpass()
 
     # Get connection parameters setup correctly
     for a_dict in (pynet1, pynet2, juniper_srx):
-        a_dict['ip'] = ip_addr
         a_dict['password'] = password
         a_dict['verbose'] = False
         try:

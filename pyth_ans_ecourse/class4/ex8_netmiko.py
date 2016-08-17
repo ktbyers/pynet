@@ -16,12 +16,10 @@ def main():
     Use Netmiko to change the logging buffer size and to disable console logging
     from a file for both pynet-rtr1 and pynet-rtr2
     '''
-    ip_addr = raw_input("Enter IP address: ")
     password = getpass()
 
     # Get connection parameters setup correctly
     for a_dict in (pynet1, pynet2, juniper_srx):
-        a_dict['ip'] = ip_addr
         a_dict['password'] = password
         a_dict['verbose'] = False
 

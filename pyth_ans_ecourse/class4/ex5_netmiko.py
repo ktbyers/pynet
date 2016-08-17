@@ -15,16 +15,12 @@ def main():
 
     Verify that you are currently in configuration mode.
     '''
-    ip_addr = raw_input("Enter IP address: ")
     password = getpass()
 
     for a_dict in (pynet1, pynet2, juniper_srx):
-        a_dict['ip'] = ip_addr
         a_dict['password'] = password
-
     net_connect2 = ConnectHandler(**pynet2)
     net_connect2.config_mode()
-
     print "\n>>>>"
     print "Checking pynet-rtr2 is in configuration mode."
     print "Config mode check: {}".format(net_connect2.check_config_mode())

@@ -35,7 +35,7 @@ def main():
     '''
     ip_addr = raw_input("Enter IP address: ")
     username = 'pyclass'
-    port = 8022
+    port = 22
 
     ssh_conn = pexpect.spawn('ssh -l {} {} -p {}'.format(username, ip_addr, port))
     ssh_conn.timeout = 3

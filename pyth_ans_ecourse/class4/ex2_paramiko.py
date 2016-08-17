@@ -46,7 +46,7 @@ def main():
     ip_addr = raw_input("Enter IP address: ")
     username = 'pyclass'
     password = getpass()
-    port = 8022
+    port = 22
 
     remote_conn_pre = paramiko.SSHClient()
     remote_conn_pre.load_system_host_keys()
