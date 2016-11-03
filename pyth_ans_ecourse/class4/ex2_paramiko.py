@@ -63,7 +63,7 @@ def main():
     send_command(remote_conn, cmd='logging buffered 20010')
     send_command(remote_conn, cmd='end')
 
-    output = send_command(remote_conn, cmd='show run | inc logging')
+    output = send_command(remote_conn, cmd='show run | inc logging', delay=2)
     print '\n>>>>'
     print output
     print '>>>>\n'
