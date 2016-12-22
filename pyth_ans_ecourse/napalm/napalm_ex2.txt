@@ -1,7 +1,6 @@
 
-NAPALM Ex2
------------
-
+NAPALM Exercise2
+----------------
 Using NAPALM and the one of the IOS devices perform the following config operations:
 a. Stage a change to add a /32 static route (merge operation)
    Use something in 1.1.X.X.

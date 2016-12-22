@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-from pprint import pprint as pp
-
+"""Test NAPALM config merge operations on one of the Cisco routers."""
 from napalm_base import get_network_driver
 from my_devices import pynet_rtr1
 
 def main():
+    """Test NAPALM config merge operations on one of the Cisco routers."""
     for a_device in (pynet_rtr1,):
         device_type = a_device.pop('device_type')
         driver = get_network_driver(device_type)
