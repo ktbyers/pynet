@@ -1,0 +1,12 @@
+
+NAPALM Ex2
+-----------
+
+Using NAPALM and the one of the IOS devices perform the following config operations:
+a. Stage a change to add a /32 static route (merge operation)
+   Use something in 1.1.X.X.
+b. Perform a compare_config operation to see your staged change.
+c. Discard your change.
+d. Verify compare_config shows no changes pending.
+e. Re-stage your change adding a /32 static route (merge operation).
+f. Commit your change.

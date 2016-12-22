@@ -1,0 +1,8 @@
+
+NAPALM ex1
+-----------
+
+Create a text file representing three VLANs including vlan names to add onto an
+Arista switch. Perform a NAPALM merge operation to push this configuration
+change. Manually check the diff file before performing the commit.
+

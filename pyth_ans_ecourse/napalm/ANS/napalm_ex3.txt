@@ -1,0 +1,17 @@
+
+NAPALM-Ansible Ex3
+-------------------
+
+Use NAPALM-Ansible to configure BGP on the NXOS routers. Run iBGP
+between the pair of routers.
+
+Use a NAPALM merge operation.
+
+You will need to store the following in a merge file:
+
+router bgp 10
+  neighbor {{ peer_ip }} remote-as 10
+    address-family ipv4 unicast
+
+Update IP address to reflect the peer IP.
+

@@ -1,0 +1,7 @@
+
+NAPALM ex2
+-----------
+
+Use the napalm_get_facts module and one of the Arista switches to view the data
+you get back from the ‘facts’, ‘interfaces’, and ‘bgp_neighbors’ filters.
+

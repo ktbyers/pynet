@@ -1,0 +1,18 @@
+---
+# Use the napalm_get_facts module and one of the Arista switches to view the data
+# you get back from the ‘facts’, ‘interfaces’, and ‘bgp_neighbors’ filters.
+
+- name: NAPALM gather information on EOS
+  hosts: pynet-sw1
+  gather_facts: False
+  tasks:
+    - name: Gather information
+      napalm_get_facts:
+        hostname: "{{ eapi_hostname }}"
+        username: "{{ eapi_username }}"
+        password: "{{ eapi_password }}"
+        dev_os: eos
+        filter: [facts, interfaces, bgp_neighbors]
+      register: result
+
+    - debug: var=result

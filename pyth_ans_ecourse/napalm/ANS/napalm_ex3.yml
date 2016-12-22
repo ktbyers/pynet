@@ -1,0 +1,18 @@
+---
+
+- name: NAPALM vlan configuration
+  hosts: nxos2
+  gather_facts: False
+  tasks:
+    - napalm_install_config:
+        hostname: "{{ host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        dev_os: nxos
+        config_file: bgp_config.txt
+        commit_changes: True
+        replace_config: False
+        diff_file: "{{ host }}.diff"
+        get_diffs: True
+        optional_args: {'nxos_protocol': 'https', 'port': 8443}
+
