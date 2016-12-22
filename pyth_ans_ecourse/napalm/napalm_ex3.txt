@@ -1,0 +1,6 @@
+
+NAPALM Exercise3
+-----------------
+
+Use the napalm_get_facts Ansible module and one of the Arista switches to view the data
+you get back from the ‘facts’, ‘interfaces’, and ‘bgp_neighbors’ filters.
