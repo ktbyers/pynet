@@ -1,7 +1,8 @@
 ---
-# Create a text file representing three VLANs including vlan names to add onto an
-# Arista switch. Perform a NAPALM merge operation to push this configuration
-# change. Manually check the diff file before performing the commit.
+# Create a text file corresponding to three VLANs that you want to configure on 
+# one of the four Arista switches. Choose random VLANS between 100 and 999.
+# Use NAPALM and Ansible to push this configuration change (merge operation).
+# Manually check the diff file before performing the commit.
 
 - name: NAPALM vlan configuration
   hosts: pynet-sw1
@@ -12,9 +13,8 @@
         username: "{{ eapi_username }}"
         password: "{{ eapi_password }}"
         dev_os: eos
-        config_file: pynet-sw1-merge.cfg
+        config_file: vlans.txt
         commit_changes: True
         replace_config: False
         diff_file: "{{ eapi_hostname }}.diff"
         get_diffs: True
-
