@@ -17,7 +17,7 @@ def main():
     '''
     Use Arista's eAPI to obtain 'show interfaces' from the switch.
     '''
-    eapi_conn = pyeapi.connect_to("pynet-sw3")
+    eapi_conn = pyeapi.connect_to("pynet-sw2")
 
     interfaces = eapi_conn.enable("show interfaces")
     interfaces = pyeapi_result(interfaces)
@@ -33,7 +33,7 @@ def main():
 
     # Print output data
     print "\n{:20} {:<20} {:<20}".format("Interface:", "inOctets", "outOctets")
-    for intf, octets in data_stats.items():
+    for intf, octets in sorted(data_stats.items()):
         print "{:20} {:<20} {:<20}".format(intf, octets[0], octets[1])
 
     print
