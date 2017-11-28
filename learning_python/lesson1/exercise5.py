@@ -17,6 +17,8 @@ should look like following:
 
 Two columns, 20 characters wide, data right aligned, a header column.
 """
+from __future__ import print_function, unicode_literals
+
 mac1 = "Internet  10.220.88.29           94   5254.abbe.5b7b  ARPA   FastEthernet4"
 mac2 = "Internet  10.220.88.30            3   5254.ab71.e119  ARPA   FastEthernet4"
 mac3 = "Internet  10.220.88.32          231   5254.abc7.26aa  ARPA   FastEthernet4"
