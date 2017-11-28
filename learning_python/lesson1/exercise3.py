@@ -1,15 +1,15 @@
-"""
-Create four different variables the first using all lower case with _ as the word separator.
+#!/usr/bin/env python
+"""Create three different variables: the first variable should use all lower case characters with
+underscore ( _ ) as the word separator. The second variable should use all upper case characters
+with underscore as the word separator. The third variable should use numbers, letters, and
+underscores, but still be a valid variable Python variable name.
 
-The second with all upper case with _ as the word separator
+Make all three variables be strings that refer to IPv6 addresses.
 
-The third with numbers, letters, and _ (but still a valid variable name)
+Use the from future technique so that any string literals in Python2 are unicode.
 
-Make all three variables refer to strings
-
-Use the from future technique so that any string literals are unicode in PY2
-
-compare if ipv6_addr1 equals ipv6_addr2
+compare if variable1 equals variable2
+compare if variable1 is not equal to variable3
 """
 from __future__ import unicode_literals
 
@@ -17,5 +17,7 @@ ipv6_addr1 = "2001:db8:1234::1"
 IPV6_ADDR2 = "2001:db8:1234::2"
 ipV6_addR3 = "2001:db8:1234::3"
 
-print(ipv6_addr1 == IPV6_ADDR2)
-print(ipv6_addr1 != ipV6_addR3)
+print("")
+print("Is variable1 equal to variable2: {}".format(ipv6_addr1 == IPV6_ADDR2))
+print("Is variable1 not equal to variable3: {}".format(ipv6_addr1 != ipV6_addR3))
+print("")
