@@ -1,0 +1,4 @@
+BGP router identifier 10.220.88.20, local AS number 42
+BGP table version is 59, main routing table version 59
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.220.88.38    4           44    7536    8296       59    0    0 5d05h           0
