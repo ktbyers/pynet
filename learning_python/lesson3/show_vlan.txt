@@ -1,0 +1,8 @@
+VLAN  Name                             Status    Ports
+----- -------------------------------- --------- -------------------------------
+1     default                          active    Cpu, Et1, Et2, Et3, Et4, Et5
+                                                 Et6, Et7
+400   blue400                          active   
+401   blue401                          active   
+402   blue402                          active   
+403   blue403                          active  
