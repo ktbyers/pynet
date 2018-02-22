@@ -7,7 +7,7 @@ just hard-code the index at this point since we haven't covered for-loops
 or regular expressions:
 
 Use the string .split() method to obtain both the IP address and the
-corresponding MAC address associated with the IP.
+corresponding interface associated with the IP.
 
 Create a two element tuple from the result (intf_name, ip_address).
 
