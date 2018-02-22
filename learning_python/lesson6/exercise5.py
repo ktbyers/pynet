@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 """
-Use send_command() to send a show command down the SSH channel. Retrieve the results and print the
-results to the screen.
+Optional, use send_command() in conjunction with ntc-templates to execute a show command. Have
+TextFSM automatically convert this show command output to structured data.
 """
 from __future__ import print_function, unicode_literals
 from netmiko import Netmiko
 from getpass import getpass
+from pprint import pprint
 
 try:
     host = raw_input("Enter host to connect to: ")
@@ -22,9 +23,9 @@ device = {
 
 command = 'show ip int brief'
 net_connect = Netmiko(**device)
-output = net_connect.send_command(command)
+output = net_connect.send_command(command, use_textfsm=True)
 print()
 print('-' * 80)
-print(output)
+pprint(output)
 print('-' * 80)
 print()
