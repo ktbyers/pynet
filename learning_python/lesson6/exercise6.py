@@ -9,7 +9,7 @@ from getpass import getpass
 
 password = getpass()
 cisco1 = {
-    'host': 'cisco1.twb-tech.com',
+    'host': 'cisco.domain.com',
     'username': 'pyclass',
     'password': password,
     'device_type': 'cisco_ios',
@@ -17,7 +17,7 @@ cisco1 = {
 }
 
 arista1 = {
-    'host': 'arista1.twb-tech.com',
+    'host': 'arista.domain.com',
     'username': 'pyclass',
     'password': password,
     'device_type': 'arista_eos',
@@ -25,7 +25,7 @@ arista1 = {
 }
 
 srx1 = {
-    'host': 'srx1.twb-tech.com',
+    'host': 'srx.domain.com',
     'username': 'pyclass',
     'password': password,
     'device_type': 'juniper_junos',
