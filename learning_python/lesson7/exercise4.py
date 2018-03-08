@@ -8,7 +8,7 @@ Take the YAML file and corresponding data structure that you defined in exercise
     'Ethernet3': {'mode': 'trunk',
                   'native_vlan': 1,
                   'trunk_vlans': 'all'}
-    }
+    }
 }
 
 From this YAML data input source, use Jinja templating to generate the following configuration
