@@ -1,4 +1,0 @@
-Do an exercise where you store certain variables in YAML and then read them
-in as variables for your jinja2 templates.
-
-Make host specific variables that need to be change across time.
