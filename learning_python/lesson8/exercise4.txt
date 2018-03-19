@@ -1,0 +1,30 @@
+Activate your 'test_venv' virtual environment:
+
+$ source test_venv/bin/activate
+(test_venv) [gituser@ip-10-178-21-224 tmp1]$
+
+Use pip to uninstall the Netmiko library
+
+Use pip to install the 'develop' branch of Netmiko.
+
+$ pip install git+https://github.com/ktbyers/netmiko.git@develop
+Collecting git+https://github.com/ktbyers/netmiko.git@develop
+  Cloning https://github.com/ktbyers/netmiko.git (to develop) to /tmp/pip-ptctzikl-build
+Requirement already satisfied: paramiko>=2.0.0 in ./test_venv/lib/python3.6/site-packages (from netmiko==2.1.0)
+Requirement already satisfied: scp>=0.10.0 in ./test_venv/lib/python3.6/site-packages (from netmiko==2.1.0)
+Requirement already satisfied: pyyaml in ./test_venv/lib/python3.6/site-packages (from netmiko==2.1.0)
+Requirement already satisfied: pyserial in ./test_venv/lib/python3.6/site-packages (from netmiko==2.1.0)
+Requirement already satisfied: textfsm in ./test_venv/lib/python3.6/site-packages (from netmiko==2.1.0)
+Requirement already satisfied: bcrypt>=3.1.3 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: pynacl>=1.0.1 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: pyasn1>=0.1.7 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: cryptography>=1.5 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: cffi>=1.1 in ./test_venv/lib/python3.6/site-packages (from bcrypt>=3.1.3->paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: six>=1.4.1 in ./test_venv/lib/python3.6/site-packages (from bcrypt>=3.1.3->paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: idna>=2.1 in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: asn1crypto>=0.21.0 in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko==2.1.0)
+Requirement already satisfied: pycparser in ./test_venv/lib/python3.6/site-packages (from cffi>=1.1->bcrypt>=3.1.3->paramiko>=2.0.0->netmiko==2.1.0)
+Installing collected packages: netmiko
+  Running setup.py install for netmiko ... done
+Successfully installed netmiko-2.1.0
+

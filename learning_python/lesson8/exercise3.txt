@@ -1,0 +1,43 @@
+Using the same 'test_venv' that you created in exercise2. Install netmiko version 2.0.1. Verify
+this version is installed by executing:
+
+$ python
+Python 3.6.2 (default, Feb 19 2018, 21:58:17) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import netmiko
+>>> netmiko.__version__
+'2.0.1'
+
+
+Upgrade your version of Netmiko to the latest version.
+
+$ pip install --upgrade netmiko
+Collecting netmiko
+Requirement already up-to-date: textfsm in ./test_venv/lib/python3.6/site-packages (from netmiko)
+Requirement already up-to-date: paramiko>=2.0.0 in ./test_venv/lib/python3.6/site-packages (from netmiko)
+Requirement already up-to-date: pyyaml in ./test_venv/lib/python3.6/site-packages (from netmiko)
+Requirement already up-to-date: pyserial in ./test_venv/lib/python3.6/site-packages (from netmiko)
+Requirement already up-to-date: scp>=0.10.0 in ./test_venv/lib/python3.6/site-packages (from netmiko)
+Requirement already up-to-date: cryptography>=1.5 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: pynacl>=1.0.1 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: pyasn1>=0.1.7 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: bcrypt>=3.1.3 in ./test_venv/lib/python3.6/site-packages (from paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: six>=1.4.1 in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: idna>=2.1 in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: cffi>=1.7; platform_python_implementation != "PyPy" in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: asn1crypto>=0.21.0 in ./test_venv/lib/python3.6/site-packages (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
+Requirement already up-to-date: pycparser in ./test_venv/lib/python3.6/site-packages (from cffi>=1.7; platform_python_implementation != "PyPy"->cryptography>=1.5->paramiko>=2.0.0->netmiko)
+Installing collected packages: netmiko
+  Found existing installation: netmiko 2.0.1
+    Uninstalling netmiko-2.0.1:
+      Successfully uninstalled netmiko-2.0.1
+Successfully installed netmiko-2.1.0
+
+
+Deactivate your virtual environment. See 'which python' is now being used?
+
+$ deactivate
+$ which python
+/usr/bin/python
+

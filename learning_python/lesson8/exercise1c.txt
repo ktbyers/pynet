@@ -1,0 +1,9 @@
+"""
+In a Python shell, try importing the 'my_devices' when my_devices.py is not in your current
+working directory.
+
+What exception do you get when you do this?
+
+Update your PYTHONPATH environment variable so that you are successfully able to import this
+module.
+"""
