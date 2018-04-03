@@ -15,6 +15,6 @@ print(best_match)                   # Name of the best device_type to use furthe
 print(guesser.potential_matches)    # Dictionary of the whole matching result
 
 device['device_type'] = best_match
-connection = Netmiko(**remote_device)
+connection = Netmiko(**device)
 
 print(connection.find_prompt())

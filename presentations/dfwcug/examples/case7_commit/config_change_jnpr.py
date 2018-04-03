@@ -17,8 +17,9 @@ net_connect = Netmiko(**device)
 
 print()
 print(net_connect.find_prompt())
-
 output = net_connect.send_config_set(commands, exit_config_mode=False)
 output += net_connect.commit(and_quit=True)
 print(output)
 print()
+
+net_connect.disconnect()
