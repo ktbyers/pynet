@@ -11,8 +11,10 @@ cisco1 = {
 
 net_connect = Netmiko(**cisco1)
 command = 'show ip int brief'
+
 print()
 print(net_connect.find_prompt())
-output = net_connect.send_command(command, expect_string=r'#')
+output = net_connect.send_command(command)
+net_connect.disconnect()
 print(output)
 print()

@@ -2,17 +2,17 @@
 from netmiko import Netmiko
 from getpass import getpass
 
+key_file = "/home/gituser/.ssh/test_rsa"
+
 cisco1 = {
-    'host': 'cisco1.twb-tech.com', 
-    'username': 'pyclass', 
-    'password': getpass(), 
     'device_type': 'cisco_ios',
+    'host': 'cisco1.twb-tech.com', 
+    'username': 'testuser',
+    'use_keys': True,
+    'key_file': key_file,
 }
 
 net_connect = Netmiko(**cisco1)
-command = 'show ip int brief'
-print()
 print(net_connect.find_prompt())
-output = net_connect.send_command(command)
+output = net_connect.send_command("show ip arp")
 print(output)
-print()

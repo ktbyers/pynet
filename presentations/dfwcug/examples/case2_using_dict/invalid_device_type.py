@@ -6,8 +6,9 @@ cisco1 = {
     'host': 'cisco1.twb-tech.com', 
     'username': 'pyclass', 
     'password': getpass(), 
-    'device_type': 'cisco_ios',
+    'device_type': 'whatever',
 }
 
 net_connect = Netmiko(**cisco1)
 print(net_connect.find_prompt())
+net_connect.disconnect()
