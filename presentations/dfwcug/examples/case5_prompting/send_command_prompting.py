@@ -10,10 +10,10 @@ cisco1 = {
 }
 
 net_connect = Netmiko(**cisco1)
-command = 'del flash:/config_tst.txt'
+command = 'del flash:/test1.txt'
 print()
 print(net_connect.find_prompt())
-output = net_connect.send_command_timing(command, strip_prompt=False, strip_command=False)
+output = net_connect.send_command_timing(command)
 if 'confirm' in output:
     output += net_connect.send_command_timing('y', strip_prompt=False, strip_command=False)
 net_connect.disconnect()
