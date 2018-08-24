@@ -1,0 +1,17 @@
+---
+defaults: {}
+  # username: admin
+  # password: <password>
+
+cisco-ios:
+  platform: cisco_ios
+  img: c880data-universalk9-mz.155-3.M8.bin
+  backup_img: c880data-universalk9-mz.154-2.T1.bin
+
+arista:
+  platform: arista_eos
+  img: test_arista.txt
+
+nxos:
+  platform: cisco_nxos
+  img: test_nxos.txt

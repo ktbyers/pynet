@@ -1,0 +1,60 @@
+---
+pynet-rtr1:
+    hostname: cisco1.twb-tech.com
+    groups: 
+      - cisco-ios
+
+pynet-rtr2:
+    hostname: cisco2.twb-tech.com
+    groups: 
+      - cisco-ios
+
+arista1:
+    hostname: arista1.twb-tech.com
+    groups: 
+      - arista
+
+arista2:
+    hostname: arista2.twb-tech.com
+    groups: 
+      - arista
+
+arista3:
+    hostname: arista3.twb-tech.com
+    groups: 
+      - arista
+
+arista4:
+    hostname: arista4.twb-tech.com
+    groups: 
+      - arista
+
+arista5:
+    hostname: arista5.twb-tech.com
+    groups: 
+      - arista
+
+arista6:
+    hostname: arista6.twb-tech.com
+    groups: 
+      - arista
+
+arista7:
+    hostname: arista7.twb-tech.com
+    groups: 
+      - arista
+
+arista8:
+    hostname: arista8.twb-tech.com
+    groups: 
+      - arista
+
+nxos1:
+    hostname: nxos1.twb-tech.com
+    groups: 
+      - nxos
+
+nxos2:
+    hostname: nxos2.twb-tech.com
+    groups: 
+      - nxos
