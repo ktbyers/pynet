@@ -1,79 +1,129 @@
-Create a new virtual environment on your system named 'test_venv'. 
 
+##########
+
+a. Create a new virtual environment on your system named 'test_venv'.
+
+b. Activate the virtual environment
+
+c. Use 'which python' to see the path of the Python that you are using.
+
+d. Use 'pip list' to see the packages you have installed.
+
+e. Use pip to install Netmiko and the requests library.
+
+f. Use 'pip list' to see the updated list of installed packages.
+
+##########
+
+
+
+# Create the virtual environment
+
+$ cd ~/VENV/ 
 $ virtualenv-3.6 -p /usr/bin/python36 test_venv
 Running virtualenv with interpreter /usr/bin/python36
 Using base prefix '/usr'
-New python executable in /home/gituser/VENV/tmp1/test_venv/bin/python36
-Also creating executable in /home/gituser/VENV/tmp1/test_venv/bin/python
+New python executable in /home/gituser/VENV/test_venv/bin/python36
+Also creating executable in /home/gituser/VENV/test_venv/bin/python
 Installing setuptools, pip, wheel...done.
 
 
 
-Activate the virtual environment
+# Activate the virtual environment
 
 $ source test_venv/bin/activate
-(test_venv) [gituser@ip-10-178-21-224 tmp1]$ 
+(test_venv) [user@host VENV]$
 
-Use 'which python' to see the path to the Python that you are using.
+
+
+# Use 'which python' to see the path of the Python that you are using.
 
 $ which python
-~/VENV/tmp1/test_venv/bin/python
+~/VENV/test_venv/bin/python
 
-Use 'pip list' to see the packages that you have installed
 
-$ pip list
-DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.
-pip (9.0.1)
-setuptools (38.6.0)
+
+# Use 'pip list' to see the packages you have installed.
+
+$ pip list --format=legacy
+pip (9.0.2)
+setuptools (39.0.1)
 wheel (0.30.0)
 
 
-Use pip to install the Netmiko and the requests libraries
 
+# Use pip to install Netmiko and the requests library.
 
 $ pip install netmiko
 Collecting netmiko
-Collecting paramiko>=2.0.0 (from netmiko)
-  Downloading paramiko-2.4.1-py2.py3-none-any.whl (194kB)
-    100% |████████████████████████████████| 194kB 2.7MB/s 
-Collecting textfsm (from netmiko)
-Collecting pyyaml (from netmiko)
 Collecting pyserial (from netmiko)
   Using cached pyserial-3.4-py2.py3-none-any.whl
+Collecting pyyaml (from netmiko)
 Collecting scp>=0.10.0 (from netmiko)
   Using cached scp-0.10.2-py2.py3-none-any.whl
+Collecting paramiko>=2.0.0 (from netmiko)
+  Using cached paramiko-2.4.1-py2.py3-none-any.whl
+Collecting textfsm (from netmiko)
 Collecting pyasn1>=0.1.7 (from paramiko>=2.0.0->netmiko)
   Using cached pyasn1-0.4.2-py2.py3-none-any.whl
-Collecting pynacl>=1.0.1 (from paramiko>=2.0.0->netmiko)
-  Using cached PyNaCl-1.2.1-cp36-cp36m-manylinux1_i686.whl
 Collecting bcrypt>=3.1.3 (from paramiko>=2.0.0->netmiko)
   Using cached bcrypt-3.1.4-cp36-cp36m-manylinux1_i686.whl
+Collecting pynacl>=1.0.1 (from paramiko>=2.0.0->netmiko)
+  Using cached PyNaCl-1.2.1-cp36-cp36m-manylinux1_i686.whl
 Collecting cryptography>=1.5 (from paramiko>=2.0.0->netmiko)
-  Using cached cryptography-2.1.4-cp36-cp36m-manylinux1_i686.whl
-Collecting six (from pynacl>=1.0.1->paramiko>=2.0.0->netmiko)
+  Downloading cryptography-2.2.1-cp34-abi3-manylinux1_i686.whl (2.0MB)
+    100% |████████████████████████████████| 2.0MB 312kB/s 
+Collecting six>=1.4.1 (from bcrypt>=3.1.3->paramiko>=2.0.0->netmiko)
   Using cached six-1.11.0-py2.py3-none-any.whl
-Collecting cffi>=1.4.1 (from pynacl>=1.0.1->paramiko>=2.0.0->netmiko)
+Collecting cffi>=1.1 (from bcrypt>=3.1.3->paramiko>=2.0.0->netmiko)
   Using cached cffi-1.11.5-cp36-cp36m-manylinux1_i686.whl
-Collecting asn1crypto>=0.21.0 (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
-  Using cached asn1crypto-0.24.0-py2.py3-none-any.whl
 Collecting idna>=2.1 (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
   Using cached idna-2.6-py2.py3-none-any.whl
-Collecting pycparser (from cffi>=1.4.1->pynacl>=1.0.1->paramiko>=2.0.0->netmiko)
-Installing collected packages: pyasn1, six, pycparser, cffi, pynacl, bcrypt, asn1crypto, idna, cryptography, paramiko, textfsm, pyyaml, pyserial, scp, netmiko
-Successfully installed asn1crypto-0.24.0 bcrypt-3.1.4 cffi-1.11.5 cryptography-2.1.4 idna-2.6 netmiko-2.1.0 paramiko-2.4.1 pyasn1-0.4.2 pycparser-2.18 pynacl-1.2.1 pyserial-3.4 pyyaml-3.12 scp-0.10.2 six-1.11.0 textfsm-0.3.2
+Collecting asn1crypto>=0.21.0 (from cryptography>=1.5->paramiko>=2.0.0->netmiko)
+  Using cached asn1crypto-0.24.0-py2.py3-none-any.whl
+Collecting pycparser (from cffi>=1.1->bcrypt>=3.1.3->paramiko>=2.0.0->netmiko)
+Installing collected packages: pyserial, pyyaml, pyasn1, six, pycparser, cffi, bcrypt, pynacl, idna, asn1crypto, cryptography, paramiko, scp, textfsm, netmiko
+Successfully installed asn1crypto-0.24.0 bcrypt-3.1.4 cffi-1.11.5 cryptography-2.2.1 idna-2.6 netmiko-2.1.0 paramiko-2.4.1 pyasn1-0.4.2 pycparser-2.18 pynacl-1.2.1 pyserial-3.4 pyyaml-3.12 scp-0.10.2 six-1.11.0 textfsm-0.3.2
 
 $ pip install requests
 Collecting requests
   Using cached requests-2.18.4-py2.py3-none-any.whl
-Collecting urllib3<1.23,>=1.21.1 (from requests)
-  Using cached urllib3-1.22-py2.py3-none-any.whl
 Collecting certifi>=2017.4.17 (from requests)
   Using cached certifi-2018.1.18-py2.py3-none-any.whl
+Collecting urllib3<1.23,>=1.21.1 (from requests)
+  Using cached urllib3-1.22-py2.py3-none-any.whl
 Requirement already satisfied: idna<2.7,>=2.5 in ./test_venv/lib/python3.6/site-packages (from requests)
 Collecting chardet<3.1.0,>=3.0.2 (from requests)
   Using cached chardet-3.0.4-py2.py3-none-any.whl
-Installing collected packages: urllib3, certifi, chardet, requests
+Installing collected packages: certifi, urllib3, chardet, requests
 Successfully installed certifi-2018.1.18 chardet-3.0.4 requests-2.18.4 urllib3-1.22
 
 
-Use 'pip list' again to see the updated list of packages.
+
+# Use 'pip list' again to see the updated list of packages.
+
+$ pip list --format=legacy
+asn1crypto (0.24.0)
+bcrypt (3.1.4)
+certifi (2018.1.18)
+cffi (1.11.5)
+chardet (3.0.4)
+cryptography (2.2.1)
+idna (2.6)
+netmiko (2.1.0)
+paramiko (2.4.1)
+pip (9.0.2)
+pyasn1 (0.4.2)
+pycparser (2.18)
+PyNaCl (1.2.1)
+pyserial (3.4)
+PyYAML (3.12)
+requests (2.18.4)
+scp (0.10.2)
+setuptools (39.0.1)
+six (1.11.0)
+textfsm (0.3.2)
+urllib3 (1.22)
+wheel (0.30.0)
+
+

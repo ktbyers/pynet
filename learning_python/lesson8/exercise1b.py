@@ -9,7 +9,6 @@ password = cisco123
 device_type = cisco_ios
 
 Import my_devices into this program and print the rtr1 dictionary to the screen using pprint
-
 """
 from __future__ import print_function, unicode_literals
 from pprint import pprint

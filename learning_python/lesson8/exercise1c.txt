@@ -1,4 +1,6 @@
-"""
+
+#########
+
 In a Python shell, try importing the 'my_devices' when my_devices.py is not in your current
 working directory.
 
@@ -6,4 +8,31 @@ What exception do you get when you do this?
 
 Update your PYTHONPATH environment variable so that you are successfully able to import this
 module.
-"""
+
+#########
+
+
+$ python
+Python 3.6.2 (default, Feb 19 2018, 21:58:17) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import my_devices
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'my_devices'
+>>> quit()
+
+
+$ pwd
+/home/gituser/pynet/learning_python
+
+$ export PYTHONPATH=/home/gituser/pynet/learning_python/lesson8
+$ python
+Python 3.6.2 (default, Feb 19 2018, 21:58:17) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import my_devices
+>>> my_devices.__file__
+'/home/gituser/pynet/learning_python/lesson8/my_devices.py'
+
