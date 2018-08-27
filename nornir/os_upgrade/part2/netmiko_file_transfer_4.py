@@ -83,7 +83,7 @@ def main():
     # std_print(result)
 
     # Filter to only a single device
-    brg_ios = brg.filter(hostname="cisco1.twb-tech.com")
+    brg_ios = brg.filter(hostname="cisco2.twb-tech.com")
     aggr_result = brg_ios.run(task=set_boot_var)
 
     # If setting the boot variable failed (assumes single device at this point)
