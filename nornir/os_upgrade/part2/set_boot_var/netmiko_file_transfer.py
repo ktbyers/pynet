@@ -26,7 +26,7 @@ def set_boot_var(task):
 
     return True if boot variable set
 
-    return False if staging verification steps failed (i.e. before the boot variable was set).
+    return False if staging verification steps failed
     """
     primary_img = task.host.get('img')
     backup_img = task.host.get('backup_img')
@@ -67,20 +67,20 @@ def continue_func(msg="Do you want to continue (y/n)? "):
 def main():
 
     # Initialize Nornir object using hosts.yaml and groups.yaml
-    brg = InitNornir(config_file="nornir.yml")
-    nornir_set_creds(brg)
+    norn = InitNornir(config_file="nornir.yml")
+    nornir_set_creds(norn)
 
     print("Transferring files")
-    result = brg.run(
+    result = norn.run(
         task=os_upgrade,
         num_workers=20,
     )
     std_print(result)
 
     # Filter to only a single device
-    brg_ios = brg.filter(hostname="cisco1.twb-tech.com")
+    norn_ios = norn.filter(hostname="cisco1.twb-tech.com")
 
-    aggr_result = brg_ios.run(task=set_boot_var)
+    aggr_result = norn_ios.run(task=set_boot_var)
 
     # If setting the boot variable failed (assumes single device at this point)
     for hostname, val in aggr_result.items():
@@ -88,7 +88,7 @@ def main():
             sys.exit("Setting the boot variable failed")
 
     # Verify the boot variable
-    result = brg_ios.run(
+    result = norn_ios.run(
         netmiko_send_command,
         command_string="show run | section boot",
         num_workers=20,
