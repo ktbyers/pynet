@@ -65,7 +65,7 @@ print()
 print('-' * 80)
 for ip_addr in ip_list:
     print("IP Addr: ", ip_addr)
-    return_code = os.system("ping -c 3 {}".format(ip_addr))
+    return_code = os.system("{} {}".format(base_cmd, ip_addr))
     print('-' * 80)
 print('-' * 80)
 print()
