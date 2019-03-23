@@ -28,8 +28,8 @@ show_arp = show_arp[1:]
 pprint(show_arp)
 
 show_arp.sort()
-# Grab only the first three entries
-my_entries = show_arp[:3]
+# Grab only entry number 14 to 16 (first 3 entries with IP Addresses)
+my_entries = show_arp[14:17]
 my_entries = '\n'.join(my_entries)
 
 with open("arp_entries.txt", "wt") as f:
