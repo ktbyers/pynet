@@ -16,10 +16,10 @@ def os_upgrade(task):
 
 
 def main():
-    # Initialize Nornir object using hosts.yaml and groups.yaml
-    norn = InitNornir(config_file="nornir.yml")
-    nornir_set_creds(norn)
-    result = norn.run(
+    # Initialize Nornir object using default "SimpleInventory" plugin
+    nr = InitNornir()
+    nornir_set_creds(nr)
+    result = nr.run(
         task=os_upgrade,
         num_workers=20,
     )

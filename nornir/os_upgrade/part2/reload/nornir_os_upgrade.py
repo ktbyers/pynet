@@ -1,7 +1,7 @@
 import re
 import sys
 
-from nornir.core import InitNornir
+from nornir import InitNornir
 from nornir.plugins.tasks.networking import netmiko_file_transfer
 from nornir.plugins.tasks.networking import netmiko_send_command
 from nornir.plugins.tasks.networking import netmiko_send_config
@@ -11,13 +11,13 @@ from nornir_utilities import nornir_set_creds, std_print
 
 def os_upgrade(task):
     file_name = task.host.get('img')
-    task.run(
+    result = task.run(
         task=netmiko_file_transfer,
         source_file=file_name,
         dest_file=file_name,
         direction='put',
     )
-    return ''
+    return result
 
 
 def set_boot_var(task):
@@ -34,7 +34,7 @@ def set_boot_var(task):
     # Check images are on the device
     for img in (primary_img, backup_img):
         result = task.run(
-            netmiko_send_command,
+            task=netmiko_send_command,
             command_string=f"dir flash:/{img}"
         )
         output = result[0].result
@@ -50,7 +50,7 @@ boot system flash {backup_img}
 """
     command_list = commands.strip().splitlines()
     task.run(
-        netmiko_send_config,
+        task=netmiko_send_config,
         config_commands=command_list
     )
     return True
@@ -65,22 +65,19 @@ def continue_func(msg="Do you want to continue (y/n)? "):
 
 
 def main():
-
-    # Initialize Nornir object using hosts.yaml and groups.yaml
-    norn = InitNornir(config_file="nornir.yml")
-    nornir_set_creds(norn)
-
-    print("Transferring files")
-    result = norn.run(
+    # Initialize Nornir object using default "SimpleInventory" plugin
+    nr = InitNornir()
+    nornir_set_creds(nr)
+    result = nr.run(
         task=os_upgrade,
         num_workers=20,
     )
     std_print(result)
 
     # Filter to only a single device
-    norn_ios = norn.filter(hostname="cisco1.twb-tech.com")
+    nr_ios = nr.filter(hostname="cisco1.domain.com")
 
-    aggr_result = norn_ios.run(task=set_boot_var)
+    aggr_result = nr_ios.run(task=set_boot_var)
 
     # If setting the boot variable failed (assumes single device at this point)
     for hostname, val in aggr_result.items():
@@ -88,8 +85,8 @@ def main():
             sys.exit("Setting the boot variable failed")
 
     # Verify the boot variable
-    result = norn_ios.run(
-        netmiko_send_command,
+    result = nr_ios.run(
+        task=netmiko_send_command,
         command_string="show run | section boot",
         num_workers=20,
     )
@@ -97,16 +94,16 @@ def main():
     continue_func()
 
     # Save the config
-    result = norn_ios.run(
-        netmiko_send_command,
+    result = nr_ios.run(
+        task=netmiko_send_command,
         command_string="write mem",
     )
     std_print(result)
 
     # Reload
     continue_func(msg="Do you want to reload the device (y/n)? ")
-    result = norn_ios.run(
-        netmiko_send_command,
+    result = nr_ios.run(
+        task=netmiko_send_command,
         use_timing=True,
         command_string="reload",
     )
@@ -114,8 +111,8 @@ def main():
     # Confirm the reload (if 'confirm' is in the output)
     for device_name, multi_result in result.items():
         if 'confirm' in multi_result[0].result:
-            result = norn_ios.run(
-                netmiko_send_command,
+            result = nr_ios.run(
+                task=netmiko_send_command,
                 use_timing=True,
                 command_string="y",
             )
