@@ -2,18 +2,16 @@ from getpass import getpass
 from pprint import pprint
 
 
-def nornir_set_creds(brg, username=None, password=None):
+def nornir_set_creds(nr, username=None, password=None):
     """Handler so credentials don't need stored in clear in inventory."""
     if not username:
         username = input("Enter username: ")
     if not password:
         password = getpass()
 
-    for host_obj in brg.inventory.hosts.values():
-        # host_obj.username = username
-        # host_obj.password = password
-        host_obj.data["username"] = username
-        host_obj.data["password"] = password
+    for host_obj in nr.inventory.hosts.values():
+        host_obj.username = username
+        host_obj.password = password
 
 
 def std_print(agg_result):
