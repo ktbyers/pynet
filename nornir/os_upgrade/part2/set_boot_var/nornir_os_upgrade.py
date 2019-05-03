@@ -11,13 +11,13 @@ from nornir_utilities import nornir_set_creds, std_print
 
 def os_upgrade(task):
     file_name = task.host.get('img')
-    result = task.run(
+    task.run(
         task=netmiko_file_transfer,
         source_file=file_name,
         dest_file=file_name,
         direction='put',
     )
-    return result
+    return ""
 
 
 def set_boot_var(task):
