@@ -1,0 +1,13 @@
+---
+name: network_device_recovery
+pack: super_cool_python
+enabled: True
+description: replace network vm configuration with base config
+runner_type: python-script
+entry_point: network_device_recovery.py
+parameters:
+  down_device:
+    type: string
+    description: hostname of network vm device that has gone down
+    required: True
+    position: 0

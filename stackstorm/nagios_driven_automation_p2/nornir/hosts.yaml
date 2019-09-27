@@ -1,0 +1,12 @@
+---
+arista1:
+    hostname: arista1.lasthop.io
+    groups:
+      - eos
+
+arista1_console:
+    hostname: "1.2.3.4"
+    groups:
+      - arista_console
+    data:
+      console_port: 5011

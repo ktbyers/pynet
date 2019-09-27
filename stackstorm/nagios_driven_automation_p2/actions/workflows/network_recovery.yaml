@@ -1,0 +1,64 @@
+version: 1.0
+description: remediate down devices
+
+input:
+  - down_device
+
+tasks:
+  check_device:
+    action: super_cool_python.network_device_check down_device=<% ctx(down_device) %>
+    next:
+      - when: <% failed() %>
+        do: recover_device
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+      - when: <% succeeded() %>
+        do: finish_device_not_down
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+
+  recover_device:
+    action: super_cool_python.network_device_recovery down_device=<% ctx(down_device) %>
+    next:
+      - when: <% failed() %>
+        do: finish_failure
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+      - when: <% succeeded() %>
+        do: confirm_device
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+
+  confirm_device:
+    action: super_cool_python.network_device_check down_device=<% ctx(down_device) %>
+    next:
+      - when: <% failed() %>
+        do: finish_validation_failure
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+      - when: <% succeeded() %>
+        do: finish_success
+        publish:
+          - stdout: <% result().stdout %>
+          - stderr: <% result().stderr %>
+
+  finish_device_not_down:
+    action: core.echo message="device <% ctx(down_device) %> was not down"
+
+  finish_failure:
+    action: core.echo message="failed trying to recover device <% ctx(down_device) %>"
+
+  finish_validation_failure:
+    action: core.echo message="failed to validate device <% ctx(down_device) %> recovered"
+
+  finish_success:
+    action: core.echo message="recovered device <% ctx(down_device) %> successfully!"
+
+output:
+  - stdout: <% ctx(stdout) %>
+  - stderr: <% ctx(stderr) %>

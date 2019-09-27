@@ -1,0 +1,6 @@
+---
+name: hello_st2
+enabled: True
+description: say hello to stackstorm
+runner_type: python-script
+entry_point: hello_st2.py

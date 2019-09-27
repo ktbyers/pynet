@@ -1,0 +1,11 @@
+---
+ref: super_cool_python
+name : super_cool_python
+description : A super cool python pack
+keywords:
+  - python3
+version: 0.0.1
+python_versions:
+  - "3"
+author : carl
+email : person@internet.com

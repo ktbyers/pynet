@@ -1,0 +1,13 @@
+---
+name: network_device_check
+pack: super_cool_python
+enabled: True
+description: check to see if a network device is alive
+runner_type: python-script
+entry_point: network_device_check.py
+parameters:
+  down_device:
+    type: string
+    description: hostname of network device to check
+    required: True
+    position: 0
