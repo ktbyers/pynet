@@ -1,0 +1,13 @@
+---
+name: network_recovery
+pack: super_cool_python
+enabled: True
+description: remediate down devices
+runner_type: orquesta
+entry_point: workflows/network_recovery.yaml
+parameters:
+  down_device:
+    type: string
+    description: name of host that is down
+    required: True
+    position: 0

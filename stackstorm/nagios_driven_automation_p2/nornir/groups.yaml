@@ -1,0 +1,31 @@
+---
+eos:
+  platform: eos
+  username: my_username
+  password: my_password
+  connection_options:
+    netmiko:
+      platform: arista_eos
+      extras:
+        global_delay_factor: 5
+    napalm:
+      extras:
+        optional_args: {}
+
+arista_console:
+  username: my_username
+  password: my_password
+  connection_options:
+    netmiko:
+      extras:
+        use_keys: True
+        key_file: /opt/stackstorm/packs/super_cool_python/nornir/ssh_key
+  data:
+    end_host_args:
+      device_type: arista_eos
+      username: my_username
+      password: my_password
+      global_delay_factor: 4
+    filesystem: flash
+    default_cfg: some_base_config
+    default_cfg_cmd: "configure replace"

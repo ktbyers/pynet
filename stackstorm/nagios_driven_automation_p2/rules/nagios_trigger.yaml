@@ -1,0 +1,30 @@
+---
+pack: super_cool_python
+ref: super_cool_python.nagios_trigger
+name: nagios_trigger
+uid: rule:super_cool_python:nagios_trigger
+tags: []
+type:
+  ref: standard
+  parameters: {}
+enabled: true
+trigger:
+  type: nagios.service_state_change
+  ref: nagios.service_state_change
+  description: Trigger type for nagios service state change event.
+  parameters: {}
+metadata_file: ''
+context:
+  user: st2admin
+criteria:
+  trigger.state:
+    pattern: "^CRITICAL|DOWN$"
+    type: regex
+  trigger.state_type:
+    pattern: HARD
+    type: eq
+action:
+  ref: super_cool_python.network_recovery
+  description: try to auto remediate network down device
+  parameters:
+    down_device: "{{ trigger.host }}"
