@@ -21,7 +21,7 @@ with open("show_vlan.txt") as f:
 
 for line in show_vlan.splitlines():
     # Skip certain lines
-    if 'VLAN' in line or '-----' in line or line.startswith('  '):
+    if "VLAN" in line or "-----" in line or line.startswith("  "):
         continue
     fields = line.split()
     vlan_id = fields[0]

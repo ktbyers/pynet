@@ -41,6 +41,7 @@ class CiscoIosXE(NetworkDevice):
         self.send("terminal width 512\n")
         self.send("terminal length 0\n")
         output = self.recv()
+        return output
 
 
 if __name__ == "__main__":

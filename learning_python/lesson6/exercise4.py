@@ -15,9 +15,9 @@ from getpass import getpass
 
 def output_printer(output):
     print()
-    print('-' * 80)
+    print("-" * 80)
     print(output)
-    print('-' * 80)
+    print("-" * 80)
     print()
 
 
@@ -28,27 +28,27 @@ except NameError:
 
 password = getpass()
 device = {
-    'host': host,
-    'username': 'pyclass',
-    'password': password,
-    'device_type': 'cisco_ios',
+    "host": host,
+    "username": "pyclass",
+    "password": password,
+    "device_type": "cisco_ios",
 }
 
 net_connect = Netmiko(**device)
 
 # Use send_config_set() to make config change
-config = ['logging console', 'logging buffer 15000']
+config = ["logging console", "logging buffer 15000"]
 output = net_connect.send_config_set(config)
 output_printer(output)
 
 # Use send_config_from_file() to make config change
-output = net_connect.send_config_from_file('config.txt')
+output = net_connect.send_config_from_file("config.txt")
 output_printer(output)
 
 
 message = "Verifying config change\n"
 output = net_connect.send_command("show run | inc logging")
-if '8000' in output:
+if "8000" in output:
     message += "Logging buffer is size 8000"
 else:
     message += "Logging buffer size is not correct!"

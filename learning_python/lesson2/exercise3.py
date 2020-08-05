@@ -30,7 +30,7 @@ pprint(show_arp)
 show_arp.sort()
 # Grab only the first three entries
 my_entries = show_arp[:3]
-my_entries = '\n'.join(my_entries)
+my_entries = "\n".join(my_entries)
 
 with open("arp_entries.txt", "wt") as f:
     f.write(my_entries)

@@ -22,14 +22,16 @@ def ssh_conn2(ip_addr, username, password, device_type="cisco_ios"):
 
 
 # Adding a default value
-ssh_conn2('192.168.1.1', password='cisco123', username='admin1')
-ssh_conn2('192.168.1.1', password='cisco123', username='admin1', device_type="cisco_nxos")
+ssh_conn2("192.168.1.1", password="cisco123", username="admin1")
+ssh_conn2(
+    "192.168.1.1", password="cisco123", username="admin1", device_type="cisco_nxos"
+)
 
 # Calling using a dictionary
 my_device = {
     "ip_addr": "172.16.1.1",
     "device_type": "cisco_xr",
     "username": "admin",
-    "password": "cisco123"
+    "password": "cisco123",
 }
 ssh_conn2(**my_device)

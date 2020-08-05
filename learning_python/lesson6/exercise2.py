@@ -14,17 +14,17 @@ except NameError:
 
 password = getpass()
 device = {
-    'host': host,
-    'username': 'pyclass',
-    'password': password,
-    'device_type': 'cisco_ios',
+    "host": host,
+    "username": "pyclass",
+    "password": password,
+    "device_type": "cisco_ios",
 }
 
-command = 'show ip int brief'
+command = "show ip int brief"
 net_connect = Netmiko(**device)
 output = net_connect.send_command(command)
 print()
-print('-' * 80)
+print("-" * 80)
 print(output)
-print('-' * 80)
+print("-" * 80)
 print()

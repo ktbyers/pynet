@@ -13,7 +13,7 @@ The output of your Python script should look as follows:
 from __future__ import print_function, unicode_literals
 import yaml
 
-yaml_file = 'exercise3a.yml'
+yaml_file = "exercise3a.yml"
 with open(yaml_file) as f:
     data = yaml.load(f)
 

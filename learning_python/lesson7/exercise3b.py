@@ -23,7 +23,7 @@ from __future__ import print_function, unicode_literals
 import yaml
 from pprint import pprint
 
-yaml_file = 'exercise3b.yml'
+yaml_file = "exercise3b.yml"
 with open(yaml_file) as f:
     data = yaml.load(f)
 

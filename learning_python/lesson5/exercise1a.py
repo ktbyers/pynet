@@ -22,10 +22,10 @@ def ssh_conn(ip_addr, username, password):
 
 
 # Positional args
-ssh_conn('192.168.1.1', 'admin', 'cisco123')
+ssh_conn("192.168.1.1", "admin", "cisco123")
 
 # Named args
-ssh_conn(ip_addr='192.168.1.1', username='admin', password='cisco123')
+ssh_conn(ip_addr="192.168.1.1", username="admin", password="cisco123")
 
 # Mixing named and positional args
-ssh_conn('192.168.1.1', password='cisco123', username='admin1')
+ssh_conn("192.168.1.1", password="cisco123", username="admin1")

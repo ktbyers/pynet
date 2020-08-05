@@ -47,11 +47,11 @@ from __future__ import print_function, unicode_literals
 import yaml
 import jinja2
 
-yaml_file = 'exercise3b.yml'
+yaml_file = "exercise3b.yml"
 with open(yaml_file) as f:
     template_vars = yaml.load(f)
 
-template_file = 'interface_config.j2'
+template_file = "interface_config.j2"
 with open(template_file) as f:
     jinja_template = f.read()
 

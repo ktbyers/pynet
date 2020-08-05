@@ -33,7 +33,7 @@ for i, address in enumerate(ipv6_list[:]):
     ipv6_list[i] = address.strip()
 
 print()
-print('-' * 80)
+print("-" * 80)
 print(ipv6_list)
-print('-' * 80)
+print("-" * 80)
 print()

@@ -14,25 +14,29 @@ except NameError:
 
 password = getpass()
 device = {
-    'host': host,
-    'username': 'pyclass',
-    'password': password,
-    'device_type': 'cisco_ios',
+    "host": host,
+    "username": "pyclass",
+    "password": password,
+    "device_type": "cisco_ios",
 }
 
-filename = 'smallfile'
-command = 'delete flash:{}'.format(filename)
+filename = "smallfile"
+command = "delete flash:{}".format(filename)
 
 net_connect = Netmiko(**device)
-output = net_connect.send_command_timing(command, strip_prompt=False, strip_command=False)
-if 'confirm' in output:
+output = net_connect.send_command_timing(
+    command, strip_prompt=False, strip_command=False
+)
+if "confirm" in output:
     # I don't confirm the file delete.
-    output += net_connect.send_command_timing('n', strip_prompt=False, strip_command=False)
+    output += net_connect.send_command_timing(
+        "n", strip_prompt=False, strip_command=False
+    )
 else:
     raise ValueError("Expected confirm message in output")
 
 print()
-print('-' * 80)
+print("-" * 80)
 print(output)
-print('-' * 80)
+print("-" * 80)
 print()

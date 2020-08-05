@@ -11,7 +11,7 @@ the type of the variable (you should have a list at this point).
 """
 from __future__ import print_function, unicode_literals
 
-banner = '-' * 80
+banner = "-" * 80
 
 f = open("show_version.txt")
 show_ver = f.read()
