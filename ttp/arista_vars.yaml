@@ -1,0 +1,53 @@
+- - global:
+      hostname: arista1
+      timezone: America/Los_Angeles
+    interfaces:
+    - intf_name: Ethernet1
+      spt_cost: '1'
+      spt_portfast: true
+    - access_vlan: '2'
+      intf_name: Ethernet2
+    - access_vlan: '3'
+      intf_name: Ethernet3
+    - access_vlan: '4'
+      intf_name: Ethernet4
+    - access_vlan: '5'
+      intf_name: Ethernet5
+    - access_vlan: '6'
+      intf_name: Ethernet6
+    - access_vlan: '7'
+      intf_name: Ethernet7
+    - intf_name: Management1
+      intf_shutdown: true
+    - intf_name: Vlan1
+      ip_addr: 10.220.88.28
+      mask_length: '24'
+    ntp:
+      ntp_server: 130.126.24.24
+    static_routes:
+    - ip_prefix: 0.0.0.0/0
+      next_hop: 10.220.88.1
+    users:
+    - encr_level: '5'
+      encr_secret: $1$aM6w809x$tgkc6ZGhcScvELVKVHq3n0
+      priv_level: '15'
+      user_role: network-admin
+      username: admin
+    - encr_level: '5'
+      encr_secret: $1$7kD0oS/t$wXhtTFwnWwnlPFKWwXoJ70
+      priv_level: '15'
+      username: admin1
+    - encr_level: '5'
+      encr_secret: $1$FIOFmaYx$FVZOCJ71hnXLN7HPXis3M.
+      username: eapi
+    - encr_level: '5'
+      encr_secret: $1$C3VfUfcO$86t4iqCX60yW.NIR8d2Lh0
+      priv_level: '15'
+      username: pyclass
+    vlan:
+    - vlan_range: 2-7,500,600
+    - vlan_id: '100'
+      vlan_name: gold100
+    - vlan_id: '101'
+      vlan_name: gold101
+
