@@ -1,0 +1,64 @@
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ global.hostname }}
+!
+ntp server {{ ntp.ntp_server }}
+!
+spanning-tree mode rapid-pvst
+!
+aaa authorization exec default local
+!
+no aaa root
+!
+{% for user in users %}
+{% if 'user_role' in user %}
+username {{ user.username }} privilege {{ user.priv_level }} role {{ user.user_role }} secret {{ user.encr_level }} {{ user.encr_secret }}
+{% elif 'priv_level' in user %}
+username {{ user.username }} privilege {{ user.priv_level }} secret {{ user.encr_level }} {{ user.encr_secret }}
+{% else %}
+username {{ user.username }} secret {{ user.encr_level }} {{ user.encr_secret }}
+{% endif %}
+{% endfor %}
+!
+clock timezone {{ global.timezone }}
+!
+{% for vlan_entry in vlan %}
+{% if "vlan_range" in vlan_entry %}
+vlan {{ vlan_entry.vlan_range }}
+{% else %}
+vlan {{ vlan_entry.vlan_id }}
+   name {{ vlan_entry.vlan_name }}
+{% endif %}
+!
+{% endfor %}
+{% for intf in interfaces %}
+interface {{ intf.intf_name }}
+   {% if "spt_portfast" in intf %}
+   spanning-tree portfast
+   {% endif %}
+   {% if "spt_cost" in intf %}
+   spanning-tree cost 1
+   {% endif %}
+   {% if "access_vlan" in intf %}
+   switchport access vlan {{ intf.access_vlan }}
+   {% endif %}
+   {% if "intf_shutdown" in intf %}
+   shutdown
+   {% endif %}
+   {% if "ip_addr" in intf %}
+   ip address {{ intf.ip_addr }}/{{ intf.mask_length }}
+   {% endif %}
+!
+{% endfor %}
+!
+{% for route in static_routes %}
+ip route {{ route.ip_prefix }} {{ route.next_hop }}
+{% endfor %}
+!
+ip routing
+!
+management api http-commands
+   no shutdown
+!
+end

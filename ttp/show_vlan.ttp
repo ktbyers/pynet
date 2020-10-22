@@ -1,0 +1,8 @@
+<vars>
+# Definition of port field regular expression
+PORT = "\S+.*"
+</vars>
+
+<group>
+{{ vlan_id | DIGIT }} {{ vlan_name }} {{ vlan_status }} {{ ports | re("PORT") }}
+</group>

@@ -1,0 +1,323 @@
+Building configuration...
+Current configuration : 10873 bytes
+!
+! Last configuration change at 07:07:55 PDT Thu Oct 22 2020 by pyclass
+! NVRAM config last updated at 04:15:43 PDT Wed Oct 21 2020 by pyclass
+!
+version 16.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+hostname cisco3
+!
+boot-start-marker
+boot system flash c1100-universalk9_ias.16.12.03.SPA.bin
+boot-end-marker
+!
+!
+logging buffered 10000
+no logging console
+enable secret 9 $14$CVrv$7vnZ7GejAAOq0k$KAuOFmHdpnAlqniUCSGXE2Q1p88oY5etEEt7/pyuFoM
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local if-authenticated 
+!
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone PST -8 0
+clock summer-time PDT recurring
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+!
+ip name-server 1.1.1.1 1.0.0.1
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2174981821
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2174981821
+ revocation-check none
+ rsakeypair TP-self-signed-2174981821
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment terminal
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-2174981821
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32313734 39383138 3231301E 170D3230 30353232 31373132 
+  32305A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 31373439 
+  38313832 31308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 01009FA6 3F19197B 749A1BC6 3018690C 8B50AB6B 6749F7CE 941F747C 
+  A102E743 B0D16F5D 00CAF25A 28867E5E B59D96AB 9F7DF4CE C19AE319 E778A385 
+  A8386B78 A8FA839D 3BB879AE 3EC11261 12A7F253 ADDA4310 9DD9D88E EEC23CC2 
+  D292E281 C2CB81E8 F184002C E376D590 B64DF0A8 7D17F285 1812A6EA 8F7BF0A4 
+  45792C01 58C0ECB5 FAE66328 52CF05DA A8E255E2 A5A13F2F 7E57AA09 D134BD94 
+  0DD10C94 45C12954 31388488 A24A34C1 B082C325 25CC9AFC 35F6F823 633CD2AB 
+  F43E672F 547D317C 4CFD07D9 D76A7250 7C361DC6 84CB10AC 067E7AC0 1D4AE81D 
+  980AE328 94E3E4A6 343ABAD6 2892A72A 389065D9 76682DBC 6A5A440E C4342B90 
+  31B9D4D5 54210203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14C6D3D0 65210918 36892ACD 4EB69E46 3CDA31E2 
+  6B301D06 03551D0E 04160414 C6D3D065 21091836 892ACD4E B69E463C DA31E26B 
+  300D0609 2A864886 F70D0101 05050003 82010100 415B6EE6 908B649C 6E81B431 
+  32FC9FFB FE55932B 26403AD1 50B76C4F F7A11010 4D117ED0 C7D0BC58 B7A27FA4 
+  F8685443 214BFC5F E76F0375 F8EC82F5 C2A87E8B EC868B27 C7D144F1 D522D4EF 
+  6FE12D9D 80352F64 3B7583DE 0B45C6F0 1F48B862 31F8BDFA 0855F615 D8857A5B 
+  95C46954 A14A4C71 EE353441 8C226604 4E370201 66A12AF7 619C05D1 772BA3FF 
+  2F1E851F 7AC5399F 1B8EB96E C3083A11 4AED9E3B 3750AAAB 7B745317 14EB6C35 
+  D8035C67 85A4E8BA ECD1FA0F 0E100D4F 96EEA3A9 D4821034 29C861DC 92B639F4 
+  5EAA6E3D BA3ADC87 17FAF35F A001A2A1 004BD7A0 31075214 6EEB55BF 8CF3A1CD 
+  3F06F9E5 BB7BC84B AC7214EA 16DA2274 DEB2F4D2
+  	quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+!
+license udi pid C1111-4P sn FGL222290LB
+archive
+ path flash:cisco3-cfg
+memory free low-watermark processor 70550
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+username test9 secret 9 $14$CQCe$BH8r2UDyqe4c0E$ZopYCeTcpUUTChQQfzUaRwwkIDoybRKRUX/YR6MLXmg
+username testuser privilege 15 secret 9 $14$A5eB$WmK3IaiKxeBqtk$/q6ZFevkX4VEXQyscbovS8Kcz8ZGUWdLX6IjSGbsFh2
+username student1 privilege 15 secret 9 $14$/gYV$ZpT.4lxPBfovOU$wtTtaGoxBdSc99Y/OEaTG4Ip.C8pYeoHnKELzuzsSNM
+username pyclass privilege 15 secret 9 $14$7t3j$LAuRnQPxL6Cv/U$fglWbgZRQp36OZnviYeiPpEsw3W6UbVn2NLI0QToSys
+!
+redundancy
+ mode none
+!
+!
+vlan internal allocation policy ascending
+!
+lldp run
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 10.220.88.22 255.255.255.0
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/1/0
+!
+interface GigabitEthernet0/1/1
+!
+interface GigabitEthernet0/1/2
+!
+interface GigabitEthernet0/1/3
+!
+interface Vlan1
+ no ip address
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.220.88.1
+ip ssh version 2
+ip ssh pubkey-chain
+  username testuser
+   key-hash ssh-rsa E5D7E26A603DD18923113E45F29BDF22 
+  username student1
+   key-hash ssh-rsa 1C3A949CF3B48F23F5074717EEEE025A 
+ip scp server enable
+!
+!
+ip access-list extended netmiko_test_large_acl
+ 10 permit ip host 192.168.0.1 any
+ 20 permit ip host 192.168.0.2 any
+ 30 permit ip host 192.168.0.3 any
+ 40 permit ip host 192.168.0.4 any
+ 50 permit ip host 192.168.0.5 any
+ 60 permit ip host 192.168.0.6 any
+ 70 permit ip host 192.168.0.7 any
+ 80 permit ip host 192.168.0.8 any
+ 90 permit ip host 192.168.0.9 any
+ 100 permit ip host 192.168.0.10 any
+ 110 permit ip host 192.168.0.11 any
+ 120 permit ip host 192.168.0.12 any
+ 130 permit ip host 192.168.0.13 any
+ 140 permit ip host 192.168.0.14 any
+ 150 permit ip host 192.168.0.15 any
+ 160 permit ip host 192.168.0.16 any
+ 170 permit ip host 192.168.0.17 any
+ 180 permit ip host 192.168.0.18 any
+ 190 permit ip host 192.168.0.19 any
+ 200 permit ip host 192.168.0.20 any
+ 210 permit ip host 192.168.0.21 any
+ 220 permit ip host 192.168.0.22 any
+ 230 permit ip host 192.168.0.23 any
+ 240 permit ip host 192.168.0.24 any
+ 250 permit ip host 192.168.0.25 any
+ 260 permit ip host 192.168.0.26 any
+ 270 permit ip host 192.168.0.27 any
+ 280 permit ip host 192.168.0.28 any
+ 290 permit ip host 192.168.0.29 any
+ 300 permit ip host 192.168.0.30 any
+ 310 permit ip host 192.168.0.31 any
+ 320 permit ip host 192.168.0.32 any
+ 330 permit ip host 192.168.0.33 any
+ 340 permit ip host 192.168.0.34 any
+ 350 permit ip host 192.168.0.35 any
+ 360 permit ip host 192.168.0.36 any
+ 370 permit ip host 192.168.0.37 any
+ 380 permit ip host 192.168.0.38 any
+ 390 permit ip host 192.168.0.39 any
+ 400 permit ip host 192.168.0.40 any
+ 410 permit ip host 192.168.0.41 any
+ 420 permit ip host 192.168.0.42 any
+ 430 permit ip host 192.168.0.43 any
+ 440 permit ip host 192.168.0.44 any
+ 450 permit ip host 192.168.0.45 any
+ 460 permit ip host 192.168.0.46 any
+ 470 permit ip host 192.168.0.47 any
+ 480 permit ip host 192.168.0.48 any
+ 490 permit ip host 192.168.0.49 any
+ 500 permit ip host 192.168.0.50 any
+ 510 permit ip host 192.168.0.51 any
+ 520 permit ip host 192.168.0.52 any
+ 530 permit ip host 192.168.0.53 any
+ 540 permit ip host 192.168.0.54 any
+ 550 permit ip host 192.168.0.55 any
+ 560 permit ip host 192.168.0.56 any
+ 570 permit ip host 192.168.0.57 any
+ 580 permit ip host 192.168.0.58 any
+ 590 permit ip host 192.168.0.59 any
+ 600 permit ip host 192.168.0.60 any
+ 610 permit ip host 192.168.0.61 any
+ 620 permit ip host 192.168.0.62 any
+ 630 permit ip host 192.168.0.63 any
+ 640 permit ip host 192.168.0.64 any
+ 650 permit ip host 192.168.0.65 any
+ 660 permit ip host 192.168.0.66 any
+ 670 permit ip host 192.168.0.67 any
+ 680 permit ip host 192.168.0.68 any
+ 690 permit ip host 192.168.0.69 any
+ 700 permit ip host 192.168.0.70 any
+ 710 permit ip host 192.168.0.71 any
+ 720 permit ip host 192.168.0.72 any
+ 730 permit ip host 192.168.0.73 any
+ 740 permit ip host 192.168.0.74 any
+ 750 permit ip host 192.168.0.75 any
+ 760 permit ip host 192.168.0.76 any
+ 770 permit ip host 192.168.0.77 any
+ 780 permit ip host 192.168.0.78 any
+ 790 permit ip host 192.168.0.79 any
+ 800 permit ip host 192.168.0.80 any
+ 810 permit ip host 192.168.0.81 any
+ 820 permit ip host 192.168.0.82 any
+ 830 permit ip host 192.168.0.83 any
+ 840 permit ip host 192.168.0.84 any
+ 850 permit ip host 192.168.0.85 any
+ 860 permit ip host 192.168.0.86 any
+ 870 permit ip host 192.168.0.87 any
+ 880 permit ip host 192.168.0.88 any
+ 890 permit ip host 192.168.0.89 any
+ 900 permit ip host 192.168.0.90 any
+ 910 permit ip host 192.168.0.91 any
+ 920 permit ip host 192.168.0.92 any
+ 930 permit ip host 192.168.0.93 any
+ 940 permit ip host 192.168.0.94 any
+ 950 permit ip host 192.168.0.95 any
+ 960 permit ip host 192.168.0.96 any
+ 970 permit ip host 192.168.0.97 any
+ 980 permit ip host 192.168.0.98 any
+ 990 permit ip host 192.168.0.99 any
+ 1000 permit ip host 192.168.0.100 any
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+ transport input none
+ stopbits 1
+line vty 0 4
+ exec-timeout 20 0
+ transport input telnet ssh
+!
+ntp server 130.126.24.24
+ntp server 152.2.21.1
+!
+!
+!
+!
+!
+netconf-yang
+end

@@ -1,0 +1,9 @@
+<group name="interfaces">
+interface {{ interface }}
+ description {{ description | ORPHRASE }}
+ ip address {{ ip }} {{ mask }}
+</group>
+
+<group name="ntp">
+ntp server {{ ntp_server | IP }}
+</group>

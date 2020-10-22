@@ -1,0 +1,5 @@
+<group name="show_ip">
+Internet {{ ip | IP | _start_ }} {{ age | DIGIT }} {{ mac | MAC }} ARPA {{ interface }}
+Internet {{ ip | IP | _start_ }} -                 {{ mac | MAC }} ARPA {{ interface }}
+Internet {{ ip | IP | _start_ }} {{ age | DIGIT }} {{ mac | MAC }} ARPA {{ interface }} *
+</group>
