@@ -1,0 +1,1 @@
+{{ vlan_id | DIGIT }} {{ vlan_name }} {{ vlan_status }} {{ vlan_ports | ORPHRASE }}
