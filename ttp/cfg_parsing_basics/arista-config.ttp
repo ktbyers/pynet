@@ -1,0 +1,7 @@
+<group name="global">
+hostname {{ hostname }}
+</group>
+
+<group name="ntp">
+ntp server {{ ntp_server }}
+</group>
