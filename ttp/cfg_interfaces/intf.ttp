@@ -1,0 +1,13 @@
+<group name="global">
+hostname {{ hostname }}
+clock timezone {{ timezone }}
+</group>
+
+<group name="interfaces">
+interface {{ intf_name }}
+   switchport access vlan {{ access_vlan | DIGIT }}
+   spanning-tree portfast {{ spt_portfast | set(true) }}
+   spanning-tree cost {{ spt_cost | DIGIT }}
+   shutdown {{ intf_shutdown | set(true) }}
+   ip address {{ ip_addr | IP }}/{{ mask_length | DIGIT }}
+</group>
