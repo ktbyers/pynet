@@ -1,0 +1,19 @@
+<group name="global">
+hostname {{ hostname }}
+clock timezone {{ timezone }}
+</group>
+
+<group name="ntp">
+ntp server {{ ntp_server }}
+</group>
+
+<group name="users">
+username {{ name | _start_ }} privilege {{ priv_level }} role {{ role }} secret {{ encr_level }} {{ encr_string }}
+username {{ name | _start_ }} privilege {{ priv_level }} secret {{ encr_level }} {{ encr_string }}
+username {{ name | _start_ }} secret {{ encr_level }} {{ encr_string }}
+</group>
+
+<group name="interfaces">
+interface {{ intf_name }}
+   switchport access vlan {{ access_vlan }}
+</group>
