@@ -6,8 +6,8 @@ clock timezone {{ timezone }}
 <group name="interfaces">
 interface {{ intf_name }}
    switchport access vlan {{ access_vlan | DIGIT }}
-   spanning-tree portfast {{ spt_portfast | set(true) }}
-   spanning-tree cost {{ spt_cost | DIGIT }}
+   spanning-tree portfast {{ stp_portfast | set(true) }}
+   spanning-tree cost {{ stp_cost | DIGIT }}
    shutdown {{ intf_shutdown | set(true) }}
    ip address {{ ip_addr | IP }}/{{ mask_length | DIGIT }}
 </group>
