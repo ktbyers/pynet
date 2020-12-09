@@ -1,0 +1,38 @@
+<vars>
+# Definition of port field regular expression
+VLAN_RANGE = "\d[\-,]+[\d\-,]*"
+</vars>
+
+<group name="global">
+hostname {{ hostname }}
+clock timezone {{ timezone }}
+</group>
+
+<group name="ntp">
+ntp server {{ ntp_server | IP }}
+</group>
+
+<group name="users">
+username {{ username | _start_ }} privilege {{ priv_level | DIGIT }} role {{ user_role }} secret {{ encr_level | DIGIT }} {{ encr_secret }}
+username {{ username | _start_ }} privilege {{ priv_level | DIGIT }} secret {{ encr_level | DIGIT }} {{ encr_secret }}
+username {{ username | _start_ }} secret {{ encr_level | DIGIT }} {{ encr_secret }}
+</group>
+
+<group name="vlan">
+vlan {{ vlan_range | re("VLAN_RANGE") | _start_ }}
+vlan {{ vlan_id | DIGIT | _start_ }}
+   name {{ vlan_name }}
+</group>
+
+<group name="interfaces">
+interface {{ intf_name }}
+   switchport access vlan {{ access_vlan | DIGIT }}
+   spanning-tree portfast {{ spt_portfast | set(true) }}
+   spanning-tree cost {{ spt_cost | DIGIT }}
+   shutdown {{ intf_shutdown | set(true) }}
+   ip address {{ ip_addr | IP }}/{{ mask_length | DIGIT }}
+</group>
+
+<group name="static_routes*">
+ip route {{ ip_prefix | PREFIX }} {{ next_hop | IP }}
+</group>
