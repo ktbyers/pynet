@@ -13,11 +13,11 @@ Create a two element tuple from the result (intf_name, ip_address).
 
 Print that tuple to the screen.
 
-Use pycodestyle on this script. Get the warnings/errors to zero. You might need
-to 'pip install pycodestyle' on your computer (should be able to type this from
+Use pylint on this script. Get the warnings/errors to zero. You might need
+to 'pip install pylint' on your computer (should be able to type this from
 the shell prompt). Alternatively, you can type:
 
-  'python -m pip install pycodestyle'.
+  'python -m pip install pylint'.
 
 """
 from __future__ import print_function, unicode_literals
