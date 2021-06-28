@@ -1,0 +1,20 @@
+
+
+
+cisco3#terminal width 511
+cisco3#terminal length 0
+cisco3#
+cisco3#ping
+Protocol [ip]: 
+Target IP address: 8.8.8.8
+Repeat count [5]: 30
+Datagram size [100]: 
+Timeout in seconds [2]: 
+Extended commands [n]: 
+Sweep range of sizes [n]: 
+Type escape sequence to abort.
+Sending 30, 100-byte ICMP Echos to 8.8.8.8, timeout is 2 seconds:
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Success rate is 100 percent (30/30), round-trip min/avg/max = 1/2/4 ms
+cisco3#
+cisco3#exit

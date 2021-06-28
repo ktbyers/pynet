@@ -10,7 +10,7 @@ device = {
 
 with ConnectHandler(**device) as net_connect:
 
-    filename = "test-reuben.txt"
+    filename = "reubens_lesson9_config.txt"
     cmd = f"del flash:/{filename}"
 
     output = net_connect.send_command_timing(
