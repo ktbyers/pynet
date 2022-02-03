@@ -15,7 +15,7 @@ import yaml
 
 yaml_file = "exercise3a.yml"
 with open(yaml_file) as f:
-    data = yaml.load(f)
+    data = yaml.safe_load(f)
 
 print()
 print(data)

@@ -49,7 +49,7 @@ import jinja2
 
 yaml_file = "exercise3b.yml"
 with open(yaml_file) as f:
-    template_vars = yaml.load(f)
+    template_vars = yaml.safe_load(f)
 
 template_file = "interface_config.j2"
 with open(template_file) as f:

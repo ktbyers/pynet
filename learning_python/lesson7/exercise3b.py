@@ -25,7 +25,7 @@ from pprint import pprint
 
 yaml_file = "exercise3b.yml"
 with open(yaml_file) as f:
-    data = yaml.load(f)
+    data = yaml.safe_load(f)
 
 print()
 pprint(data)
