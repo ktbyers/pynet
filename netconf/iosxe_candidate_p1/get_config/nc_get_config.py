@@ -1,5 +1,4 @@
 from ncclient import manager
-from rich import print
 from lxml import etree
 
 
