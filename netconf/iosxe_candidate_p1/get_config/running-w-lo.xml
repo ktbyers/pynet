@@ -166,9 +166,6 @@
           <auto>true</auto>
         </negotiation>
       </GigabitEthernet>
-      <Loopback>
-        <name>99</name>
-      </Loopback>
       <VirtualPortGroup>
         <name>0</name>
         <vrf>
@@ -346,28 +343,6 @@
       </ethernet>
     </interface>
     <interface>
-      <name>Loopback99</name>
-      <config>
-        <name>Loopback99</name>
-        <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:softwareLoopback</type>
-        <enabled>true</enabled>
-      </config>
-      <subinterfaces>
-        <subinterface>
-          <index>0</index>
-          <config>
-            <index>0</index>
-            <enabled>true</enabled>
-          </config>
-          <ipv6 xmlns="http://openconfig.net/yang/interfaces/ip">
-            <config>
-              <enabled>false</enabled>
-            </config>
-          </ipv6>
-        </subinterface>
-      </subinterfaces>
-    </interface>
-    <interface>
       <name>VirtualPortGroup0</name>
       <config>
         <name>VirtualPortGroup0</name>
@@ -540,13 +515,6 @@
     <interface>
       <name>GigabitEthernet1</name>
       <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
-      <enabled>true</enabled>
-      <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
-      <ipv6 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
-    </interface>
-    <interface>
-      <name>Loopback99</name>
-      <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:softwareLoopback</type>
       <enabled>true</enabled>
       <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
       <ipv6 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
